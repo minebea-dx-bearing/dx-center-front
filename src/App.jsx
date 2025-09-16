@@ -14,10 +14,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/nat" element={<NatHome />} />
-        <Route path="turning" element={<NatTn />} />
-        <Route path="1stgrinding" element={<Nat1stGd />} />
-        <Route path="2ndgrinding" element={<Nat2ndGd />} />
-        <Route path="assy" element={<NatAssy />} />
+        <Route path="/nat/turning" element={<NatTn />} />
+        <Route path="/nat/1stgrinding" element={<Nat1stGd />} />
+        <Route path="/nat/2ndgrinding" element={<Nat2ndGd />} />
+        <Route path="/nat/assy" element={<NatAssy />} />
       </Routes>
     </BrowserRouter>
   );
