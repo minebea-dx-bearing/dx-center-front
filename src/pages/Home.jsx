@@ -29,7 +29,7 @@ export default function Home() {
         </div>
       </div>
       <p className="absolute text-sm text-center text-gray-500 -translate-x-1/2 bottom-6 left-1/2 dark:text-gray-400">
-        &copy; 2025 - DX bearing team
+        &copy; 2025 += DX bearing team
       </p>
     </div>
   );
