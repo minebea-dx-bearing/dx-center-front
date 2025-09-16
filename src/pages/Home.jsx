@@ -9,23 +9,24 @@ export default function Home() {
       </div>
       <div>
         <div className="text-center">Factory</div>
-        <hr className="mt-2" />
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8 md:gap-10 mb-10">
-        <CardTitle title={"NAT"} path={"/nat"} />
-        <CardTitle title={"NHT"} path={"/nht"} />
-        <CardTitle title={"NMB"} path={"/nmb"} />
-        <CardTitle title={"PELMEC"} path={"/pelmec"} />
-        <CardTitle title={"NHB"} path={"/nhb"} />
-        <CardTitle title={"MCB"} path={"/mcb"} />
+        <hr className="my-4" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8 md:gap-10 mb-10">
+          <CardTitle title={"NAT"} path={"/nat"} />
+          <CardTitle title={"NHT"} path={"/nht"} />
+          <CardTitle title={"NMB"} path={"/nmb"} />
+          <CardTitle title={"PELMEC"} path={"/pelmec"} />
+          <CardTitle title={"NHB"} path={"/nhb"} />
+          <CardTitle title={"MCB"} path={"/mcb"} />
+        </div>
       </div>
       <div>
         <div className="text-center">Application Center</div>
-        <hr className="mt-2" />
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8 md:gap-10 mb-10">
-        <CardTitle title={"DX Job Request"} path={"/job_request"} />
-        <CardTitle title={"Stock ball"} path={"/ball"} />
+        <hr className="my-4" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8 md:gap-10 mb-10">
+          <CardTitle title={"Stock ball"} path={"/ball"} />
+          <CardTitle title={"Stock Retainer"} path={"/retainer"} />
+          <CardTitle title={"DX Job Request"} path={"/job_request"} />
+        </div>
       </div>
       <p className="absolute text-sm text-center text-gray-500 -translate-x-1/2 bottom-6 left-1/2 dark:text-gray-400">
         &copy; 2025 - DX bearing team
