@@ -1,23 +1,29 @@
 export default function CardProd({ title, target, actual, avgCT, avgOpn }) {
+  const formatNumber = (num) => num?.toLocaleString();
+  const formatCT = (num) => (num !== undefined && num !== null ? Number(num).toFixed(2) : "");
+
   return (
-    <div className="w-150 h-35 p-4 font-semibold text-slate-700 rounded-2xl border border-gray-200 bg-white shadow-md flex flex-col justify-center">
+    <div
+      className="w-150 h-35 p-8 font-semibold text-slate-700 rounded-2xl border border-gray-200 bg-white shadow-md flex flex-col justify-center transition-transform duration-500 ease-in-out transform 
+             hover:scale-105 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:border-gray-200 cursor-pointer"
+    >
       <div className="text-2xl flex justify-center mb-2">{title}</div>
-      <div className="grid grid-cols-4 gap-4 w-full text-center">
+      <div className="w-full text-center flex justify-between">
         <div>
           <div className="text-gray-400">Target Prod.</div>
-          <div className="my-2 text-xl">{target}</div>
+          <div className="my-2 text-xl">{formatNumber(target)}</div>
         </div>
         <div>
           <div className="text-gray-400">Actual Prod.</div>
-          <div className="my-2 text-xl">{actual}</div>
+          <div className="my-2 text-xl">{formatNumber(actual)}</div>
         </div>
         <div>
           <div className="text-gray-400">AVG.C/T</div>
-          <div className="my-2 text-xl">{avgCT}s</div>
+          <div className="my-2 text-xl">{formatCT(avgCT)}s</div>
         </div>
         <div>
           <div className="text-gray-400">AVG. Opn.</div>
-          <div className="my-2 text-xl">{avgOpn}%</div>
+          <div className="my-2 text-xl">{formatCT(avgOpn)}%</div>
         </div>
       </div>
     </div>

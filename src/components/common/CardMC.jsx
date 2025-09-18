@@ -1,4 +1,5 @@
 export default function CardMC({ mc_no, part_no, process, target, actual, target_ct, actual_ct, yield_per, opn, status }) {
+
   const diff_actual = actual !== undefined && target !== undefined ? actual - target : undefined;
   const diff_ct = actual_ct !== undefined && target_ct !== undefined ? actual_ct - target_ct : undefined;
   const formatDiff = (value) => (value > 0 ? `+${value.toLocaleString()}` : value.toLocaleString());
@@ -8,7 +9,6 @@ export default function CardMC({ mc_no, part_no, process, target, actual, target
   const diffActualColor = diff_actual > 0 ? "text-green-600" : diff_actual < 0 ? "text-red-600" : "text-gray-600";
   const diffCTColor = diff_ct > 0 ? "text-red-600" : diff_ct < 0 ? "text-green-600" : "text-gray-600";
 
-  // เงื่อนไขสี status
   let statusColor = "bg-orange-200 text-orange-700";
   if (status === "RUNNING") statusColor = "bg-green-200 text-green-700";
   else if (status === "STOP") statusColor = "bg-red-200 text-red-700";
