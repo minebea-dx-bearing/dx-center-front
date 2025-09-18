@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Home";
 import NatHome from "./pages/nat/NatHome";
-import NatAssy from "./pages/nat/NatAssy";
+import NatAssyMbrRealtime from "./pages/nat/NatAssyMbrRealtime";
 import NatTn from "./pages/nat/NatTn";
 import Nat1stGd from "./pages/nat/Nat1stGd";
 import Nat2ndGd from "./pages/nat/Nat2ndGd";
@@ -17,7 +17,7 @@ function App() {
         <Route path="/nat/turning" element={<NatTn />} />
         <Route path="/nat/1stgrinding" element={<Nat1stGd />} />
         <Route path="/nat/2ndgrinding" element={<Nat2ndGd />} />
-        <Route path="/nat/assy" element={<NatAssy />} />
+        <Route path="/nat/assymbrrealtime" element={<NatAssyMbrRealtime />} />
       </Routes>
     </BrowserRouter>
   );
