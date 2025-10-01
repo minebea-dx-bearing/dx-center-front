@@ -1,6 +1,10 @@
 export default function CardProd({ title, target, actual, avgCT, avgOpn }) {
   const formatNumber = (num) => num?.toLocaleString();
   const formatCT = (num) => (num !== undefined && num !== null ? Number(num).toFixed(2) : "");
+  const formatDiff = (value) => (value > 0 ? `+${value.toLocaleString()}` : value.toLocaleString());
+
+  const diff_actual = actual !== undefined && target !== undefined ? actual - target : undefined;
+  const diffActualColor = diff_actual > 0 ? "text-green-600" : diff_actual < 0 ? "text-red-600" : "text-gray-600";
 
   return (
     <div
@@ -16,6 +20,10 @@ export default function CardProd({ title, target, actual, avgCT, avgOpn }) {
         <div>
           <div className="text-gray-400">Actual Prod.</div>
           <div className="my-2 text-xl">{formatNumber(actual)}</div>
+        </div>
+        <div>
+          <div className="text-gray-400">Diff</div>
+          <div className={`my-2 text-xl ${diffActualColor}`}>{formatDiff(actual - target)}</div>
         </div>
         <div>
           <div className="text-gray-400">AVG.C/T</div>
