@@ -1,15 +1,15 @@
-import PageBreadcrumb from "../../components/common/PageBreadcrumb";
-import CardProd from "../../components/common/CardProd";
-import CardMC from "../../components/common/CardMC";
+import PageBreadcrumb from "../../../components/common/PageBreadcrumb";
+import CardProd from "../../../components/common/CardProd";
+import CardMC from "../../../components/common/CardMC";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import moment from "moment/moment";
-import { BASE_URL } from "../../constance/constance";
+import { BASE_URL } from "../../../constance/constance";
 
 const refreshTime = 60;
 
-export default function NhbTnRealtime() {
+export default function Nat2ndInSuperRealtime() {
   const [loading, setLoading] = useState(false);
   const [fetchTime, setFetchTime] = useState();
   const [countdown, setCountdown] = useState(refreshTime);
@@ -24,7 +24,7 @@ export default function NhbTnRealtime() {
       setLoading(true);
     }
     try {
-      const response1 = await axios.get(`${BASE_URL}/nhb/assy/tn_realtime/get_data_realtime`, {
+      const response1 = await axios.get(`${BASE_URL}/nat/gd/2ndinsuper-realtime/get_data_realtime`, {
         headers: {
           "Cache-Control": "no-cache",
           Pragma: "no-cache",
@@ -68,14 +68,20 @@ export default function NhbTnRealtime() {
 
   return (
     <div>
-      <PageBreadcrumb pageTitle="ASSY : Realtime TN" />
+      <PageBreadcrumb pageTitle="GRINDING : Realtime INNER RING S/F" />
       <div className="flex flex-row-reverse">
         <div>
           Update : {fetchTime} <span style={{ color: "red" }}>(Refresh in {countdown}s)</span>
         </div>
       </div>
       <div className="flex justify-center m-2">
-        <CardProd title={"TN"} target={summaryData.sum_target} actual={summaryData.sum_daily_ok} avgCT={summaryData.avg_cycle_t} avgOpn={summaryData.avg_opn} />
+        <CardProd
+          title={"S/F"}
+          target={summaryData.sum_target}
+          actual={summaryData.sum_daily_ok}
+          avgCT={summaryData.avg_cycle_t}
+          avgOpn={summaryData.avg_opn}
+        />
       </div>
 
       <div className="flex flex-wrap">
@@ -84,11 +90,11 @@ export default function NhbTnRealtime() {
             <div className="m-2" key={mc.mc_no}>
               <CardMC
                 mc_no={mc.mc_no}
-                part_no={mc.wos || "-"}
+                part_no={mc.model || "-"}
                 target={mc.target}
-                actual={mc.daily_count_ok1}
-                actual_ng={mc.daily_count_ng}
-                actual_ct={mc.average_cycle_time}
+                actual={mc.prod_ok}
+                actual_ng={mc.prod_ng}
+                actual_ct={mc.cycle_t}
                 yield_per={mc.yield_per}
                 opn={mc.opn}
                 status={mc.status_alarm}

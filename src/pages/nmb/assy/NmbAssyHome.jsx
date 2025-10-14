@@ -24,8 +24,8 @@ export default function NmbAssyHome() {
           <CardTitle title={"ARP"} path={"/nmb/assy/arp-realtime"} />
           <CardTitle title={"ASL"} path={"/nmb/assy/asl-realtime"} />
           <CardTitle title={"ASR"} path={"/nmb/assy/asr-realtime"} />
-          <CardTitle title={"ASS"} path={"/nmb/assy/ASS-realtime"} />
-          <CardTitle title={"AVS"} path={"/nmb/assy/AVS-realtime"} />
+          <CardTitle title={"ASS"} path={"/nmb/assy/ass-realtime"} />
+          <CardTitle title={"AVS"} path={"/nmb/assy/avs-realtime"} />
         </div>
       </div>
     </div>
