@@ -68,7 +68,7 @@ export default function NatTnRealtime() {
 
   return (
     <div>
-      <PageBreadcrumb pageTitle="TURNING : Realtime TURNING" />
+      <PageBreadcrumb pageTitle="NAT : TURNING REALTIME" />
       <div className="flex flex-row-reverse">
         <div>
           Update : {fetchTime} <span style={{ color: "red" }}>(Refresh in {countdown}s)</span>

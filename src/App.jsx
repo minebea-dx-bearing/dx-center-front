@@ -30,6 +30,7 @@ import Nat2ndInSuperRealtime from "./pages/nat/gd/Nat2ndInSuperRealtime";
 import Nat2ndOutSuperRealtime from "./pages/nat/gd/Nat2ndOutSuperRealtime";
 import Nat2ndOutRaceRealtime from "./pages/nat/gd/Nat2ndOutRaceRealtime";
 import NatTnSummary from "./pages/nat/tn/NatTnSummary";
+import NatLayout from "./pages/nat/NatLayout";
 
 function App() {
   return (
@@ -37,21 +38,24 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/nat" element={<NatHome />} />
-        <Route path="/nat/tn" element={<NatTnHome />} />
-        <Route path="/nat/tn/tn-realtime" element={<NatTnRealtime />} />
-        <Route path="/nat/tn/tn-summary" element={<NatTnSummary />} />
 
-        <Route path="/nat/gd" element={<NatGdHome />} />
-        <Route path="/nat/gd/2ndinbore-realtime" element={<Nat2ndInBoreRealtime />} />
-        <Route path="/nat/gd/2ndinrace-realtime" element={<Nat2ndInRaceRealtime />} />
-        <Route path="/nat/gd/2ndinsuper-realtime" element={<Nat2ndInSuperRealtime />} />
-        <Route path="/nat/gd/2ndoutrace-realtime" element={<Nat2ndOutRaceRealtime />} />
-        <Route path="/nat/gd/2ndoutsuper-realtime" element={<Nat2ndOutSuperRealtime />} />
+        <Route path="/nat" element={<NatLayout />}>
+          <Route index element={<NatHome />} />
+          <Route path="tn" element={<NatTnHome />} />
+          <Route path="tn/tn-realtime" element={<NatTnRealtime />} />
+          <Route path="tn/tn-summary-prod" element={<NatTnSummary />} />
 
-        <Route path="/nat/assy" element={<NatAssyHome />} />
-        <Route path="/nat/assy/combine-realtime" element={<NatAssyCombineRealtime />} />
-        <Route path="/nat/assy/mbr-realtime" element={<NatAssyMbrRealtime />} />
+          <Route path="gd" element={<NatGdHome />} />
+          <Route path="gd/2ndinbore-realtime" element={<Nat2ndInBoreRealtime />} />
+          <Route path="gd/2ndinrace-realtime" element={<Nat2ndInRaceRealtime />} />
+          <Route path="gd/2ndinsuper-realtime" element={<Nat2ndInSuperRealtime />} />
+          <Route path="gd/2ndoutrace-realtime" element={<Nat2ndOutRaceRealtime />} />
+          <Route path="gd/2ndoutsuper-realtime" element={<Nat2ndOutSuperRealtime />} />
+
+          <Route path="assy" element={<NatAssyHome />} />
+          <Route path="assy/combine-realtime" element={<NatAssyCombineRealtime />} />
+          <Route path="assy/mbr-realtime" element={<NatAssyMbrRealtime />} />
+        </Route>
 
         <Route path="/nmb" element={<NmbHome />} />
         <Route path="/nmb/assy" element={<NmbAssyHome />} />
