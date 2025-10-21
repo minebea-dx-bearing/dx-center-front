@@ -66,7 +66,7 @@ export default function NatAssyCombineRealtime() {
 
   return (
     <div>
-      <PageBreadcrumb pageTitle="NAT : ASSY COMBINE REALTIME" />
+      <PageBreadcrumb pageTitle="NAT : ASSY COMBINE REALTIME1" />
       <div className="flex flex-row-reverse">
         <div>
           Update : {fetchTime} <span style={{ color: "red" }}>(Refresh in {countdown}s)</span>
