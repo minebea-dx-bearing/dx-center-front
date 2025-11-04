@@ -8,6 +8,7 @@ import moment from "moment/moment";
 import { BASE_URL } from "../../../constance/constance";
 
 const refreshTime = 60;
+const process = "2NDINBORE";
 
 export default function Nat2ndInBoreRealtime() {
   const [loading, setLoading] = useState(false);
@@ -24,7 +25,7 @@ export default function Nat2ndInBoreRealtime() {
       setLoading(true);
     }
     try {
-      const response1 = await axios.get(`${BASE_URL}/nat/gd/2ndinbore-realtime/get_data_realtime`, {
+      const response1 = await axios.get(`${BASE_URL}/nat/gd/${process}-realtime/get_data_realtime`, {
         headers: {
           "Cache-Control": "no-cache",
           Pragma: "no-cache",
@@ -68,10 +69,10 @@ export default function Nat2ndInBoreRealtime() {
 
   return (
     <div>
-      <PageBreadcrumb pageTitle="GRINDING : Realtime INNER RING BORE" />
+      <PageBreadcrumb pageTitle={`NAT : ASSY ${process} REALTIME`} />
       <div className="flex flex-row-reverse">
         <div>
-          Update : {fetchTime} <span style={{ color: "red" }}>(Refresh in {countdown}s)</span>
+          Update : {fetchTime} <span className="text-red-600">(Refresh in {countdown}s)</span>
         </div>
       </div>
       <div className="flex justify-center m-2">
@@ -90,12 +91,17 @@ export default function Nat2ndInBoreRealtime() {
             <div className="m-2" key={mc.mc_no}>
               <CardMC
                 mc_no={mc.mc_no}
-                part_no={mc.model || "-"}
-                target={mc.target}
+                part_no={mc.part_no}
+                process={"BORE"}
+                target={mc.target_actual}
                 actual={mc.prod_ok}
                 actual_ng={mc.prod_ng}
+                diff_actual={mc.diff_prod}
+                target_ct={mc.target_ct}
                 actual_ct={mc.cycle_t}
-                yield_per={mc.yield_per}
+                diff_ct={mc.diff_ct}
+                yield_target={mc.target_yield}
+                yield_rate={mc.yield_rate}
                 opn={mc.opn}
                 status={mc.status_alarm}
               />
