@@ -8,6 +8,7 @@ import moment from "moment/moment";
 import { BASE_URL } from "../../../constance/constance";
 
 const refreshTime = 60;
+const process = "MBR";
 
 export default function NatAssyMbrRealtime() {
   const [loading, setLoading] = useState(false);
@@ -24,7 +25,7 @@ export default function NatAssyMbrRealtime() {
       setLoading(true);
     }
     try {
-      const response1 = await axios.get(`${BASE_URL}/nat/assy/mbr-realtime/get_data_realtime`, {
+      const response1 = await axios.get(`${BASE_URL}/nat/assy/${process}-realtime/get_data_realtime`, {
         headers: {
           "Cache-Control": "no-cache",
           Pragma: "no-cache",
@@ -68,15 +69,15 @@ export default function NatAssyMbrRealtime() {
 
   return (
     <div>
-      <PageBreadcrumb pageTitle="ASSY : Realtime MBR" />
+      <PageBreadcrumb pageTitle={`NAT : ASSY ${process} REALTIME`} />
       <div className="flex flex-row-reverse">
         <div>
-          Update : {fetchTime} <span style={{ color: "red" }}>(Refresh in {countdown}s)</span>
+          Update : {fetchTime} <span className="text-red-600">(Refresh in {countdown}s)</span>
         </div>
       </div>
       <div className="flex justify-center m-2">
         <CardProd
-          title={"MBR"}
+          title={process}
           target={summaryData.sum_target}
           actual={summaryData.sum_daily_ok}
           avgCT={summaryData.avg_cycle_t}
@@ -90,19 +91,18 @@ export default function NatAssyMbrRealtime() {
             <div className="m-2" key={mc.mc_no}>
               <CardMC
                 mc_no={mc.mc_no}
-                part_no={mc.model}
-                target={mc.target}
-                actual={mc.daily_ok}
-                actual_ng={mc.daily_ng}
-                target_ct={1.6}
+                part_no={mc.part_no}
+                process={mc.process}
+                target={mc.target_actual}
+                actual={mc.prod_ok}
+                actual_ng={mc.prod_ng}
+                diff_actual={mc.diff_prod}
+                target_ct={mc.target_ct}
                 actual_ct={mc.cycle_t}
-                yield_per={mc.yield_per}
+                diff_ct={mc.diff_ct}
+                yield_target={mc.target_yield}
+                yield_rate={mc.yield_rate}
                 opn={mc.opn}
-                c1_ok={mc.c1_ok}
-                c2_ok={mc.c2_ok}
-                c3_ok={mc.c3_ok}
-                c4_ok={mc.c4_ok}
-                c5_ok={mc.c5_ok}
                 status={mc.status_alarm}
               />
             </div>
