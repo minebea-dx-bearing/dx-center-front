@@ -31,6 +31,7 @@ import Nat2ndOutSuperRealtime from "./pages/nat/gd/Nat2ndOutSuperRealtime";
 import Nat2ndOutRaceRealtime from "./pages/nat/gd/Nat2ndOutRaceRealtime";
 import NatTnSummary from "./pages/nat/tn/NatTnSummary";
 import NatLayout from "./pages/nat/NatLayout";
+import NatAssyAnalysisMachine from "./pages/nat/assy/NatAssyAnalysisMachine";
 import NatAssyGssmRealtime from "./pages/nat/assy/NatAssyGssmRealtime";
 import NatAssyArpRealtime from "./pages/nat/assy/NatAssyArpRealtime";
 import NatAssyFimRealtime from "./pages/nat/assy/NatAssyFimRealtime";
@@ -74,6 +75,7 @@ function App() {
           <Route path="assy/combine-realtime" element={<NatAssyCombineRealtime />} />
           <Route path="assy/combine-realtime-oee" element={<NatAssyCombineRealtimeOee />} />
           <Route path="assy/mbr-realtime" element={<NatAssyMbrRealtime />} />
+          <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine defaultMC={"mbr01"} defaultDate={"2025-11-01"}/>} />
           <Route path="assy/mbr-daily" element={<NatAssyMbrDaily />} />
           <Route path="assy/arp-realtime" element={<NatAssyArpRealtime />} />
           <Route path="assy/arp-daily" element={<NatAssyArpDaily />} />
