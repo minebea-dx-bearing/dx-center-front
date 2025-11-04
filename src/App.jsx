@@ -31,6 +31,7 @@ import Nat2ndOutSuperRealtime from "./pages/nat/gd/Nat2ndOutSuperRealtime";
 import Nat2ndOutRaceRealtime from "./pages/nat/gd/Nat2ndOutRaceRealtime";
 import NatTnSummary from "./pages/nat/tn/NatTnSummary";
 import NatLayout from "./pages/nat/NatLayout";
+import NatAssyAnalysisMachine from "./pages/nat/assy/NatAssyAnalysisMachine";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
           <Route path="assy" element={<NatAssyHome />} />
           <Route path="assy/combine-realtime" element={<NatAssyCombineRealtime />} />
           <Route path="assy/mbr-realtime" element={<NatAssyMbrRealtime />} />
+          <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine defaultMC={"mbr01"} defaultDate={"2025-11-01"}/>} />
         </Route>
 
         <Route path="/nmb" element={<NmbHome />} />
