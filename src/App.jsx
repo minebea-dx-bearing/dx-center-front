@@ -31,6 +31,20 @@ import Nat2ndOutSuperRealtime from "./pages/nat/gd/Nat2ndOutSuperRealtime";
 import Nat2ndOutRaceRealtime from "./pages/nat/gd/Nat2ndOutRaceRealtime";
 import NatTnSummary from "./pages/nat/tn/NatTnSummary";
 import NatLayout from "./pages/nat/NatLayout";
+import NatAssyGssmRealtime from "./pages/nat/assy/NatAssyGssmRealtime";
+import NatAssyArpRealtime from "./pages/nat/assy/NatAssyArpRealtime";
+import NatAssyFimRealtime from "./pages/nat/assy/NatAssyFimRealtime";
+import NatAssyAntRealtime from "./pages/nat/assy/NatAssyAntRealtime";
+import NatAssyAvsRealtime from "./pages/nat/assy/NatAssyAvsRealtime";
+import NatAssyAluRealtime from "./pages/nat/assy/NatAssyAluRealtime";
+import NatAssyCombineRealtimeOee from "./pages/nat/assy/NatAssyCombineRealtimeOee";
+import Test from "./pages/test";
+import NatTnRealtimeOee from "./pages/nat/tn/NatTnRealtimeOee";
+import NatTnDaily from "./pages/nat/tn/NatTnDaily";
+import NatAssyMbrDaily from "./pages/nat/assy/NatAssyMbrDaily";
+import NatAssyArpDaily from "./pages/nat/assy/NatAssyArpDaily";
+import NatAssyGssmDaily from "./pages/nat/assy/NatAssyGssmDaily";
+import NatAssyFimDaily from "./pages/nat/assy/NatAssyFimDaily";
 
 function App() {
   return (
@@ -39,10 +53,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
+        <Route path="/test" element={<Test />} />
+
         <Route path="/nat" element={<NatLayout />}>
           <Route index element={<NatHome />} />
           <Route path="tn" element={<NatTnHome />} />
           <Route path="tn/tn-realtime" element={<NatTnRealtime />} />
+          <Route path="tn/tn-realtime-oee" element={<NatTnRealtimeOee />} />
+          <Route path="tn/tn-daily" element={<NatTnDaily />} />
           <Route path="tn/tn-summary-prod" element={<NatTnSummary />} />
 
           <Route path="gd" element={<NatGdHome />} />
@@ -54,7 +72,18 @@ function App() {
 
           <Route path="assy" element={<NatAssyHome />} />
           <Route path="assy/combine-realtime" element={<NatAssyCombineRealtime />} />
+          <Route path="assy/combine-realtime-oee" element={<NatAssyCombineRealtimeOee />} />
           <Route path="assy/mbr-realtime" element={<NatAssyMbrRealtime />} />
+          <Route path="assy/mbr-daily" element={<NatAssyMbrDaily />} />
+          <Route path="assy/arp-realtime" element={<NatAssyArpRealtime />} />
+          <Route path="assy/arp-daily" element={<NatAssyArpDaily />} />
+          <Route path="assy/gssm-realtime" element={<NatAssyGssmRealtime />} />
+          <Route path="assy/gssm-daily" element={<NatAssyGssmDaily />} />
+          <Route path="assy/fim-realtime" element={<NatAssyFimRealtime />} />
+          <Route path="assy/fim-daily" element={<NatAssyFimDaily />} />
+          <Route path="assy/ant-realtime" element={<NatAssyAntRealtime />} />
+          <Route path="assy/avs-realtime" element={<NatAssyAvsRealtime />} />
+          <Route path="assy/alu-realtime" element={<NatAssyAluRealtime />} />
         </Route>
 
         <Route path="/nmb" element={<NmbHome />} />

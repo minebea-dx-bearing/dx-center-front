@@ -10,6 +10,8 @@ const navItems = [
     name: "TURNING",
     subItems: [
       { name: "TN REALTIME", path: "/nat/tn/tn-realtime" },
+      { name: "TN REALTIME OEE", path: "/nat/tn/tn-realtime-oee" },
+      { name: "TN DAILY", path: "/nat/tn/tn-daily" },
       { name: "TN SUMMARY PROD.", path: "/nat/tn/tn-summary-prod" },
     ],
   },
@@ -29,10 +31,15 @@ const navItems = [
     name: "ASSEMBLY",
     subItems: [
       { name: "COMBINE REALTIME", path: "/nat/assy/combine-realtime" },
+      { name: "COMBINE REALTIME OEE", path: "/nat/assy/combine-realtime-oee" },
       { name: "MBR REALTIME", path: "/nat/assy/mbr-realtime" },
+      { name: "MBR DAILY", path: "/nat/assy/mbr-daily" },
       { name: "ARP REALTIME", path: "/nat/assy/arp-realtime" },
+      { name: "ARP DAILY", path: "/nat/assy/arp-daily" },
       { name: "GSSM REALTIME", path: "/nat/assy/gssm-realtime" },
+      { name: "GSSM DAILY", path: "/nat/assy/gssm-daily" },
       { name: "FIM REALTIME", path: "/nat/assy/fim-realtime" },
+      { name: "FIM DAILY", path: "/nat/assy/fim-daily" },
       { name: "ANT REALTIME", path: "/nat/assy/ant-realtime" },
       { name: "AVS REALTIME", path: "/nat/assy/avs-realtime" },
       { name: "ALU REALTIME", path: "/nat/assy/alu-realtime" },
@@ -112,7 +119,7 @@ export default function SidebarNat() {
                 height: openSubmenu?.type === menuType && openSubmenu?.index === index ? `${subMenuHeight[`${menuType}-${index}`]}px` : "0px",
               }}
             >
-              <ul className="mt-2 space-y-1 ml-9">
+              <ul className="mt-2 space-y-1 ml-5">
                 {nav.subItems.map((subItem) => (
                   <li key={subItem.name}>
                     <Link

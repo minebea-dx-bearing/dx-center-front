@@ -1,15 +1,16 @@
 import PageBreadcrumb from "../../../components/common/PageBreadcrumb";
 import CardProd from "../../../components/common/CardProd";
+import CardMC from "../../../components/common/CardMC";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import moment from "moment/moment";
 import { BASE_URL } from "../../../constance/constance";
-import CardMC2 from "../../../components/common/CardMC2";
 
 const refreshTime = 60;
+const process = "ANT";
 
-export default function NmbAssyArpRealtime() {
+export default function NatAssyAntRealtime() {
   const [loading, setLoading] = useState(false);
   const [fetchTime, setFetchTime] = useState();
   const [countdown, setCountdown] = useState(refreshTime);
@@ -24,7 +25,7 @@ export default function NmbAssyArpRealtime() {
       setLoading(true);
     }
     try {
-      const response1 = await axios.get(`${BASE_URL}/nmb/assy/arp-realtime/get_data_realtime`, {
+      const response1 = await axios.get(`${BASE_URL}/nat/assy/${process}-realtime/get_data_realtime`, {
         headers: {
           "Cache-Control": "no-cache",
           Pragma: "no-cache",
@@ -68,28 +69,39 @@ export default function NmbAssyArpRealtime() {
 
   return (
     <div>
-      <PageBreadcrumb pageTitle="ASSY : Realtime ARP" />
+      <PageBreadcrumb pageTitle={`NAT : ASSY ${process} REALTIME`} />
       <div className="flex flex-row-reverse">
         <div>
-          Update : {fetchTime} <span style={{ color: "red" }}>(Refresh in {countdown}s)</span>
+          Update : {fetchTime} <span className="text-red-600">(Refresh in {countdown}s)</span>
         </div>
       </div>
       <div className="flex justify-center m-2">
-        <CardProd title={"ARP"} target={summaryData.sum_target} actual={summaryData.sum_daily_ok} avgCT={summaryData.avg_cycle_t} avgOpn={summaryData.avg_opn} />
+        <CardProd
+          title={process}
+          target={summaryData.sum_target}
+          actual={summaryData.sum_daily_ok}
+          avgCT={summaryData.avg_cycle_t}
+          avgOpn={summaryData.avg_opn}
+        />
       </div>
 
       <div className="flex flex-wrap">
         {realtime_data.map((mc) => {
           return (
             <div className="m-2" key={mc.mc_no}>
-              <CardMC2
+              <CardMC
                 mc_no={mc.mc_no}
-                part_no={mc.wos || "-"}
-                target={mc.target}
+                part_no={mc.part_no}
+                process={mc.process}
+                target={mc.target_actual}
                 actual={mc.prod_ok}
                 actual_ng={mc.prod_ng}
-                actual_ct={mc.average_cycle_time}
-                yield_per={mc.yield_per}
+                diff_actual={mc.diff_prod}
+                target_ct={mc.target_ct}
+                actual_ct={mc.cycle_t}
+                diff_ct={mc.diff_ct}
+                yield_target={mc.target_yield}
+                yield_rate={mc.yield_rate}
                 opn={mc.opn}
                 status={mc.status_alarm}
               />
