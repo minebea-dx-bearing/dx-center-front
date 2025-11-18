@@ -108,16 +108,16 @@ export default function NatAssyCombineRealtime() {
                   processes={["GAUGE", "BALL"]}
                   data={{
                     prodActual: [
-                      { value: 0, diff: 0 },
+                      { value: data["MBR_F-FIRST"].prod_ok, diff: data["MBR_F-FIRST"].diff_prod },
                       { value: data["MBR-FIRST"].prod_ok, diff: data["MBR-FIRST"].diff_prod },
                     ],
                     ctActual: [
-                      { value: 0, diff: 0 },
+                      { value: data["MBR_F-FIRST"].cycle_t, diff: data["MBR_F-FIRST"].diff_ct },
                       { value: data["MBR-FIRST"].cycle_t, diff: data["MBR-FIRST"].diff_ct },
                     ],
-                    yield_target: [0, data["MBR-FIRST"].target_yield],
-                    yield_rate: [0, data["MBR-FIRST"].yield_rate],
-                    status: ["OFFLINE", data["MBR-FIRST"].status_alarm],
+                    yield_target: [data["MBR_F-FIRST"].target_yield, data["MBR-FIRST"].target_yield],
+                    yield_rate: [data["MBR_F-FIRST"].yield_rate, data["MBR-FIRST"].yield_rate],
+                    status: [data["MBR_F-FIRST"].status_alarm, data["MBR-FIRST"].status_alarm],
                   }}
                 />
               </div>
@@ -182,15 +182,15 @@ export default function NatAssyCombineRealtime() {
               </div>
               <div className="col-start-18 col-span-3 row-start-3 row-span-5">
                 <CardProcess
-                  title="AOD01"
-                  subTitle="TEST"
+                  title={data["AOD-FIRST"].mc_no}
+                  subTitle={data["AOD-FIRST"].part_no}
                   processes={["AOD"]}
                   data={{
-                    prodActual: [{ value: 0, diff: 0 }],
-                    ctActual: [{ value: 0, diff: 0 }],
-                    yield_target: [0],
-                    yield_rate: [0],
-                    status: ["OFFLINE"],
+                    prodActual: [{ value: data["AOD-FIRST"].prod_ok, diff: data["AOD-FIRST"].diff_prod }],
+                    ctActual: [{ value: data["AOD-FIRST"].cycle_t, diff: data["AOD-FIRST"].diff_ct }],
+                    yield_target: [data["AOD-FIRST"].target_yield],
+                    yield_rate: [data["AOD-FIRST"].yield_rate],
+                    status: [data["AOD-FIRST"].status_alarm],
                   }}
                 />
               </div>
@@ -231,16 +231,16 @@ export default function NatAssyCombineRealtime() {
                   processes={["GAUGE", "BALL"]}
                   data={{
                     prodActual: [
-                      { value: 0, diff: 0 },
+                      { value: data["MBR_F-SECOND"].prod_ok, diff: data["MBR_F-SECOND"].diff_prod },
                       { value: data["MBR-SECOND"].prod_ok, diff: data["MBR-SECOND"].diff_prod },
                     ],
                     ctActual: [
-                      { value: 0, diff: 0 },
+                      { value: data["MBR_F-SECOND"].cycle_t, diff: data["MBR_F-SECOND"].diff_ct },
                       { value: data["MBR-SECOND"].cycle_t, diff: data["MBR-SECOND"].diff_ct },
                     ],
-                    yield_target: [0, data["MBR-SECOND"].target_yield],
-                    yield_rate: [0, data["MBR-SECOND"].yield_rate],
-                    status: ["OFFLINE", data["MBR-SECOND"].status_alarm],
+                    yield_target: [data["MBR_F-SECOND"].target_yield, data["MBR-SECOND"].target_yield],
+                    yield_rate: [data["MBR_F-SECOND"].yield_rate, data["MBR-SECOND"].yield_rate],
+                    status: [data["MBR_F-SECOND"].status_alarm, data["MBR-SECOND"].status_alarm],
                   }}
                 />
               </div>
@@ -305,15 +305,15 @@ export default function NatAssyCombineRealtime() {
               </div>
               <div className="col-start-18 col-span-3 row-start-11 row-span-5">
                 <CardProcess
-                  title="AOD02"
-                  subTitle="TEST"
+                  title={data["AOD-SECOND"].mc_no}
+                  subTitle={data["AOD-SECOND"].part_no}
                   processes={["AOD"]}
                   data={{
-                    prodActual: [{ value: 0, diff: 0 }],
-                    ctActual: [{ value: 0, diff: 0 }],
-                    yield_target: [0],
-                    yield_rate: [0],
-                    status: ["OFFLINE"],
+                    prodActual: [{ value: data["AOD-SECOND"].prod_ok, diff: data["AOD-SECOND"].diff_prod }],
+                    ctActual: [{ value: data["AOD-SECOND"].cycle_t, diff: data["AOD-SECOND"].diff_ct }],
+                    yield_target: [data["AOD-SECOND"].target_yield],
+                    yield_rate: [data["AOD-SECOND"].yield_rate],
+                    status: [data["AOD-SECOND"].status_alarm],
                   }}
                 />
               </div>
