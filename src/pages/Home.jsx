@@ -14,7 +14,7 @@ export default function Home() {
           <CardTitle title={"NAT"} path={"/nat"} />
           <CardTitle title={"NHT"} path={"/nht"} />
           <CardTitle title={"NMB"} path={"/nmb"} />
-          <CardTitle disabled title={"PELMEC"} path={"/pelmec"} />
+          <CardTitle title={"PELMEC"} path={"/pelmec"} />
           <CardTitle title={"NHB"} path={"/nhb"} />
           <CardTitle disabled title={"MCB"} path={"/mcb"} />
         </div>

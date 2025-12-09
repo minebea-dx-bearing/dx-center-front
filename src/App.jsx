@@ -46,6 +46,8 @@ import NatAssyMbrDaily from "./pages/nat/assy/NatAssyMbrDaily";
 import NatAssyArpDaily from "./pages/nat/assy/NatAssyArpDaily";
 import NatAssyGssmDaily from "./pages/nat/assy/NatAssyGssmDaily";
 import NatAssyFimDaily from "./pages/nat/assy/NatAssyFimDaily";
+import NatTnProdDash from "./pages/nat/tn/NatTnProdDash";
+import PelmecHome from "./pages/pelmec/PelmecHome";
 
 import NewHome from "./pages/NewHome";
 import Footer from "./components/layouts/Footer";
@@ -70,6 +72,7 @@ import NotFound from "./components/common/NotFound";
 
 function App() {
   return (
+
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
         <BrowserRouter>
@@ -159,6 +162,7 @@ function App() {
       </main>
       <Footer/> 
     </div>
+
   );
 }
 

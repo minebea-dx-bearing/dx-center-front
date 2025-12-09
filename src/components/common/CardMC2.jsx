@@ -31,7 +31,7 @@ export default function CardMC2({
   let statusColor = "bg-orange-200 text-orange-700";
   if (status === "RUNNING") statusColor = "bg-green-200 text-green-700";
   else if (status === "STOP") statusColor = "bg-red-200 text-red-800";
-  else if (status === "SIGNAL LOSE") statusColor = "bg-gray-200 text-gray-800";
+  else if (status === "SIGNAL LOSE" || status === "NO DATA STATUS") statusColor = "bg-gray-200 text-gray-800";
 
   const sumTotal = (...numbers) => {
     return numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
