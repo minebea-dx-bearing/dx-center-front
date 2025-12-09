@@ -49,70 +49,120 @@ import NatAssyFimDaily from "./pages/nat/assy/NatAssyFimDaily";
 import NatTnProdDash from "./pages/nat/tn/NatTnProdDash";
 import PelmecHome from "./pages/pelmec/PelmecHome";
 
+import NewHome from "./pages/NewHome";
+import Footer from "./components/layouts/Footer";
+// NAT
+import NatHomeNew from "./pages/natNew/NatHomeNew";
+import NatTnRt from "./pages/natNew/tn/NatTnRt";
+import NatTnHistory from "./pages/natNew/tn/NatTnHistory";
+import NatSLRt from "./pages/natNew/gd1/NatSLRt";
+
+// NHT
+import NhtHomeNew from "./pages/nhtNew/NhtHomeNew";
+// NMB
+import NmbHomeNew from "./pages/nmbNew/NmbHomeNew";
+// PELMEC
+import PelmecHomeNew from "./pages/pelmecNew/PelmecHomeNew";
+// NHB
+import NhbHomeNew from "./pages/nhbNew/NhbHomeNew";
+// MCB
+import McbHomeNew from "./pages/mcbNew/McbHomeNew";
+// Page Not Found
+import NotFound from "./components/common/NotFound";
+
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Home />} />
 
-        <Route path="/test" element={<Test />} />
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-grow">
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<NewHome />} />
 
-        <Route path="/nat" element={<NatLayout />}>
-          <Route index element={<NatHome />} />
-          <Route path="tn" element={<NatTnHome />} />
-          <Route path="tn/tn-realtime" element={<NatTnRealtime />} />
-          <Route path="tn/tn-realtime-oee" element={<NatTnRealtimeOee />} />
-          <Route path="tn/tn-daily" element={<NatTnDaily />} />
-          <Route path="tn/tn-summary-prod" element={<NatTnSummary />} />
-          <Route path="tn/tn-prod-dash" element={<NatTnProdDash />} />
+            <Route path="/test" element={<Test />} />
 
-          <Route path="gd" element={<NatGdHome />} />
-          <Route path="gd/2ndinbore-realtime" element={<Nat2ndInBoreRealtime />} />
-          <Route path="gd/2ndinrace-realtime" element={<Nat2ndInRaceRealtime />} />
-          <Route path="gd/2ndinsuper-realtime" element={<Nat2ndInSuperRealtime />} />
-          <Route path="gd/2ndoutrace-realtime" element={<Nat2ndOutRaceRealtime />} />
-          <Route path="gd/2ndoutsuper-realtime" element={<Nat2ndOutSuperRealtime />} />
+            <Route path="/nat" element={<NatLayout />}>
+              <Route index element={<NatHome />} />
+              <Route path="tn" element={<NatTnHome />} />
+              <Route path="tn/tn-realtime" element={<NatTnRealtime />} />
+              <Route path="tn/tn-realtime-oee" element={<NatTnRealtimeOee />} />
+              <Route path="tn/tn-daily" element={<NatTnDaily />} />
+              <Route path="tn/tn-summary-prod" element={<NatTnSummary />} />
 
-          <Route path="assy" element={<NatAssyHome />} />
-          <Route path="assy/combine-realtime" element={<NatAssyCombineRealtime />} />
-          <Route path="assy/combine-realtime-oee" element={<NatAssyCombineRealtimeOee />} />
-          <Route path="assy/mbr-realtime" element={<NatAssyMbrRealtime />} />
-          <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine defaultMC={"mbr01"} defaultDate={"2025-11-01"}/>} />
-          <Route path="assy/mbr-daily" element={<NatAssyMbrDaily />} />
-          <Route path="assy/arp-realtime" element={<NatAssyArpRealtime />} />
-          <Route path="assy/arp-daily" element={<NatAssyArpDaily />} />
-          <Route path="assy/gssm-realtime" element={<NatAssyGssmRealtime />} />
-          <Route path="assy/gssm-daily" element={<NatAssyGssmDaily />} />
-          <Route path="assy/fim-realtime" element={<NatAssyFimRealtime />} />
-          <Route path="assy/fim-daily" element={<NatAssyFimDaily />} />
-          <Route path="assy/ant-realtime" element={<NatAssyAntRealtime />} />
-          <Route path="assy/avs-realtime" element={<NatAssyAvsRealtime />} />
-          <Route path="assy/alu-realtime" element={<NatAssyAluRealtime />} />
-        </Route>
+              <Route path="gd" element={<NatGdHome />} />
+              <Route path="gd/2ndinbore-realtime" element={<Nat2ndInBoreRealtime />} />
+              <Route path="gd/2ndinrace-realtime" element={<Nat2ndInRaceRealtime />} />
+              <Route path="gd/2ndinsuper-realtime" element={<Nat2ndInSuperRealtime />} />
+              <Route path="gd/2ndoutrace-realtime" element={<Nat2ndOutRaceRealtime />} />
+              <Route path="gd/2ndoutsuper-realtime" element={<Nat2ndOutSuperRealtime />} />
 
-        <Route path="/nmb" element={<NmbHome />} />
-        <Route path="/nmb/assy" element={<NmbAssyHome />} />
-        <Route path="/nmb/assy/agr-realtime" element={<NmbAssyAgrRealtime />} />
-        <Route path="/nmb/assy/alu-realtime" element={<NmbAssyAluRealtime />} />
-        <Route path="/nmb/assy/and-realtime" element={<NmbAssyAndRealtime />} />
-        <Route path="/nmb/assy/aps-realtime" element={<NmbAssyApsRealtime />} />
-        <Route path="/nmb/assy/arp-realtime" element={<NmbAssyArpRealtime />} />
-        <Route path="/nmb/assy/asl-realtime" element={<NmbAssyAslRealtime />} />
-        <Route path="/nmb/assy/asr-realtime" element={<NmbAssyAsrRealtime />} />
-        <Route path="/nmb/assy/ass-realtime" element={<NmbAssyAssRealtime />} />
-        <Route path="/nmb/assy/avs-realtime" element={<NmbAssyAvsRealtime />} />
+              <Route path="assy" element={<NatAssyHome />} />
+              <Route path="assy/combine-realtime" element={<NatAssyCombineRealtime />} />
+              <Route path="assy/combine-realtime-oee" element={<NatAssyCombineRealtimeOee />} />
+              <Route path="assy/mbr-realtime" element={<NatAssyMbrRealtime />} />
+              <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine defaultMC={"mbr01"} defaultDate={"2025-11-01"}/>} />
+              <Route path="assy/mbr-daily" element={<NatAssyMbrDaily />} />
+              <Route path="assy/arp-realtime" element={<NatAssyArpRealtime />} />
+              <Route path="assy/arp-daily" element={<NatAssyArpDaily />} />
+              <Route path="assy/gssm-realtime" element={<NatAssyGssmRealtime />} />
+              <Route path="assy/gssm-daily" element={<NatAssyGssmDaily />} />
+              <Route path="assy/fim-realtime" element={<NatAssyFimRealtime />} />
+              <Route path="assy/fim-daily" element={<NatAssyFimDaily />} />
+              <Route path="assy/ant-realtime" element={<NatAssyAntRealtime />} />
+              <Route path="assy/avs-realtime" element={<NatAssyAvsRealtime />} />
+              <Route path="assy/alu-realtime" element={<NatAssyAluRealtime />} />
+            </Route>
 
-        <Route path="/nhb" element={<NhbHome />} />
-        <Route path="/nhb/tn" element={<NhbTnHome />} />
-        <Route path="/nhb/tn/tn-realtime" element={<NhbTnTnRealtime />} />
+            <Route path="/nmb" element={<NmbHome />} />
+            <Route path="/nmb/assy" element={<NmbAssyHome />} />
+            <Route path="/nmb/assy/agr-realtime" element={<NmbAssyAgrRealtime />} />
+            <Route path="/nmb/assy/alu-realtime" element={<NmbAssyAluRealtime />} />
+            <Route path="/nmb/assy/and-realtime" element={<NmbAssyAndRealtime />} />
+            <Route path="/nmb/assy/aps-realtime" element={<NmbAssyApsRealtime />} />
+            <Route path="/nmb/assy/arp-realtime" element={<NmbAssyArpRealtime />} />
+            <Route path="/nmb/assy/asl-realtime" element={<NmbAssyAslRealtime />} />
+            <Route path="/nmb/assy/asr-realtime" element={<NmbAssyAsrRealtime />} />
+            <Route path="/nmb/assy/ass-realtime" element={<NmbAssyAssRealtime />} />
+            <Route path="/nmb/assy/avs-realtime" element={<NmbAssyAvsRealtime />} />
 
-        <Route path="/nht" element={<NhtHome />} />
-        <Route path="/nht/gd" element={<NhtGdHome />} />
+            <Route path="/nhb" element={<NhbHome />} />
+            <Route path="/nhb/tn" element={<NhbTnHome />} />
+            <Route path="/nhb/tn/tn-realtime" element={<NhbTnTnRealtime />} />
 
-        <Route path="/pelmec" element={<PelmecHome />} />
-      </Routes>
-    </BrowserRouter>
+            <Route path="/nht" element={<NhtHome />} />
+            <Route path="/nht/gd" element={<NhtGdHome />} />
+
+            {/* NAT */}
+            <Route path="/nat_new" element={<NatHomeNew/>}/>
+            <Route path="/nat_new/tn-realtime_new" element={<NatTnRt/>}/>
+            <Route path="/nat_new/tn-history_new" element={<NatTnHistory/>}/>
+            <Route path="/nat_new/sl-realtime_new" element={<NatSLRt/>}/>
+
+            {/* NHT */}
+            <Route path="/nht_new" element={<NhtHomeNew/>}/>
+
+            {/* NMB */}
+            <Route path="/nmb_new" element={<NmbHomeNew/>}/>
+
+            {/* PELMEC */}
+            <Route path="/pelmec_new" element={<PelmecHomeNew/>}/>
+
+            {/* NHB */}
+            <Route path="/nhb_new" element={<NhbHomeNew/>}/>
+
+            {/* MCB */}
+            <Route path="/mcb_new" element={<McbHomeNew/>}/>
+
+            {/* page not found */}
+            <Route path="*" exact={true} element={<NotFound/>} />
+          </Routes>
+        </BrowserRouter>
+      </main>
+      <Footer/> 
+    </div>
+
   );
 }
 
