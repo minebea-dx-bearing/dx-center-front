@@ -46,6 +46,8 @@ import NatAssyMbrDaily from "./pages/nat/assy/NatAssyMbrDaily";
 import NatAssyArpDaily from "./pages/nat/assy/NatAssyArpDaily";
 import NatAssyGssmDaily from "./pages/nat/assy/NatAssyGssmDaily";
 import NatAssyFimDaily from "./pages/nat/assy/NatAssyFimDaily";
+import NatTnProdDash from "./pages/nat/tn/NatTnProdDash";
+import PelmecHome from "./pages/pelmec/PelmecHome";
 
 function App() {
   return (
@@ -63,6 +65,7 @@ function App() {
           <Route path="tn/tn-realtime-oee" element={<NatTnRealtimeOee />} />
           <Route path="tn/tn-daily" element={<NatTnDaily />} />
           <Route path="tn/tn-summary-prod" element={<NatTnSummary />} />
+          <Route path="tn/tn-prod-dash" element={<NatTnProdDash />} />
 
           <Route path="gd" element={<NatGdHome />} />
           <Route path="gd/2ndinbore-realtime" element={<Nat2ndInBoreRealtime />} />
@@ -106,6 +109,8 @@ function App() {
 
         <Route path="/nht" element={<NhtHome />} />
         <Route path="/nht/gd" element={<NhtGdHome />} />
+
+        <Route path="/pelmec" element={<PelmecHome />} />
       </Routes>
     </BrowserRouter>
   );

@@ -14,7 +14,7 @@ export default function NatGdHome() {
         <div className="text-center">Section</div>
         <hr className="my-4" />
         <div className="flex flex-wrap justify-center gap-8">
-          <CardTitle disabled title={"IN COMBINE"} path={"/nat/gd/2ndincombine-realtime"} />
+          <CardTitle title={"IN COMBINE"} path={"/nat/gd/2ndincombine-realtime"} />
           <CardTitle title={"IN BORE"} path={"/nat/gd/2ndinbore-realtime"} />
           <CardTitle title={"IN RACE"} path={"/nat/gd/2ndinrace-realtime"} />
           <CardTitle title={"IN S/F"} path={"/nat/gd/2ndinsuper-realtime"} />
