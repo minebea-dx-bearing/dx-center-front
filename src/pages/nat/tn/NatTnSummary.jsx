@@ -1,6 +1,4 @@
 import PageBreadcrumb from "../../../components/common/PageBreadcrumb";
-import CardProd from "../../../components/common/CardProd";
-import CardMC from "../../../components/common/CardMC";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -209,8 +207,8 @@ export default function NatTnSummary() {
   }, [selectDate, toggleRealtime]);
 
   return (
-    <div className="p-4">
-      <PageBreadcrumb pageTitle="TURNING : Turning Summary" />
+    <div>
+      <PageBreadcrumb pageTitle="NAT : TURNING SUMMARY" />
       <div className="relative flex items-center justify-end mb-4">
         <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-3">
           <Radio.Group
@@ -234,7 +232,7 @@ export default function NatTnSummary() {
             </span>
           ) : (
             <span>
-              Data as of : {prodCard.OUTER?.latest_registered ? moment(prodCard.OUTER.latest_registered).utc().format("DD-MMM HH:mm") : "-"}
+              Data as of : {prodCard.INNER?.latest_registered ? moment(prodCard.INNER.latest_registered).utc().format("DD-MMM HH:mm") : "-"}
             </span>
           )}
         </div>
@@ -373,7 +371,6 @@ export default function NatTnSummary() {
             dataSource={dataTable}
             pagination={false}
             bordered
-            // title={() => <div className="h5 text-center">2nd GD Inner Ring Realtime Table</div>}
           />
         </div>
       </div>

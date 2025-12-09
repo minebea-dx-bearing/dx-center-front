@@ -1,11 +1,11 @@
 import PageBreadcrumb from "../../../components/common/PageBreadcrumb";
 import CardProd from "../../../components/common/CardProd";
-import CardMC from "../../../components/common/CardMC";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import moment from "moment/moment";
 import { BASE_URL } from "../../../constance/constance";
+import CardMC2 from "../../../components/common/CardMC2";
 
 const refreshTime = 60;
 
@@ -82,7 +82,7 @@ export default function NmbAssyAssRealtime() {
         {realtime_data.map((mc) => {
           return (
             <div className="m-2" key={mc.mc_no}>
-              <CardMC
+              <CardMC2
                 mc_no={mc.mc_no}
                 part_no={mc.wos || "-"}
                 target={mc.target}
