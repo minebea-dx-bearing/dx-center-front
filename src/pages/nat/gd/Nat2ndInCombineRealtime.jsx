@@ -3,12 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import moment from "moment/moment";
-import { BASE_URL } from "../../../constance/constance";
+import { BASE_URL, BASE_URL_NHT_NAT } from "../../../constance/constance";
 import CardProcess from "../../../components/common/CardProcess";
 
 const refreshTime = 30;
 
-export default function NatAssyCombineRealtime() {
+export default function Nat2ndInCombineRealtime() {
   const [loading, setLoading] = useState(false);
   const [fetchTime, setFetchTime] = useState();
   const [countdown, setCountdown] = useState(refreshTime);
@@ -22,7 +22,7 @@ export default function NatAssyCombineRealtime() {
       setLoading(true);
     }
     try {
-      const response1 = await axios.get(`${BASE_URL}/nat/assy/combine-realtime/get_data_realtime`, {
+      const response1 = await axios.get(`${BASE_URL_NHT_NAT}/nat/gd/2gdin-combine-realtime/`, {
         headers: {
           "Cache-Control": "no-cache",
           Pragma: "no-cache",
@@ -65,14 +65,14 @@ export default function NatAssyCombineRealtime() {
 
   return (
     <div>
-      <PageBreadcrumb pageTitle="NAT : ASSY COMBINE REALTIME" />
+      <PageBreadcrumb pageTitle="NAT : GD 2nd IN COMBINE REALTIME" />
       <div className="flex flex-row-reverse">
         <div>
           Update : {fetchTime} <span className="text-red-600">(Refresh in {countdown}s)</span>
         </div>
       </div>
 
-      <div className="p-0">
+      {/* <div className="p-0">
         {Object.keys(realtime_data).map((item, index) => {
           const data = realtime_data[item];
           return (
@@ -359,7 +359,7 @@ export default function NatAssyCombineRealtime() {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 }

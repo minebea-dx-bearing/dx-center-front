@@ -7,9 +7,9 @@ import MachineCycleTimeChart from "../../../components/common/MachineCycleTimeCh
 import MachineStatusTimeline from "../../../components/common/MachineStatusTimeline";
 import dayjs from "dayjs";
 import axios from "axios";
-import MachineSumAlarmTable from "../../../components/common/MachineSumAlarmTable";
+import MachineSumAlarmTable from "../../../components/common/MachineSumAlarmTable.jsx";
 import Swal from "sweetalert2";
-import { NMB_TN_URL } from "../../../constance/constance";
+import { NHB_TN_URL } from "../../../constance/constance.js";
 
 export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
   const [masterMachine, setMasterMachine] = useState([]);
@@ -25,7 +25,7 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
   const GET_MASTER_MACHINE_MBR_API = async () => {
     try {
       let dataMC = await axios.get(
-        `${NMB_TN_URL}/nhb/tn/analisis-by-mc/master_machine_tn`
+        `${NHB_TN_URL}/nhb/tn/analisis-by-mc/master_machine_tn`
       );
       if (dataMC.data.success === true) {
         setMasterMachine(dataMC.data.data);
@@ -61,7 +61,7 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
     try {
       setLoading(true);
       let data = await axios.get(
-        `${NMB_TN_URL}/nhb/tn/analisis-by-mc/tn_production_hour_by_mc/${machine}/${date.format(
+        `${NHB_TN_URL}/nhb/tn/analisis-by-mc/tn_production_hour_by_mc/${machine}/${date.format(
           "YYYY-MM-DD"
         )}`
       );
@@ -98,7 +98,7 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
     try {
       setLoading(true);
       let data = await axios.get(
-        `${NMB_TN_URL}/nhb/tn/analisis-by-mc/status_tn/${machine}/${date.format(
+        `${NHB_TN_URL}/nhb/tn/analisis-by-mc/status_tn/${machine}/${date.format(
           "YYYY-MM-DD"
         )}`
       );
@@ -135,7 +135,7 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
     try {
       setLoading(true);
       let data = await axios.get(
-        `${NMB_TN_URL}/nhb/tn/analisis-by-mc/get_production_analysis_by_mc/${machine}/${date.format(
+        `${NHB_TN_URL}/nhb/tn/analisis-by-mc/get_production_analysis_by_mc/${machine}/${date.format(
           "YYYY-MM-DD"
         )}`
       );

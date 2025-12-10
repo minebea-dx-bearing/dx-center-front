@@ -31,6 +31,8 @@ export default function NhbTnTnRealtime() {
           Expires: "0",
         },
       });
+
+      console.log(response1)
       setFetchTime(moment().format("DD-MMM HH:mm"));
       setRealtimeData(response1.data.data.data);
       setSummaryData(response1.data.data.resultSummary);
@@ -84,7 +86,7 @@ export default function NhbTnTnRealtime() {
             <div className="m-2" key={mc.mc_no}>
               <CardMC2
                 mc_no={mc.mc_no}
-                part_no={mc.wos || "-"}
+                part_no={mc.PART_NUMBER || "-"}
                 target={mc.target}
                 actual={mc.prod_ok}
                 actual_ng={mc.prod_ng}

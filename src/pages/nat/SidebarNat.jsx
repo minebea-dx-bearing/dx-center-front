@@ -44,6 +44,7 @@ const navItems = [
       { name: "AVS REALTIME", path: "/nat/assy/avs-realtime" },
       { name: "ALU REALTIME", path: "/nat/assy/alu-realtime" },
       { name: "MBR ANALYSIS", path: "/nat/assy/analysis-mc" },
+      { name: "MBR UNMATCH", path: "/nat/assy/mbr-unmatch" },
     ],
   },
 ];

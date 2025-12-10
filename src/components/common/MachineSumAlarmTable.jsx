@@ -11,7 +11,7 @@ export default function MachineSumAlarmTable({ data }) {
       </h2>
       <div className="flex justify-center w-full">
         <div className="w-[90%] max-w-6xl">
-          <Table dataSource={data} pagination={false} size="small" bordered>
+          <Table dataSource={data} pagination={false} size="small">
             <Column title="#" dataIndex="no" key="no" />
             <Column
               title="Color"

@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 import axios from "axios";
 import MachineSumAlarmTable from "../../../components/common/MachineSumAlarmTable";
 import Swal from "sweetalert2";
-import { LOCAL_URL } from "../../../constance/constance";
+import { TWN_URL } from "../../../constance/constance";
 
 export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
   const [masterMachine, setMasterMachine] = useState([]);
@@ -25,7 +25,7 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
   const GET_MASTER_MACHINE_MBR_API = async () => {
     try {
       let dataMC = await axios.get(
-        `${LOCAL_URL}/nat/assy/analisis-by-mc/master_machine_mbr`
+        `${TWN_URL}/nat/assy/analisis-by-mc/master_machine_mbr`
       );
       if (dataMC.data.success === true) {
         setMasterMachine(dataMC.data.data);
@@ -61,7 +61,7 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
     try {
       setLoading(true);
       let data = await axios.get(
-        `${LOCAL_URL}/nat/assy/analisis-by-mc/mbr_production_hour_by_mc/${machine}/${date.format(
+        `${TWN_URL}/nat/assy/analisis-by-mc/mbr_production_hour_by_mc/${machine}/${date.format(
           "YYYY-MM-DD"
         )}`
       );
@@ -98,7 +98,7 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
     try {
       setLoading(true);
       let data = await axios.get(
-        `${LOCAL_URL}/nat/assy/analisis-by-mc/status_mbr/${machine}/${date.format(
+        `${TWN_URL}/nat/assy/analisis-by-mc/status_mbr/${machine}/${date.format(
           "YYYY-MM-DD"
         )}`
       );
@@ -135,7 +135,7 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
     try {
       setLoading(true);
       let data = await axios.get(
-        `${LOCAL_URL}/nat/assy/analisis-by-mc/get_production_analysis_by_mc/${machine}/${date.format(
+        `${TWN_URL}/nat/assy/analisis-by-mc/get_production_analysis_by_mc/${machine}/${date.format(
           "YYYY-MM-DD"
         )}`
       );

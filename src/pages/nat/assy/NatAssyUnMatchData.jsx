@@ -4,7 +4,7 @@ import PageBreadcrumb from "../../../components/common/PageBreadcrumb";
 import dayjs from "dayjs";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { LOCAL_URL } from "../../../constance/constance";
+import { TWN_URL } from "../../../constance/constance";
 
 export default function NatAssyUnMatchData() {
   const [data, setData] = useState([]);
@@ -14,7 +14,7 @@ export default function NatAssyUnMatchData() {
   const GET_DATA_NG = async () => {
     try {
       let dataMC = await axios.post(
-        `${LOCAL_URL}/nat/assy/mbr-table/table_production_mbr_unmatch`,
+        `${TWN_URL}/nat/assy/mbr-table/table_production_mbr_unmatch`,
         { date: date.format("YYYY-MM-DD"), shift: shift }
       );
 

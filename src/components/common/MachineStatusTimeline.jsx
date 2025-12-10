@@ -1,4 +1,5 @@
-import * as echarts from "echarts";
+import React from "react";
+import * as echarts from "echarts"; // ✅ ต้อง import ตัวหลักด้วย
 import ReactECharts from "echarts-for-react";
 import moment from "moment";
 
@@ -25,7 +26,7 @@ const MachineStatusTimeline = ({ Arrdata }) => {
     };
   });
 
-  const startDay = new Date(Arrdata[0]?.occurred_start);
+  const startDay = new Date(Arrdata[0].occurred_start);
   startDay.setHours(7, 0, 0, 0); // เริ่มจาก 07:00
   const endDay = new Date(startDay);
   endDay.setHours(6 + 24, 59, 59, 999); // จบที่ 06:00 วันถัดไป
