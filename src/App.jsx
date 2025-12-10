@@ -17,6 +17,7 @@ import NatAssyHome from "./pages/nat/assy/NatAssyHome";
 import NmbHome from "./pages/nmb/NmbHome";
 import NmbAssyHome from "./pages/nmb/assy/NmbAssyHome";
 import NhbTnTnRealtime from "./pages/nhb/tn/NhbtntnRealtime";
+import NhbTnAnalysisMachine from "./pages/nhb/tn/NhbTnAnalysisMachine";
 import NhbHome from "./pages/nhb/NhbHome";
 import NhbTnHome from "./pages/nhb/tn/NhbTnHome";
 import NhtHome from "./pages/nht/NhtHome";
@@ -69,6 +70,8 @@ import NhbHomeNew from "./pages/nhbNew/NhbHomeNew";
 import McbHomeNew from "./pages/mcbNew/McbHomeNew";
 // Page Not Found
 import NotFound from "./components/common/NotFound";
+import NatAssyUnMatchData from "./pages/nat/assy/NatAssyUnMatchData";
+import McbAssyAnalysisMachine from "./pages/mcb/assy/McbAssyAnalysisMachine";
 
 function App() {
   return (
@@ -102,7 +105,8 @@ function App() {
               <Route path="assy/combine-realtime" element={<NatAssyCombineRealtime />} />
               <Route path="assy/combine-realtime-oee" element={<NatAssyCombineRealtimeOee />} />
               <Route path="assy/mbr-realtime" element={<NatAssyMbrRealtime />} />
-              <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine defaultMC={"mbr01"} defaultDate={"2025-11-01"}/>} />
+              <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine/>} />
+              <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine/>} />
               <Route path="assy/mbr-daily" element={<NatAssyMbrDaily />} />
               <Route path="assy/arp-realtime" element={<NatAssyArpRealtime />} />
               <Route path="assy/arp-daily" element={<NatAssyArpDaily />} />
@@ -113,6 +117,8 @@ function App() {
               <Route path="assy/ant-realtime" element={<NatAssyAntRealtime />} />
               <Route path="assy/avs-realtime" element={<NatAssyAvsRealtime />} />
               <Route path="assy/alu-realtime" element={<NatAssyAluRealtime />} />
+              <Route path="assy/mbr-unmatch" element={<NatAssyUnMatchData />} />
+              
             </Route>
 
             <Route path="/nmb" element={<NmbHome />} />
@@ -130,6 +136,7 @@ function App() {
             <Route path="/nhb" element={<NhbHome />} />
             <Route path="/nhb/tn" element={<NhbTnHome />} />
             <Route path="/nhb/tn/tn-realtime" element={<NhbTnTnRealtime />} />
+            <Route path="/nhb/tn/analysis-mc" element={<NhbTnAnalysisMachine />} />
 
             <Route path="/nht" element={<NhtHome />} />
             <Route path="/nht/gd" element={<NhtGdHome />} />
@@ -154,6 +161,7 @@ function App() {
 
             {/* MCB */}
             <Route path="/mcb_new" element={<McbHomeNew/>}/>
+            <Route path="/mcb/assy/analysis-mc" element={<McbAssyAnalysisMachine />} />
 
             {/* page not found */}
             <Route path="*" exact={true} element={<NotFound/>} />

@@ -1,0 +1,27 @@
+@keyframes blink-animation {
+      0%, 100% { fill: red; } /* สีที่ 1 */
+      50% { fill: yellow; } /* สีที่ 2 */
+    }
+
+    .blinking-critical {
+      animation: blink-animation 1s steps(1, start) infinite; /* กระพริบทุก 1 วินาที */
+    }
+
+/* กำหนด Keyframes สำหรับการสลับสี */
+@keyframes blink-critical {
+  0%, 100% { fill: red; }    /* เริ่มและจบด้วยสีแดง (สีเด่น) */
+  50% { fill: #ffcccc; }   /* ตรงกลางด้วยสีอ่อนลง */
+}
+
+
+/* Style พื้นฐานสำหรับอำเภอที่ไม่กระพริบ */
+.normal-district {
+  fill: lightgray;
+}
+
+/* Style เพิ่มเติม */
+.map-container {
+  max-width: 600px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+}
