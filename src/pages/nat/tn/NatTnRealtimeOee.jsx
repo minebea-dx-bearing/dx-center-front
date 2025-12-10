@@ -33,6 +33,7 @@ export default function NatTnRealtimeOee() {
           Expires: "0",
         },
       });
+
       setFetchTime(moment().format("DD-MMM HH:mm"));
       setRealtimeData(response1.data.data.data);
       setSummaryData(response1.data.data.resultSummary);

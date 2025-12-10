@@ -106,6 +106,7 @@ function App() {
               <Route path="assy/combine-realtime-oee" element={<NatAssyCombineRealtimeOee />} />
               <Route path="assy/mbr-realtime" element={<NatAssyMbrRealtime />} />
               <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine/>} />
+              <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine/>} />
               <Route path="assy/mbr-daily" element={<NatAssyMbrDaily />} />
               <Route path="assy/arp-realtime" element={<NatAssyArpRealtime />} />
               <Route path="assy/arp-daily" element={<NatAssyArpDaily />} />
