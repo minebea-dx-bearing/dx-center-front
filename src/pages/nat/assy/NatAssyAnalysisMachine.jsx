@@ -10,10 +10,14 @@ import axios from "axios";
 import MachineSumAlarmTable from "../../../components/common/MachineSumAlarmTable";
 import Swal from "sweetalert2";
 import { TWN_URL } from "../../../constance/constance";
+import { useSearchParams } from "react-router";
+import BreadCrumbs from "../../../components/redesign/BreadCrumbs";
 
 export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
   const [masterMachine, setMasterMachine] = useState([]);
-  const [machine, setMachine] = useState(defaultMC || null);
+  const [searchParams] = useSearchParams();
+  const mcNoFromUrl = searchParams.get('mc_no');
+  const [machine, setMachine] = useState(mcNoFromUrl || defaultMC || null);
   const [date, setDate] = useState(defaultDate ? dayjs(defaultDate) : dayjs());
   const [dataProdShift, setDataProdShift] = useState([]);
   const [dataProd, setDataProd] = useState([0]);
@@ -21,6 +25,7 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
   const [dataStatus, setDataStatus] = useState([0]);
   const [dataSumAlarm, setDataSumAlarm] = useState([]);
   const [loading, setLoading] = useState(true);
+
 
   const GET_MASTER_MACHINE_MBR_API = async () => {
     try {
@@ -49,7 +54,7 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
       } else {
         Swal.fire({
           icon: "error",
-          text: "เกิดข้อผิดพลากในการโหลดข้อมูล",
+          text: "เกิดข้อผิดพลาดในการโหลดข้อมูล",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -84,7 +89,7 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
       } else {
         Swal.fire({
           icon: "error",
-          text: "เกิดข้อผิดพลากในการโหลดข้อมูล",
+          text: "เกิดข้อผิดพลาดในการโหลดข้อมูล",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -121,7 +126,7 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
       } else {
         Swal.fire({
           icon: "error",
-          text: "เกิดข้อผิดพลากในการโหลดข้อมูล",
+          text: "เกิดข้อผิดพลาดในการโหลดข้อมูล",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -156,7 +161,7 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
       } else {
         Swal.fire({
           icon: "error",
-          text: "เกิดข้อผิดพลากในการโหลดข้อมูล",
+          text: "เกิดข้อผิดพลาดในการโหลดข้อมูล",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -203,7 +208,8 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
 
   return (
     <div>
-      <PageBreadcrumb pageTitle="ASSY : Analysis by M/C" />
+      {/* <PageBreadcrumb pageTitle="ASSY : Analysis by M/C" /> */}
+      <BreadCrumbs/>
       <div className="flex flex-row justify-center gap-2">
         <div>
           <DatePicker

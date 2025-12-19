@@ -26,7 +26,7 @@ export default function NatAssyAnalysisMachine({defaultMC, defaultDate}) {
 
     const GET_MASTER_MACHINE_MBR_API = async () => {
         try {
-            let dataMC = await axios.get(`http://localhost:8009/nat/assy/analisis-by-mc/master_machine_mbr`);
+            let dataMC = await axios.get(`${BASE_URL}/nat/assy/analisis-by-mc/master_machine_mbr`);
             if (dataMC.data.success === true) {
                 setMasterMachine(dataMC.data.data);
                 setLoading(false)

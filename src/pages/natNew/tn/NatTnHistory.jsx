@@ -1,39 +1,49 @@
 import React from 'react'
-import { Link, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import { useNavigate } from 'react-router-dom';
-import DefaultHeader from '../../../components/layouts/DefaultHeader';
 import BreadCrumbs from '../../../components/redesign/BreadCrumbs';
-import { Segmented } from "antd";
+import { Segmented, DatePicker, Select, Form, Button } from "antd";
+import MasterHistory from '../../../components/redesign/history/MasterHistory';
+import Loading from '../../../components/common/Loading';
 
 export default function NatTnHistory() {
-    // console.log(path)
-    const navigate = useNavigate();
-    const location = useLocation();
+    // // console.log(path)
+    // const navigate = useNavigate();
+    // const location = useLocation();
+    // const {RangePicker} = DatePicker;
+    // const data = location.state
+    // // console.log(data.rtPath)
+    // const options = Array.from({ length: 10 }).map((_, i) => ({
+    //   label: i,
+    //   value: i,
+    // }));
+    
+    // const changeState = (value) => {
+    //     // console.log(value)
+    //     if(value === "realtime"){
+    //         navigate(data.rtPath)
+    //     }
+    //   }
 
-    const data = location.state
-    console.log(data.rtPath)
+    // const handleDateChange = (date, dateString) => {
+    //   console.log(dateString)
+    // }
 
-    const changeState = (value) => {
-        // console.log(value)
-        if(value === "realtime"){
-            navigate(data.rtPath)
-        }
-      }
+    // const handleMCTypyChange = (value) => {
+    //   console.log(value)
+    // }
+
+    // const handleMCNoChange = (value) => {
+    //   console.log(value)
+    // }
+
+    // const onFinish = (value) => {
+    //   console.log(value)
+    // }
   
     return (
       <div>
-        <DefaultHeader plant={data.plant}/>
-        <BreadCrumbs/>
-        <div className="flex justify-center items-baseline -mt-8 mb-8">
-            <Segmented
-                size="large"
-                shape="round"
-                value="history"
-                options={[{label:"Realtime", value:"realtime"}, 
-                        {label:"History", value:"history"}]}
-                onChange={changeState}
-            />
-        </div>
+        <MasterHistory/>
       </div>
     )
 }

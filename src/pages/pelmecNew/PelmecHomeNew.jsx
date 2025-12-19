@@ -1,5 +1,4 @@
 import React from 'react'
-import DefaultHeader from '../../components/layouts/DefaultHeader'
 import CardButton from '../../components/redesign/CardButton'
 import BreadCrumbs from '../../components/redesign/BreadCrumbs'
 import ModalCard from '../../components/redesign/ModalCard'
@@ -12,7 +11,6 @@ export default function PelmecHomeNew() {
     ]
   return (
     <div>
-        <DefaultHeader plant="pelmec"/>
         <BreadCrumbs/>
         <div className="flex justify-center gap-10 mt-5">
         {/* TN */}
@@ -56,18 +54,18 @@ export default function PelmecHomeNew() {
                     <CardButton title="Combine" color="bg-lightblue" path="/pelmec_new/assy-combine-realtime_new"/>
                 </div>
                 <div>
-                    <ModalCard title="MBR" sub_title="Matching Ball Retainer" color="bg-bluegray" component={mbrProcessName}/>
+                    <ModalCard plant="npelmec" title="MBR" sub_title="Matching Ball Retainer" color="bg-bluegray" component={mbrProcessName}/>
                     <CardButton title="ARP" sub_title="Auto Radial Play" color="bg-bluegray" path="/pelmec_new/assy-arp-realtime_new"/>
                 </div>
                 <div>
                     <CardButton title="GSSM" sub_title="Grease Shield Snap" color="bg-darkbluegray" path="/pelmec_new/assy-gssm-realtime_new"/>
                     <CardButton title="FIM" sub_title="Final Inspection" color="bg-darkbluegray" path="/pelmec_new/assy-fim-realtime_new"/>
-                    <CardButton title="AN" sub_title="Auto Noise" color="bg-darkbluegray" path="/pelmec_new/assy-ant-realtime_new"/>
+                    <CardButton title="AN" sub_title="Auto Noise" color="bg-darkbluegray" path="/pelmec_new/assy-an-realtime_new"/>
                 </div>
                 <div>
-                    <CardButton title="ATO" sub_title="Auto OD" color="bg-darkbluegray" path="/pelmec_new/assy-aod-realtime_new"/>
-                    <CardButton title="ATV" sub_title="Auto Visual" color="bg-darkbluegray" path="/pelmec_new/assy-avs-realtime_new"/>
-                    <CardButton title="PL & AL" sub_title={`Packing Line Up & Auto Line Up`} color="bg-darkbluegray" path="/pelmec_new/assy-alu-realtime_new"/>
+                    <CardButton title="ATO" sub_title="Auto OD" color="bg-darkbluegray" path="/pelmec_new/assy-ato-realtime_new"/>
+                    <CardButton title="ATV" sub_title="Auto Visual" color="bg-darkbluegray" path="/pelmec_new/assy-atv-realtime_new"/>
+                    <CardButton title="PL & AL" sub_title={`Packing Line Up & Auto Line Up`} color="bg-darkbluegray" path="/pelmec_new/assy-pl-al-realtime_new"/>
                 </div>
             </div>
         </div>

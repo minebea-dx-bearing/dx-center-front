@@ -1,15 +1,25 @@
-import React, {useEffect, useState} from 'react'
-import axios from 'axios';
-import moment from 'moment';
-import MasterRtPage from '../../../components/redesign/realtime/MasterRtPage'
-import DefaultCardCombine from '../../../components/redesign/combine/DefaultCardCombine';
-import DoubleDataCardCombine from '../../../components/redesign/combine/DoubleDataCardCombine';
-import DoubleDataCard from '../../../components/redesign/realtime/DoubleDataCard';
-import DefaultCard from '../../../components/redesign/realtime/DefaultCard';
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import moment from "moment";
+import MasterRtPage from "../../../components/redesign/realtime/MasterRtPage";
+import DefaultCardCombine from "../../../components/redesign/combine/DefaultCardCombine";
+import DoubleDataCardCombine from "../../../components/redesign/combine/DoubleDataCardCombine";
+import DoubleDataCard from "../../../components/redesign/realtime/DoubleDataCard";
+import DefaultCard from "../../../components/redesign/realtime/DefaultCard";
+import { LOCAL_URL, TWN_URL } from "../../../constance/constance";
+import Swal from "sweetalert2";
+import Loading from "../../../components/common/Loading";
 
 export default function NatTnRt() {
-  const [dataSource, setDataSourse] = useState([])
-  const [dataSummary, setdataSummary] = useState({ sum_target: 0, sum_daily_ok: 0, avg_cycle_t: 0, avg_opn: 0 })
+  const isFirstLoad = useRef(true);
+  const [loading, setLoading] = useState(false);
+  const [dataSource, setDataSourse] = useState([]);
+  const [dataSummary, setdataSummary] = useState({
+    sum_target: 0,
+    sum_daily_ok: 0,
+    avg_cycle_t: 0,
+    avg_utl: 0,
+  });
   let timeCounter = 0;
 
   // const dataSource = Array.from({ length: 2 }).map((_, i) => ({
@@ -56,29 +66,52 @@ export default function NatTnRt() {
   // }));
 
   async function fetchData() {
-    axios.get('http://10.120.139.25:4005/nat/tn/tn-realtime/machines')
-    .then(response => {
-      // console.log(response.data);
-      setDataSourse(response.data.data)
-      setdataSummary(response.data.resultSummary);
-    })
-    .catch(error => {
-      console.error('There was a problem with the Axios request:', error);
-    });
+    if (isFirstLoad.current) {
+      setLoading(true);
+    }
+    try{
+      const response1 = await axios.get(`${TWN_URL}/nat/tn/tn-realtime/machines`, {
+        headers: {
+          "Cache-Control": "no-cache",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      });
+      console.log(response1.data.data)
+      setDataSourse(response1.data.data);
+      setdataSummary(response1.data.resultSummary);
+      if (isFirstLoad.current) {
+        setLoading(false);
+        isFirstLoad.current = false;
+      }
+    }
+    catch (error) {
+      if (isFirstLoad.current) {
+        setLoading(false);
+        isFirstLoad.current = false;
+      }
+      Swal.fire({
+        title: error.message,
+        icon: "warning",
+        timer: 4000,
+        timerProgressBar: true,
+      });
+    }
   }
 
   useEffect(() => {
     fetchData();
-
+    
     setInterval(() => {
       // console.log('time count down',60-(moment().format("ss")), 'time',moment().format("ss"))
-      timeCounter = 60-(moment().format("ss"))
-      if(timeCounter == 60){
+      timeCounter = 60 - moment().format("ss");
+      if (timeCounter == 60) {
         fetchData();
       }
-      }, 1000);
-    }, [])
-
+    }, 1000);
+  }, []);
+  // console.log(dataSource)
+  
   // const cardItem = dataSource.map(data => {
   //   return (
   //     <div key={data.mc_no}>
@@ -96,7 +129,7 @@ export default function NatTnRt() {
   // })
 
   // const [currentPage, setCurrentPage] = useState('realtime');
-  
+
   // const handleSegmentChange = (value) => {
   //     setCurrentPage(value);
   // }
@@ -113,6 +146,14 @@ export default function NatTnRt() {
   // }
 
   return (
-    <MasterRtPage plant_={"nat"} process_={"Turning"} data={dataSource} dataSum={dataSummary}/>
-  )
+    <div>
+      {loading && <Loading />}
+      <MasterRtPage
+        plant_={"nat"}
+        process_={"Turning"}
+        data={dataSource}
+        dataSum={dataSummary}
+      />
+    </div>
+  );
 }

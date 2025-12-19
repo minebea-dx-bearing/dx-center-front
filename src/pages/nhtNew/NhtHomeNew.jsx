@@ -1,12 +1,10 @@
 import React from 'react'
-import DefaultHeader from '../../components/layouts/DefaultHeader'
 import CardButton from '../../components/redesign/CardButton'
 import BreadCrumbs from '../../components/redesign/BreadCrumbs'
 
 export default function NhtHomeNew() {
   return (
     <div>
-        <DefaultHeader plant="nht"/>
         <BreadCrumbs/>
         <div className="flex justify-center gap-10 mt-5">
         {/* TN */}
@@ -56,7 +54,7 @@ export default function NhtHomeNew() {
                 <div>
                     <CardButton title="GSSM" sub_title="Grease Shield Snap" color="bg-darkbluegray" path="/nht_new/assy-gssm-realtime_new"/>
                     <CardButton title="FIM" sub_title="Final Inspection" color="bg-darkbluegray" path="/nht_new/assy-fim-realtime_new"/>
-                    <CardButton title="AN" sub_title="Auto Noise" color="bg-darkbluegray" path="/nht_new/assy-ant-realtime_new"/>
+                    <CardButton title="AN" sub_title="Auto Noise" color="bg-darkbluegray" path="/nht_new/assy-an-realtime_new"/>
                 </div>
                 <div>
                     <CardButton title="AOD" sub_title="Auto OD" color="bg-darkbluegray" path="/nht_new/assy-aod-realtime_new"/>

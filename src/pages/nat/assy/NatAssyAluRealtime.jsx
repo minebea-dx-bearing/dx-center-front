@@ -6,6 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import moment from "moment/moment";
 import { BASE_URL } from "../../../constance/constance";
+import BreadCrumbs from "../../../components/redesign/BreadCrumbs";
 
 const refreshTime = 60;
 const process = "ALU";
@@ -69,7 +70,8 @@ export default function NatAssyAluRealtime() {
 
   return (
     <div>
-      <PageBreadcrumb pageTitle={`NAT : ASSY ${process} REALTIME`} />
+      {/* <PageBreadcrumb pageTitle={`NAT : ASSY ${process} REALTIME`} /> */}
+      <BreadCrumbs/>
       <div className="flex flex-row-reverse">
         <div>
           Update : {fetchTime} <span className="text-red-600">(Refresh in {countdown}s)</span>

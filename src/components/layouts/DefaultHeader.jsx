@@ -12,16 +12,16 @@ export default function DefaultHeader({plant}) {
     sub_header = "NMB Hi-Tech  Manufacturing Thailand"
   }
   else if (plant === "nmb"){
-    header = "NMB"
-    sub_header = "Nippon Miniature Ball Bearing"
+    header = "NMB-T"
+    sub_header = "Ayuthaya Plant"
   }
   else if (plant === "pelmec"){
-    header = "PELMEC"
+    header = "PELMEC-T"
     sub_header = "Precise Electric Machinery Element & Component"
   }
   else if (plant === "nhb"){
     header = "NHB"
-    sub_header = "NMB Hi-Tech Bearing"
+    sub_header = "Hi-Tech Ball Bearing"
   }
   else if (plant === "mcb"){
     header = "MCB"

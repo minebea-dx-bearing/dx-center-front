@@ -7,6 +7,7 @@ import ChartDonutPercent from "../../../components/common/ChartDonutPercent";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { BASE_URL } from "../../../constance/constance";
+import BreadCrumbs from "../../../components/redesign/BreadCrumbs";
 
 const OEE_MASTER = {
   OEE: "#1E90FF",
@@ -250,7 +251,8 @@ export default function NatAssyGssmDaily() {
 
   return (
     <div className="grid gap-4">
-      <PageBreadcrumb pageTitle={`NAT : ASSY GSSM DAILY`} />
+      {/* <PageBreadcrumb pageTitle={`NAT : ASSY GSSM DAILY`} /> */}
+      <BreadCrumbs/>
       <div className="relative flex items-center justify-end mb-4">
         <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-4">
           <div className="flex items-center gap-2">
