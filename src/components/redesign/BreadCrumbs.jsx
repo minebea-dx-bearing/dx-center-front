@@ -7,10 +7,15 @@ export default function BreadCrumbs() {
   // console.log(pathnames)
 
   let currentLink = "";
+  let addNew = "";
   const breadCrumbs = pathnames.map((name, index) => {
     currentLink += `/${name}`;
-    let rename = name.split("_")[0].toUpperCase();
-    // console.log(currentLink)
+    let plant = name.split("_")[0]
+    let rename = plant.toUpperCase();
+    // if(plant === 'nat'){
+    //   addNew = plant+"_new";
+    // }
+    // console.log(addNew)
     const isLast = index === pathnames.length - 1;
 
     return (
@@ -18,7 +23,7 @@ export default function BreadCrumbs() {
         {isLast ? (
           <span>{rename}</span>
         ) : (
-          <Link to={currentLink} className="text-gray-600">{rename}<span className="ml-2 mr-2">></span></Link>
+          <Link to={currentLink} className="text-gray-600">{rename}<span className="ml-2 mr-2">{">"}</span></Link>
           
         )}
       </li>
@@ -29,7 +34,7 @@ export default function BreadCrumbs() {
     <div>
         <ol className="flex ml-15 mt-5">
             <li className="text-gray-600">
-                <Link to="/home">HOME<span className="ml-2 mr-2">></span></Link>
+                <Link to="/">HOME<span className="ml-2 mr-2">{">"}</span></Link>
             </li>
             {breadCrumbs}
         </ol>

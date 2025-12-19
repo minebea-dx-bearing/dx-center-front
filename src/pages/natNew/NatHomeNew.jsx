@@ -1,18 +1,15 @@
 import React from 'react'
-import DefaultHeader from '../../components/layouts/DefaultHeader'
 import CardButton from '../../components/redesign/CardButton'
 import BreadCrumbs from '../../components/redesign/BreadCrumbs'
+import NatSidebar from './NatSidebar'
 
 
 export default function NatHomeNew() {
-  console.log(window.innerWidth, window.innerHeight)
+  // console.log(window.innerWidth, window.innerHeight)
   // const screenWidth = window.innerWidth;
   // const screenHeight = window.innerHeight;
   return (
-    <div>
-      {/* <h1>{screenHeight}</h1>
-      <h1>{screenWidth}</h1> */}
-      <DefaultHeader plant="nat"/>
+    <div className='w-full'>
       <BreadCrumbs/>
       <div className="flex justify-center gap-10 mt-5">
         {/* TN */}
@@ -24,8 +21,8 @@ export default function NatHomeNew() {
         {/* 1st GD */}
         <div className="w-50">
           <h1 className="text-center text-xl font-medium mb-3">1st Grinding</h1>
-          <CardButton title="Sidelap" color="bg-bluegray" path="/nat_new/sl-realtime_new"/>
-          <CardButton title="OD" color="bg-bluegray" path="/nat_new/od-realtime_new"/>
+          <CardButton disabled title="Sidelap" color="bg-bluegray" path="/nat_new/sl-realtime_new"/>
+          <CardButton disabled title="OD" color="bg-bluegray" path="/nat_new/od-realtime_new"/>
         </div>
 
         {/* 2nd GD */}
@@ -33,13 +30,13 @@ export default function NatHomeNew() {
           <h1 className="text-center text-xl font-medium mb-3">2nd Grinding</h1>
           <div className="grid grid-cols-2 gap-5">
             <div>
-              <CardButton title="I/R Combine" color="bg-lightblue" path="/nat_new/ir-combine-realtime_new"/>
+              <CardButton disabled title="I/R Combine" color="bg-lightblue" path="/nat_new/ir-combine-realtime_new"/>
               <CardButton title="I/R Bore" color="bg-bluegray" path="/nat_new/ir-bore-realtime_new"/>
               <CardButton title="I/R Raceway" color="bg-bluegray" path="/nat_new/ir-rw-realtime_new"/>
               <CardButton title="I/R S/F" color="bg-bluegray" path="/nat_new/ir-sf-realtime_new"/>
             </div>
             <div>
-              <CardButton title="O/R Combine" color="bg-lightblue" path="/nat_new/or-combine-realtime_new"/>
+              <CardButton disabled title="O/R Combine" color="bg-lightblue" path="/nat_new/or-combine-realtime_new"/>
               <CardButton title="O/R Raceway" color="bg-darkbluegray" path="/nat_new/or-rw-realtime_new"/>
               <CardButton title="O/R S/F" color="bg-darkbluegray" path="/nat_new/or-sf-realtime_new"/>
             </div>
@@ -63,7 +60,7 @@ export default function NatHomeNew() {
               <CardButton title="ANT" sub_title="Auto Noise" color="bg-darkbluegray" path="/nat_new/assy-ant-realtime_new"/>
             </div>
             <div>
-              <CardButton title="AOD" sub_title="Auto OD" color="bg-darkbluegray" path="/nat_new/assy-aod-realtime_new"/>
+              <CardButton disabled title="AOD" sub_title="Auto OD" color="bg-darkbluegray" path="/nat_new/assy-aod-realtime_new"/>
               <CardButton title="AVS" sub_title="Auto Visual" color="bg-darkbluegray" path="/nat_new/assy-avs-realtime_new"/>
               <CardButton title="ALU" sub_title="Auto Line Up" color="bg-darkbluegray" path="/nat_new/assy-alu-realtime_new"/>
             </div>

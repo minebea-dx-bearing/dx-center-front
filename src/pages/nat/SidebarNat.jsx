@@ -9,7 +9,7 @@ const navItems = [
     icon: <Squares2X2Icon />,
     name: "TURNING",
     subItems: [
-      { name: "TN REALTIME", path: "/nat/tn/tn-realtime" },
+      { name: "TN REALTIME", path: "/nat/tn-realtime_new" },
       { name: "TN REALTIME OEE", path: "/nat/tn/tn-realtime-oee" },
       { name: "TN DAILY", path: "/nat/tn/tn-daily" },
       { name: "TN SUMMARY PROD.", path: "/nat/tn/tn-summary-prod" },

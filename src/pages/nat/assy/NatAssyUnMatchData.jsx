@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { TWN_URL } from "../../../constance/constance";
+import BreadCrumbs from "../../../components/redesign/BreadCrumbs";
 
 export default function NatAssyUnMatchData() {
   const [data, setData] = useState([]);
@@ -253,7 +254,8 @@ export default function NatAssyUnMatchData() {
   ];
   return (
     <div>
-      <PageBreadcrumb pageTitle="ASSY : Data Unmatch" />
+      {/* <PageBreadcrumb pageTitle="ASSY : Data Unmatch" /> */}
+      <BreadCrumbs/>
       <div className="flex flex-row justify-center gap-2 py-2">
         <div>Date : </div>
         <div>

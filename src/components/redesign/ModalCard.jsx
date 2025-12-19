@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Modal } from 'antd';
 import CardButton from './CardButton';
 
-export default function ModalCard({title, sub_title, color, component, disabled = false}) {
+export default function ModalCard({plant, title, sub_title, color, component, disabled = false}) {
     const defaultTitleStyle = "font-medium text-2xl text-center px-3";
     const defaultSubTitleStyle = "text-sm text-gray-600 text-center px-3";
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,9 +23,9 @@ export default function ModalCard({title, sub_title, color, component, disabled 
     };
 
     const componentItem = component.map((data) => {
-        const titleLowerCase = data.title.toLowerCase();
+        const titleLowerCase = data.title.replace(" ","-").toLowerCase();
         return(
-            <CardButton title={data.title} sub_title={data.sub_title} color="bg-bluegray" path={`/nmb_new/assy-${titleLowerCase}-realtime_new`}/>
+            <CardButton title={data.title} sub_title={data.sub_title} color="bg-bluegray" path={`/${plant}_new/assy-${titleLowerCase}-realtime_new`}/>
         )    
     })
 

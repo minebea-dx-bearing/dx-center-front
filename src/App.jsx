@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Home";
@@ -72,10 +73,25 @@ import McbHomeNew from "./pages/mcbNew/McbHomeNew";
 import NotFound from "./components/common/NotFound";
 import NatAssyUnMatchData from "./pages/nat/assy/NatAssyUnMatchData";
 import McbAssyAnalysisMachine from "./pages/mcb/assy/McbAssyAnalysisMachine";
+import NhbIRBore from "./pages/nhbNew/gd2/NhbIRBore";
+import NhbGdHome from "./pages/nhb/gd2/NhbGdHome";
+import NhbGd2IRBore from "./pages/nhb/gd2/NhbGd2IRBore";
+import NhbTnRt from "./pages/nhbNew/tn/NhbTnRt";
+
+import SidebarLayout from "./pages/SidebarLayout";
+import NatIRBoreRt from "./pages/natNew/gd2/ir/NatIRBoreRt";
+import NatIRRwRt from "./pages/natNew/gd2/ir/NatIRRwRt";
+import NatORRwRt from "./pages/natNew/gd2/or/NatORRwRt";
+import NatMbrRt from "./pages/natNew/assy/NatMbrRt";
+
 
 function App() {
+  // useEffect(() => {
+  //   const scale = window.devicePixelRatio;
+  //   document.body.style.zoom = (1 / scale).toString();
+  //   // console.log(window.innerHeight)
+  // }, []);
   return (
-
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
         <BrowserRouter>
@@ -137,30 +153,73 @@ function App() {
             <Route path="/nhb/tn" element={<NhbTnHome />} />
             <Route path="/nhb/tn/tn-realtime" element={<NhbTnTnRealtime />} />
             <Route path="/nhb/tn/analysis-mc" element={<NhbTnAnalysisMachine />} />
+            <Route path="/nhb/gd" element={<NhbGdHome />} />
+            <Route path="/nhb/gd/2ndinbore-realtime" element={<NhbGd2IRBore />} />
 
             <Route path="/nht" element={<NhtHome />} />
             <Route path="/nht/gd" element={<NhtGdHome />} />
 
             {/* NAT */}
-            <Route path="/nat_new" element={<NatHomeNew/>}/>
-            <Route path="/nat_new/tn-realtime_new" element={<NatTnRt/>}/>
-            <Route path="/nat_new/tn-history_new" element={<NatTnHistory/>}/>
-            <Route path="/nat_new/sl-realtime_new" element={<NatSLRt/>}/>
+            {/* <Route path="/nat_new" element={<DefaultHeader plant="nat" />}></Route> */}
+            <Route path="/nat_new" element={< SidebarLayout plant={"nat"}/>}>
+              <Route index element={<NatHomeNew/>}/>
+              {/* TN */}
+              <Route path="tn-realtime_new" element={<NatTnRt/>}/>
+              <Route path="tn-history_new" element={<NatTnHistory/>}/>
+              {/* 1st Gd */}
+              <Route path="sl-realtime_new" element={<NatSLRt/>}/>
+              {/* 2nd Gd IR */}
+              <Route path="ir-bore-realtime_new" element={<NatIRBoreRt/>}/>
+              <Route path="ir-rw-realtime_new" element={<NatIRRwRt/>}/>
+              <Route path="ir-sf-realtime_new" element={<Nat2ndInSuperRealtime />} />
+              {/* 2nd Gd OR */}
+              <Route path="or-rw-realtime_new" element={<NatORRwRt/>}/>
+              <Route path="or-sf-realtime_new" element={<Nat2ndOutSuperRealtime />} />
+              {/* Assy */}
+              <Route path="assy-combine-realtime_new" element={<NatAssyCombineRealtime />} />
+              <Route path="assy-mbr-realtime_new" element={<NatMbrRt/>}/>
+              <Route path="assy-arp-realtime_new" element={<NatAssyArpRealtime />} />
+              <Route path="assy-gssm-realtime_new" element={<NatAssyGssmRealtime />} />
+              <Route path="assy-fim-realtime_new" element={<NatAssyFimRealtime />} />
+              <Route path="assy-ant-realtime_new" element={<NatAssyAntRealtime />} />
+              <Route path="assy-avs-realtime_new" element={<NatAssyAvsRealtime />} />
+              <Route path="assy-alu-realtime_new" element={<NatAssyAluRealtime />} />
+              {/* Assy additional */}
+              <Route path="assy-mbr-realtime_new/analysis-mc" element={<NatAssyAnalysisMachine/>} />
+              <Route path="mbr-unmatch" element={<NatAssyUnMatchData />} />
+              <Route path="mbr-daily" element={<NatAssyMbrDaily />} />
+              <Route path="arp-daily" element={<NatAssyArpDaily />} />
+              <Route path="gssm-daily" element={<NatAssyGssmDaily />} />
+              <Route path="fim-daily" element={<NatAssyFimDaily />} />
+            </Route>
 
             {/* NHT */}
-            <Route path="/nht_new" element={<NhtHomeNew/>}/>
+            <Route path="/nht_new" element={< SidebarLayout plant={"nht"}/>}>
+              <Route index element={<NhtHomeNew/>}/>
+            </Route>
 
             {/* NMB */}
-            <Route path="/nmb_new" element={<NmbHomeNew/>}/>
+            <Route path="/nmb-t_new" element={< SidebarLayout plant={"nmb"}/>}>
+              <Route index element={<NmbHomeNew/>}/>
+            </Route>
 
             {/* PELMEC */}
-            <Route path="/pelmec_new" element={<PelmecHomeNew/>}/>
+            <Route path="/pelmec-t_new" element={< SidebarLayout plant={"pelmec"}/>}>
+              <Route index element={<PelmecHomeNew/>}/>
+            </Route>
 
             {/* NHB */}
-            <Route path="/nhb_new" element={<NhbHomeNew/>}/>
+            <Route path="/nhb_new" element={< SidebarLayout plant={"nhb"}/>}>
+              <Route index element={<NhbHomeNew/>}/>
+              <Route path="/nhb_new/tn-realtime_new" element={<NhbTnRt/>}/>
+              <Route path="/nhb_new/ir-bore-realtime_new" element={<NhbIRBore/>}/>
+            </Route>
 
             {/* MCB */}
-            <Route path="/mcb_new" element={<McbHomeNew/>}/>
+            <Route path="/mcb_new" element={< SidebarLayout plant={"mcb"}/>}>
+              <Route index element={<McbHomeNew/>}/>
+            </Route>
+
             <Route path="/mcb/assy/analysis-mc" element={<McbAssyAnalysisMachine />} />
 
             {/* page not found */}
@@ -168,7 +227,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </main>
-      <Footer/> 
+      {/* <Footer/>  */}
     </div>
 
   );

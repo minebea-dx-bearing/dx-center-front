@@ -1,12 +1,10 @@
 import React from 'react'
-import DefaultHeader from '../../components/layouts/DefaultHeader'
 import CardButton from '../../components/redesign/CardButton'
 import BreadCrumbs from '../../components/redesign/BreadCrumbs'
 
 export default function NhbHomeNew() {
   return (
     <div>
-        <DefaultHeader plant="nhb"/>
         <BreadCrumbs/>
         <div className="flex justify-center gap-10 mt-5">
             {/* TN */}

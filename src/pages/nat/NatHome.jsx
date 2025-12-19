@@ -14,7 +14,8 @@ export default function NatHome() {
         <div className="text-center">Section</div>
         <hr className="my-4" />
         <div className="flex flex-wrap justify-center gap-8">
-          <CardTitle title={"TURNING"} path={"/nat/tn"} />
+          {/* <CardTitle title={"TURNING"} path={"/nat/tn"} /> */}
+          <CardTitle title={"TURNING"} path={"/nat_new/tn-realtime_new"} />
           <CardTitle title={"GRINDING"} path={"/nat/gd"} />
           <CardTitle title={"ASSEMBLY"} path={"/nat/assy"} />
         </div>

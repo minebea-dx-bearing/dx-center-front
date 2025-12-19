@@ -13,8 +13,8 @@ export default function NewHome() {
                                 gap-8 md:gap-15 mb-10 mt-5">
                     <CardButton title={"NAT"} color={"bg-lightblue"} path={"/nat_new"}/>
                     <CardButton title={"NHT"} color={"bg-lightblue"} path={"/nht_new"}/>
-                    <CardButton title={"NMB"} color={"bg-lightblue"} path={"/nmb_new"}/>
-                    <CardButton title={"PELMEC"} color={"bg-lightblue"} path={"/pelmec_new"}/>
+                    <CardButton title={"NMB-T"} color={"bg-lightblue"} path={"/nmb-t_new"}/>
+                    <CardButton title={"PELMEC-T"} color={"bg-lightblue"} path={"/pelmec-t_new"}/>
                     <CardButton title={"NHB"} color={"bg-lightblue"} path={"/nhb_new"}/>
                     <CardButton title={"MCB"} color={"bg-lightblue"} path={"/mcb_new"}/>
                 </div>
