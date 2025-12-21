@@ -115,6 +115,7 @@ export default function NatAssyAnalysisMachine({ defaultMC, defaultDate }) {
         setDataStatus([0]);
         setDataSumAlarm([]);
       }
+      // console.log(data.data.data)
     } catch (error) {
       if (error.code === "ERR_NETWORK") {
         Swal.fire({

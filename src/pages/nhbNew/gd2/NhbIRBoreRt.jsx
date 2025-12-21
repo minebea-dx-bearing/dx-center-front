@@ -8,7 +8,7 @@ import DefaultCard from '../../../components/redesign/realtime/DefaultCard';
 
 const process = "2NDINBORE";
 
-export default function NhbIRBore() {
+export default function NhbIRBoreRt() {
     const isFirstLoad = useRef(true);
     const [loading, setLoading] = useState(false);
     const [dataSource, setDataSourse] = useState([]);
@@ -32,7 +32,7 @@ export default function NhbIRBore() {
               Expires: "0",
             },
           });
-          console.log(response1.data.data.data)
+          // console.log(response1.data.data.data)
           setDataSourse(response1.data.data.data);
           setdataSummary(response1.data.data.resultSummary);
         }
