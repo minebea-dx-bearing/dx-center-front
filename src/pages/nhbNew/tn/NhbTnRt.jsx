@@ -29,7 +29,7 @@ export default function NhbTnRt() {
           Expires: "0",
         },
       });
-      console.log(response1.data.data)
+      // console.log(response1.data.data)
       setDataSourse(response1.data.data);
       setdataSummary(response1.data.resultSummary);
     }

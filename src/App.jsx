@@ -53,11 +53,17 @@ import PelmecHome from "./pages/pelmec/PelmecHome";
 
 import NewHome from "./pages/NewHome";
 import Footer from "./components/layouts/Footer";
+import SidebarLayout from "./pages/SidebarLayout";
 // NAT
 import NatHomeNew from "./pages/natNew/NatHomeNew";
 import NatTnRt from "./pages/natNew/tn/NatTnRt";
 import NatTnHistory from "./pages/natNew/tn/NatTnHistory";
 import NatSLRt from "./pages/natNew/gd1/NatSLRt";
+import NatIRBoreRt from "./pages/natNew/gd2/ir/NatIRBoreRt";
+import NatIRRwRt from "./pages/natNew/gd2/ir/NatIRRwRt";
+import NatORRwRt from "./pages/natNew/gd2/or/NatORRwRt";
+import NatMbrRt from "./pages/natNew/assy/NatMbrRt";
+import NatAssyUnMatchData from "./pages/nat/assy/NatAssyUnMatchData";
 
 // NHT
 import NhtHomeNew from "./pages/nhtNew/NhtHomeNew";
@@ -67,22 +73,17 @@ import NmbHomeNew from "./pages/nmbNew/NmbHomeNew";
 import PelmecHomeNew from "./pages/pelmecNew/PelmecHomeNew";
 // NHB
 import NhbHomeNew from "./pages/nhbNew/NhbHomeNew";
+import NhbTnRt from "./pages/nhbNew/tn/NhbTnRt";
+import NhbIRBoreRt from "./pages/nhbNew/gd2/NhbIRBoreRt";
 // MCB
 import McbHomeNew from "./pages/mcbNew/McbHomeNew";
+import McbAssyAnalysisMachine from "./pages/mcb/assy/McbAssyAnalysisMachine";
 // Page Not Found
 import NotFound from "./components/common/NotFound";
-import NatAssyUnMatchData from "./pages/nat/assy/NatAssyUnMatchData";
-import McbAssyAnalysisMachine from "./pages/mcb/assy/McbAssyAnalysisMachine";
-import NhbIRBore from "./pages/nhbNew/gd2/NhbIRBore";
+
 import NhbGdHome from "./pages/nhb/gd2/NhbGdHome";
 import NhbGd2IRBore from "./pages/nhb/gd2/NhbGd2IRBore";
-import NhbTnRt from "./pages/nhbNew/tn/NhbTnRt";
 
-import SidebarLayout from "./pages/SidebarLayout";
-import NatIRBoreRt from "./pages/natNew/gd2/ir/NatIRBoreRt";
-import NatIRRwRt from "./pages/natNew/gd2/ir/NatIRRwRt";
-import NatORRwRt from "./pages/natNew/gd2/or/NatORRwRt";
-import NatMbrRt from "./pages/natNew/assy/NatMbrRt";
 
 
 function App() {
@@ -212,7 +213,7 @@ function App() {
             <Route path="/nhb_new" element={< SidebarLayout plant={"nhb"}/>}>
               <Route index element={<NhbHomeNew/>}/>
               <Route path="/nhb_new/tn-realtime_new" element={<NhbTnRt/>}/>
-              <Route path="/nhb_new/ir-bore-realtime_new" element={<NhbIRBore/>}/>
+              <Route path="/nhb_new/ir-bore-realtime_new" element={<NhbIRBoreRt/>}/>
             </Route>
 
             {/* MCB */}

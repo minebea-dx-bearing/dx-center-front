@@ -24,6 +24,7 @@ export default function NatAssyUnMatchData() {
       } else {
         setData([]);
       }
+      // console.log(dataMC)
     } catch (error) {
       if (error.code === "ERR_NETWORK") {
         Swal.fire({

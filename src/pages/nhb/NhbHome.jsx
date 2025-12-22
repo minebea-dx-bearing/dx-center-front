@@ -15,7 +15,7 @@ export default function NhbHome() {
         <hr className="my-4" />
         <div className="flex flex-wrap justify-center gap-8">
           <CardTitle title={"TURNING"} path={"/nhb/tn"} />
-          <CardTitle title={"GRINDING"} path={"/nhb/gd"} />
+          <CardTitle disabled title={"GRINDING"} path={"/nhb/gd"} />
           <CardTitle disabled title={"ASSEMBLY"} path={"/nhb/assy"} />
         </div>
       </div>

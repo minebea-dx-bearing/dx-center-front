@@ -1,7 +1,10 @@
 import React from 'react'
+import { useLocation, useNavigate } from 'react-router';
 
 export default function DefaultCard({data}) {
     // console.log(data)
+    const navigate = useNavigate();
+    const location = useLocation();
     let additionalData = "";
     let cardHeight = "h-74";
     
@@ -23,7 +26,7 @@ export default function DefaultCard({data}) {
     // check cycle time and set text color
     const textCtColor = (CtData) => {
         if (CtData >= 0){
-            return "text-red-500";
+            return "text-red-500 text-blink";
         }
         else{
             return "text-green-500";
@@ -118,7 +121,8 @@ export default function DefaultCard({data}) {
     }
 
     const onClick = (() => {
-        console.log(data.mc_no)
+        // console.log(data.mc_no)
+        navigate(`${location.pathname}/analysis-mc?mc_no=${data.mc_no}`)
     })
 
     return (

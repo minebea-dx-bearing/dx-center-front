@@ -1,8 +1,9 @@
 import React from 'react'
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 export default function DoubleDataCard({data}) {
     const navigate = useNavigate();
+    const location = useLocation();
     const columnStyle = "grid grid-cols-[110px_1fr_1fr] border-b";
     const formatNumber = (num) => num?.toLocaleString();
     const formatCT = (num) => (num !== undefined && num !== null ? Number(num).toFixed(2) : 0);
@@ -101,8 +102,8 @@ export default function DoubleDataCard({data}) {
     }
 
     const onClick = (() => {
-        console.log(data.mc_no)
-        navigate(`/nat_new/assy-mbr-realtime_new/analysis-mc?mc_no=${data.mc_no}`)
+        // console.log(location.pathname)
+        navigate(`${location.pathname}/analysis-mc?mc_no=${data.mc_no}`)
     })
 
     return (

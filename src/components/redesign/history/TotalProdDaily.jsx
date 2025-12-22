@@ -45,12 +45,12 @@ export default function TotalProdDaily({formData, mcData}) {
     }));
 
   return (
-    <div className="w-full h-[400px] py-8 rounded-2xl ml-20">
+    <div className=" h-[400px] py-8 rounded-2xl ml-20">
       {/*  <div className="w-full h-[400px] p-4 bg-white shadow rounded-2xl "> */}
       <h2 className="text-lg font-semibold mb-2 text-gray-700 ">
         Production by Hour
       </h2>
-      <ResponsiveContainer width="90%" height="90%">
+      <ResponsiveContainer width="95%" height="90%">
         <BarChart data={data} responsive>
           <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200" />
           <XAxis
