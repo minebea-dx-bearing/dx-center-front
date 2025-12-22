@@ -48,6 +48,13 @@ import NatAssyGssmDaily from "./pages/nat/assy/NatAssyGssmDaily";
 import NatAssyFimDaily from "./pages/nat/assy/NatAssyFimDaily";
 import NatTnProdDash from "./pages/nat/tn/NatTnProdDash";
 import PelmecHome from "./pages/pelmec/PelmecHome";
+import PelmecMmsAssy from "./pages/pelmec/assy/PelmecMmsAssy";
+import PelmecMmsTurning from "./pages/pelmec/tn/PelmecMmsTurning";
+import PelmecMms1stRough from "./pages/pelmec/gd/PelmecMms1stRough";
+import PelmecMms2ndOuter from "./pages/pelmec/gd/PelmecMms2ndOuter";
+import PelmecMms2ndInner from "./pages/pelmec/gd/PelmecMms2ndInner";
+import PelmecMmsColdForming from "./pages/pelmec/tn/PelmecMmsColdForming";
+import NmbMmsTurning from "./pages/nmb/tn/NmbMmsTurning";
 
 function App() {
   return (
@@ -92,6 +99,7 @@ function App() {
         </Route>
 
         <Route path="/nmb" element={<NmbHome />} />
+        <Route path="/nmb/tn/tn" element={<NmbMmsTurning />} />
         <Route path="/nmb/assy" element={<NmbAssyHome />} />
         <Route path="/nmb/assy/agr-realtime" element={<NmbAssyAgrRealtime />} />
         <Route path="/nmb/assy/alu-realtime" element={<NmbAssyAluRealtime />} />
@@ -111,6 +119,12 @@ function App() {
         <Route path="/nht/gd" element={<NhtGdHome />} />
 
         <Route path="/pelmec" element={<PelmecHome />} />
+        <Route path="/pelmec/tn/tn" element={<PelmecMmsTurning />} />
+        <Route path="/pelmec/tn/coldforming" element={<PelmecMmsColdForming />} />
+        <Route path="/pelmec/gd/1strough" element={<PelmecMms1stRough />} />
+        <Route path="/pelmec/gd/2ndouter" element={<PelmecMms2ndOuter />} />
+        <Route path="/pelmec/gd/2ndinner" element={<PelmecMms2ndInner />} />
+        <Route path="/pelmec/assy/assy" element={<PelmecMmsAssy />} />
       </Routes>
     </BrowserRouter>
   );
