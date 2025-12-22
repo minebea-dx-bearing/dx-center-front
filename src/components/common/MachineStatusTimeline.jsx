@@ -26,6 +26,7 @@ const MachineStatusTimeline = ({ Arrdata }) => {
     };
   });
 
+  console.log(Arrdata)
   const startDay = new Date(Arrdata[0].occurred_start);
   startDay.setHours(7, 0, 0, 0); // เริ่มจาก 07:00
   const endDay = new Date(startDay);

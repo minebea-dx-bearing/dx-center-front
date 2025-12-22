@@ -32,6 +32,7 @@ export default function NhbTnTnRealtime() {
         },
       });
 
+      // console.log(response1)
       setFetchTime(moment().format("DD-MMM HH:mm"));
       setRealtimeData(response1.data.data.data);
       setSummaryData(response1.data.data.resultSummary);
