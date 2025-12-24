@@ -70,7 +70,8 @@ export default function NatTnRt() {
       setLoading(true);
     }
     try{
-      const response1 = await axios.get(`${TWN_URL}/nat/tn/tn-realtime/machines`, {
+      // const response1 = await axios.get(`${TWN_URL}/nat/tn/tn-realtime/machines`, {
+      const response1 = await axios.get(`http://localhost:8009/nat/tn/tn-realtime/machines`, {
         headers: {
           "Cache-Control": "no-cache",
           Pragma: "no-cache",
@@ -103,47 +104,12 @@ export default function NatTnRt() {
     fetchData();
     
     setInterval(() => {
-      // console.log('time count down',60-(moment().format("ss")), 'time',moment().format("ss"))
       timeCounter = 60 - moment().format("ss");
       if (timeCounter == 60) {
         fetchData();
       }
     }, 1000);
   }, []);
-  // console.log(dataSource)
-  
-  // const cardItem = dataSource.map(data => {
-  //   return (
-  //     <div key={data.mc_no}>
-  //       <DefaultCard data={data}/>
-  //     </div>
-  //   )
-  // })
-
-  // const cardItemmbr = dataSourcembr.map(data => {
-  //   return (
-  //     <div key={data.mc_no}>
-  //       <DoubleDataCard data={data}/>
-  //     </div>
-  //   )
-  // })
-
-  // const [currentPage, setCurrentPage] = useState('realtime');
-
-  // const handleSegmentChange = (value) => {
-  //     setCurrentPage(value);
-  // }
-
-  // const renderPageContent = () => {
-  //     switch (currentPage) {
-  //         case 'realtime':
-  //             return <MasterRtPage plant_={"nat"} process_={"Turning"} data={dataSource}/>;
-  //         case 'history':
-  //             return <MasterRtPage plant_={"nht"} process_={"Test"} data={dataSource}/>;
-  //         default:
-  //             return null;
-  //     }
-  // }
 
   return (
     <div>

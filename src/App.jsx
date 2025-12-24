@@ -90,6 +90,23 @@ import NotFound from "./components/common/NotFound";
 
 import NhbGdHome from "./pages/nhb/gd2/NhbGdHome";
 import NhbGd2IRBore from "./pages/nhb/gd2/NhbGd2IRBore";
+import NatTnAnalysisMachine from "./pages/natNew/tn/NatTnAnalysisMachine";
+import NatIRBoreAnalysisMachine from "./pages/natNew/gd2/ir/NatIRBoreAnalysisMachine";
+import NatIRRwAnalysisMachine from "./pages/natNew/gd2/ir/NatIRRwAnalysisMachine";
+import NatIRSfAnalysisMachine from "./pages/natNew/gd2/ir/NatIRSfAnalysisMachine";
+import NatIRSfRt from "./pages/natNew/gd2/ir/NatIRSfRt";
+import NatORSfRt from "./pages/natNew/gd2/or/NatORSfRt";
+import NatORSfAnalysisMachine from "./pages/natNew/gd2/or/NatORSfAnalysisMachine";
+import NatORRwAnalysisMachine from "./pages/natNew/gd2/or/NatORRwAnalysisMachine";
+import NatMbrAnalysisMachine from "./pages/natNew/assy/NatMbrAnalysisMachine";
+import NatArpRt from "./pages/natNew/assy/NatArpRt";
+import NatArpAnalysisMachine from "./pages/natNew/assy/NatArpAnalysisMachine";
+import NatFimRt from "./pages/natNew/assy/NatFimRt";
+import NatFimAnalysisMachine from "./pages/natNew/assy/NatFimAnalysisMachine";
+import NatAvsRt from "./pages/natNew/assy/NatAvsRt";
+import NatAvsAnalysisMachine from "./pages/natNew/assy/NatAvsAnalysisMachine";
+import NatAluRt from "./pages/natNew/assy/NatAluRt";
+import NatAluAnalysisMachine from "./pages/natNew/assy/NatAluAnalysisMachine";
 
 
 
@@ -100,75 +117,75 @@ function App() {
   //   // console.log(window.innerHeight)
   // }, []);
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Home />} />
+    // <BrowserRouter>
+    //   <ScrollToTop />
+    //   <Routes>
+    //     <Route path="/" element={<Home />} />
 
-        <Route path="/test" element={<Test />} />
+    //     <Route path="/test" element={<Test />} />
 
-        <Route path="/nat" element={<NatLayout />}>
-          <Route index element={<NatHome />} />
-          <Route path="tn" element={<NatTnHome />} />
-          <Route path="tn/tn-realtime" element={<NatTnRealtime />} />
-          <Route path="tn/tn-realtime-oee" element={<NatTnRealtimeOee />} />
-          <Route path="tn/tn-daily" element={<NatTnDaily />} />
-          <Route path="tn/tn-summary-prod" element={<NatTnSummary />} />
-          <Route path="tn/tn-prod-dash" element={<NatTnProdDash />} />
+    //     <Route path="/nat" element={<NatLayout />}>
+    //       <Route index element={<NatHome />} />
+    //       <Route path="tn" element={<NatTnHome />} />
+    //       <Route path="tn/tn-realtime" element={<NatTnRealtime />} />
+    //       <Route path="tn/tn-realtime-oee" element={<NatTnRealtimeOee />} />
+    //       <Route path="tn/tn-daily" element={<NatTnDaily />} />
+    //       <Route path="tn/tn-summary-prod" element={<NatTnSummary />} />
+    //       <Route path="tn/tn-prod-dash" element={<NatTnProdDash />} />
 
-          <Route path="gd" element={<NatGdHome />} />
-          <Route path="gd/2ndinbore-realtime" element={<Nat2ndInBoreRealtime />} />
-          <Route path="gd/2ndinrace-realtime" element={<Nat2ndInRaceRealtime />} />
-          <Route path="gd/2ndinsuper-realtime" element={<Nat2ndInSuperRealtime />} />
-          <Route path="gd/2ndoutrace-realtime" element={<Nat2ndOutRaceRealtime />} />
-          <Route path="gd/2ndoutsuper-realtime" element={<Nat2ndOutSuperRealtime />} />
+    //       <Route path="gd" element={<NatGdHome />} />
+    //       <Route path="gd/2ndinbore-realtime" element={<Nat2ndInBoreRealtime />} />
+    //       <Route path="gd/2ndinrace-realtime" element={<Nat2ndInRaceRealtime />} />
+    //       <Route path="gd/2ndinsuper-realtime" element={<Nat2ndInSuperRealtime />} />
+    //       <Route path="gd/2ndoutrace-realtime" element={<Nat2ndOutRaceRealtime />} />
+    //       <Route path="gd/2ndoutsuper-realtime" element={<Nat2ndOutSuperRealtime />} />
 
-          <Route path="assy" element={<NatAssyHome />} />
-          <Route path="assy/combine-realtime" element={<NatAssyCombineRealtime />} />
-          <Route path="assy/combine-realtime-oee" element={<NatAssyCombineRealtimeOee />} />
-          <Route path="assy/mbr-realtime" element={<NatAssyMbrRealtime />} />
-          <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine defaultMC={"mbr01"} defaultDate={"2025-11-01"}/>} />
-          <Route path="assy/mbr-daily" element={<NatAssyMbrDaily />} />
-          <Route path="assy/arp-realtime" element={<NatAssyArpRealtime />} />
-          <Route path="assy/arp-daily" element={<NatAssyArpDaily />} />
-          <Route path="assy/gssm-realtime" element={<NatAssyGssmRealtime />} />
-          <Route path="assy/gssm-daily" element={<NatAssyGssmDaily />} />
-          <Route path="assy/fim-realtime" element={<NatAssyFimRealtime />} />
-          <Route path="assy/fim-daily" element={<NatAssyFimDaily />} />
-          <Route path="assy/ant-realtime" element={<NatAssyAntRealtime />} />
-          <Route path="assy/avs-realtime" element={<NatAssyAvsRealtime />} />
-          <Route path="assy/alu-realtime" element={<NatAssyAluRealtime />} />
-        </Route>
+    //       <Route path="assy" element={<NatAssyHome />} />
+    //       <Route path="assy/combine-realtime" element={<NatAssyCombineRealtime />} />
+    //       <Route path="assy/combine-realtime-oee" element={<NatAssyCombineRealtimeOee />} />
+    //       <Route path="assy/mbr-realtime" element={<NatAssyMbrRealtime />} />
+    //       <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine defaultMC={"mbr01"} defaultDate={"2025-11-01"}/>} />
+    //       <Route path="assy/mbr-daily" element={<NatAssyMbrDaily />} />
+    //       <Route path="assy/arp-realtime" element={<NatAssyArpRealtime />} />
+    //       <Route path="assy/arp-daily" element={<NatAssyArpDaily />} />
+    //       <Route path="assy/gssm-realtime" element={<NatAssyGssmRealtime />} />
+    //       <Route path="assy/gssm-daily" element={<NatAssyGssmDaily />} />
+    //       <Route path="assy/fim-realtime" element={<NatAssyFimRealtime />} />
+    //       <Route path="assy/fim-daily" element={<NatAssyFimDaily />} />
+    //       <Route path="assy/ant-realtime" element={<NatAssyAntRealtime />} />
+    //       <Route path="assy/avs-realtime" element={<NatAssyAvsRealtime />} />
+    //       <Route path="assy/alu-realtime" element={<NatAssyAluRealtime />} />
+    //     </Route>
 
-        <Route path="/nmb" element={<NmbHome />} />
-        <Route path="/nmb/tn/tn" element={<NmbMmsTurning />} />
-        <Route path="/nmb/assy" element={<NmbAssyHome />} />
-        <Route path="/nmb/assy/agr-realtime" element={<NmbAssyAgrRealtime />} />
-        <Route path="/nmb/assy/alu-realtime" element={<NmbAssyAluRealtime />} />
-        <Route path="/nmb/assy/and-realtime" element={<NmbAssyAndRealtime />} />
-        <Route path="/nmb/assy/aps-realtime" element={<NmbAssyApsRealtime />} />
-        <Route path="/nmb/assy/arp-realtime" element={<NmbAssyArpRealtime />} />
-        <Route path="/nmb/assy/asl-realtime" element={<NmbAssyAslRealtime />} />
-        <Route path="/nmb/assy/asr-realtime" element={<NmbAssyAsrRealtime />} />
-        <Route path="/nmb/assy/ass-realtime" element={<NmbAssyAssRealtime />} />
-        <Route path="/nmb/assy/avs-realtime" element={<NmbAssyAvsRealtime />} />
+    //     <Route path="/nmb" element={<NmbHome />} />
+    //     <Route path="/nmb/tn/tn" element={<NmbMmsTurning />} />
+    //     <Route path="/nmb/assy" element={<NmbAssyHome />} />
+    //     <Route path="/nmb/assy/agr-realtime" element={<NmbAssyAgrRealtime />} />
+    //     <Route path="/nmb/assy/alu-realtime" element={<NmbAssyAluRealtime />} />
+    //     <Route path="/nmb/assy/and-realtime" element={<NmbAssyAndRealtime />} />
+    //     <Route path="/nmb/assy/aps-realtime" element={<NmbAssyApsRealtime />} />
+    //     <Route path="/nmb/assy/arp-realtime" element={<NmbAssyArpRealtime />} />
+    //     <Route path="/nmb/assy/asl-realtime" element={<NmbAssyAslRealtime />} />
+    //     <Route path="/nmb/assy/asr-realtime" element={<NmbAssyAsrRealtime />} />
+    //     <Route path="/nmb/assy/ass-realtime" element={<NmbAssyAssRealtime />} />
+    //     <Route path="/nmb/assy/avs-realtime" element={<NmbAssyAvsRealtime />} />
 
-        <Route path="/nhb" element={<NhbHome />} />
-        <Route path="/nhb/tn" element={<NhbTnHome />} />
-        <Route path="/nhb/tn/tn-realtime" element={<NhbTnTnRealtime />} />
+    //     <Route path="/nhb" element={<NhbHome />} />
+    //     <Route path="/nhb/tn" element={<NhbTnHome />} />
+    //     <Route path="/nhb/tn/tn-realtime" element={<NhbTnTnRealtime />} />
 
-        <Route path="/nht" element={<NhtHome />} />
-        <Route path="/nht/gd" element={<NhtGdHome />} />
+    //     <Route path="/nht" element={<NhtHome />} />
+    //     <Route path="/nht/gd" element={<NhtGdHome />} />
 
-        <Route path="/pelmec" element={<PelmecHome />} />
-        <Route path="/pelmec/tn/tn" element={<PelmecMmsTurning />} />
-        <Route path="/pelmec/tn/coldforming" element={<PelmecMmsColdForming />} />
-        <Route path="/pelmec/gd/1strough" element={<PelmecMms1stRough />} />
-        <Route path="/pelmec/gd/2ndouter" element={<PelmecMms2ndOuter />} />
-        <Route path="/pelmec/gd/2ndinner" element={<PelmecMms2ndInner />} />
-        <Route path="/pelmec/assy/assy" element={<PelmecMmsAssy />} />
-      </Routes>
-    </BrowserRouter>
+    //     <Route path="/pelmec" element={<PelmecHome />} />
+    //     <Route path="/pelmec/tn/tn" element={<PelmecMmsTurning />} />
+    //     <Route path="/pelmec/tn/coldforming" element={<PelmecMmsColdForming />} />
+    //     <Route path="/pelmec/gd/1strough" element={<PelmecMms1stRough />} />
+    //     <Route path="/pelmec/gd/2ndouter" element={<PelmecMms2ndOuter />} />
+    //     <Route path="/pelmec/gd/2ndinner" element={<PelmecMms2ndInner />} />
+    //     <Route path="/pelmec/assy/assy" element={<PelmecMmsAssy />} />
+    //   </Routes>
+    // </BrowserRouter>
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
         <BrowserRouter>
@@ -198,7 +215,6 @@ function App() {
               <Route path="assy/combine-realtime" element={<NatAssyCombineRealtime />} />
               <Route path="assy/combine-realtime-oee" element={<NatAssyCombineRealtimeOee />} />
               <Route path="assy/mbr-realtime" element={<NatAssyMbrRealtime />} />
-              <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine/>} />
               <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine/>} />
               <Route path="assy/mbr-daily" element={<NatAssyMbrDaily />} />
               <Route path="assy/arp-realtime" element={<NatAssyArpRealtime />} />
@@ -243,26 +259,39 @@ function App() {
               {/* TN */}
               <Route path="tn-realtime_new" element={<NatTnRt/>}/>
               <Route path="tn-history_new" element={<NatTnHistory/>}/>
+              {/* TN additional */}
+              <Route path="tn-realtime_new/analysis-mc" element={<NatTnAnalysisMachine/>} />
               {/* 1st Gd */}
               <Route path="sl-realtime_new" element={<NatSLRt/>}/>
               {/* 2nd Gd IR */}
               <Route path="ir-bore-realtime_new" element={<NatIRBoreRt/>}/>
               <Route path="ir-rw-realtime_new" element={<NatIRRwRt/>}/>
-              <Route path="ir-sf-realtime_new" element={<Nat2ndInSuperRealtime />} />
+              <Route path="ir-sf-realtime_new" element={<NatIRSfRt />} />
+              {/* 2nd Gd IR additional */}
+              <Route path="ir-bore-realtime_new/analysis-mc" element={<NatIRBoreAnalysisMachine/>} />
+              <Route path="ir-rw-realtime_new/analysis-mc" element={<NatIRRwAnalysisMachine/>} />
+              <Route path="ir-sf-realtime_new/analysis-mc" element={<NatIRSfAnalysisMachine/>} />
               {/* 2nd Gd OR */}
               <Route path="or-rw-realtime_new" element={<NatORRwRt/>}/>
-              <Route path="or-sf-realtime_new" element={<Nat2ndOutSuperRealtime />} />
+              <Route path="or-sf-realtime_new" element={<NatORSfRt />} />
+              {/* 2nd Gd OR additional */}
+              <Route path="or-rw-realtime_new/analysis-mc" element={<NatORRwAnalysisMachine/>} />
+              <Route path="or-sf-realtime_new/analysis-mc" element={<NatORSfAnalysisMachine/>} />
               {/* Assy */}
               <Route path="assy-combine-realtime_new" element={<NatAssyCombineRealtime />} />
               <Route path="assy-mbr-realtime_new" element={<NatMbrRt/>}/>
-              <Route path="assy-arp-realtime_new" element={<NatAssyArpRealtime />} />
+              <Route path="assy-arp-realtime_new" element={<NatArpRt />} />
               <Route path="assy-gssm-realtime_new" element={<NatAssyGssmRealtime />} />
-              <Route path="assy-fim-realtime_new" element={<NatAssyFimRealtime />} />
+              <Route path="assy-fim-realtime_new" element={<NatFimRt />} />
               <Route path="assy-ant-realtime_new" element={<NatAssyAntRealtime />} />
-              <Route path="assy-avs-realtime_new" element={<NatAssyAvsRealtime />} />
-              <Route path="assy-alu-realtime_new" element={<NatAssyAluRealtime />} />
+              <Route path="assy-avs-realtime_new" element={<NatAvsRt />} />
+              <Route path="assy-alu-realtime_new" element={<NatAluRt />} />
               {/* Assy additional */}
-              <Route path="assy-mbr-realtime_new/analysis-mc" element={<NatAssyAnalysisMachine/>} />
+              <Route path="assy-mbr-realtime_new/analysis-mc" element={<NatMbrAnalysisMachine/>} />
+              <Route path="assy-arp-realtime_new/analysis-mc" element={<NatArpAnalysisMachine/>} />
+              <Route path="assy-fim-realtime_new/analysis-mc" element={<NatFimAnalysisMachine/>} />
+              <Route path="assy-avs-realtime_new/analysis-mc" element={<NatAvsAnalysisMachine/>} />
+              <Route path="assy-alu-realtime_new/analysis-mc" element={<NatAluAnalysisMachine/>} />
               <Route path="mbr-unmatch" element={<NatAssyUnMatchData />} />
               <Route path="mbr-daily" element={<NatAssyMbrDaily />} />
               <Route path="arp-daily" element={<NatAssyArpDaily />} />
