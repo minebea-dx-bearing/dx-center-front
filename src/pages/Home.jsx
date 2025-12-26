@@ -25,7 +25,7 @@ export default function Home() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8 md:gap-10 mb-10">
           <CardTitle disabled title={"Stock ball"} path={"/ball"} />
           <CardTitle disabled title={"Stock Retainer"} path={"/retainer"} />
-          <CardTitle disabled title={"DX Job Request"} path={"/job_request"} />
+          <CardTitle title={"DX Job Request"} path={"/user_login"} />
         </div>
       </div>
       <p className="absolute text-sm text-center text-gray-500 -translate-x-1/2 bottom-6 left-1/2 dark:text-gray-400">
