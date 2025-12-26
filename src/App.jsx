@@ -50,6 +50,9 @@ import NatAssyGssmDaily from "./pages/nat/assy/NatAssyGssmDaily";
 import NatAssyFimDaily from "./pages/nat/assy/NatAssyFimDaily";
 import NatTnProdDash from "./pages/nat/tn/NatTnProdDash";
 import PelmecHome from "./pages/pelmec/PelmecHome";
+import JobRequest from "./pages/JobRequest";
+import UserLogin from "./pages/UserLogin";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import PelmecMmsAssy from "./pages/pelmec/assy/PelmecMmsAssy";
 import PelmecMmsTurning from "./pages/pelmec/tn/PelmecMmsTurning";
 import PelmecMms1stRough from "./pages/pelmec/gd/PelmecMms1stRough";
@@ -117,6 +120,71 @@ function App() {
   //   // console.log(window.innerHeight)
   // }, []);
   return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        <Route path="/test" element={<Test />} />
+
+        <Route path="/nat" element={<NatLayout />}>
+          <Route index element={<NatHome />} />
+          <Route path="tn" element={<NatTnHome />} />
+          <Route path="tn/tn-realtime" element={<NatTnRealtime />} />
+          <Route path="tn/tn-realtime-oee" element={<NatTnRealtimeOee />} />
+          <Route path="tn/tn-daily" element={<NatTnDaily />} />
+          <Route path="tn/tn-summary-prod" element={<NatTnSummary />} />
+          <Route path="tn/tn-prod-dash" element={<NatTnProdDash />} />
+
+          <Route path="gd" element={<NatGdHome />} />
+          <Route path="gd/2ndinbore-realtime" element={<Nat2ndInBoreRealtime />} />
+          <Route path="gd/2ndinrace-realtime" element={<Nat2ndInRaceRealtime />} />
+          <Route path="gd/2ndinsuper-realtime" element={<Nat2ndInSuperRealtime />} />
+          <Route path="gd/2ndoutrace-realtime" element={<Nat2ndOutRaceRealtime />} />
+          <Route path="gd/2ndoutsuper-realtime" element={<Nat2ndOutSuperRealtime />} />
+
+          <Route path="assy" element={<NatAssyHome />} />
+          <Route path="assy/combine-realtime" element={<NatAssyCombineRealtime />} />
+          <Route path="assy/combine-realtime-oee" element={<NatAssyCombineRealtimeOee />} />
+          <Route path="assy/mbr-realtime" element={<NatAssyMbrRealtime />} />
+          <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine defaultMC={"mbr01"} defaultDate={"2025-11-01"}/>} />
+          <Route path="assy/mbr-daily" element={<NatAssyMbrDaily />} />
+          <Route path="assy/arp-realtime" element={<NatAssyArpRealtime />} />
+          <Route path="assy/arp-daily" element={<NatAssyArpDaily />} />
+          <Route path="assy/gssm-realtime" element={<NatAssyGssmRealtime />} />
+          <Route path="assy/gssm-daily" element={<NatAssyGssmDaily />} />
+          <Route path="assy/fim-realtime" element={<NatAssyFimRealtime />} />
+          <Route path="assy/fim-daily" element={<NatAssyFimDaily />} />
+          <Route path="assy/ant-realtime" element={<NatAssyAntRealtime />} />
+          <Route path="assy/avs-realtime" element={<NatAssyAvsRealtime />} />
+          <Route path="assy/alu-realtime" element={<NatAssyAluRealtime />} />
+        </Route>
+
+        <Route path="/nmb" element={<NmbHome />} />
+        <Route path="/nmb/assy" element={<NmbAssyHome />} />
+        <Route path="/nmb/assy/agr-realtime" element={<NmbAssyAgrRealtime />} />
+        <Route path="/nmb/assy/alu-realtime" element={<NmbAssyAluRealtime />} />
+        <Route path="/nmb/assy/and-realtime" element={<NmbAssyAndRealtime />} />
+        <Route path="/nmb/assy/aps-realtime" element={<NmbAssyApsRealtime />} />
+        <Route path="/nmb/assy/arp-realtime" element={<NmbAssyArpRealtime />} />
+        <Route path="/nmb/assy/asl-realtime" element={<NmbAssyAslRealtime />} />
+        <Route path="/nmb/assy/asr-realtime" element={<NmbAssyAsrRealtime />} />
+        <Route path="/nmb/assy/ass-realtime" element={<NmbAssyAssRealtime />} />
+        <Route path="/nmb/assy/avs-realtime" element={<NmbAssyAvsRealtime />} />
+
+        <Route path="/nhb" element={<NhbHome />} />
+        <Route path="/nhb/tn" element={<NhbTnHome />} />
+        <Route path="/nhb/tn/tn-realtime" element={<NhbTnTnRealtime />} />
+
+        <Route path="/nht" element={<NhtHome />} />
+        <Route path="/nht/gd" element={<NhtGdHome />} />
+
+        <Route path="/pelmec" element={<PelmecHome />} />
+        <Route path="/job_request" element={<JobRequest />} />
+        <Route path="/user_login" element={<UserLogin />} />
+        
+      </Routes>
+    </BrowserRouter>
     // <BrowserRouter>
     //   <ScrollToTop />
     //   <Routes>
