@@ -44,7 +44,6 @@ export default function MachineProductionChart({Arrdata}) {
 
   return (
     <div className="w-full h-[400px] py-8 rounded-2xl">
-      {/*  <div className="w-full h-[400px] p-4 bg-white shadow rounded-2xl "> */}
       <h2 className="text-lg font-semibold mb-2 text-gray-700">
         Production by Hour
       </h2>

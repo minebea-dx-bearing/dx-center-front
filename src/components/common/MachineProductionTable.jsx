@@ -30,15 +30,15 @@ export default function MachineProductionTable({ Arrdata }) {
               Arrdata.M.map((item, i) => (
                 <tr>
                   <th className="border border-gray-300 py-1 bg-gray-100">M</th>
-                  <td className="border border-gray-300 text-center">{(item.target_prod).toLocaleString()}</td>
-                  <td className="border border-gray-300 text-center">{(item.prod_total).toLocaleString()}</td>
-                  <td className="border border-gray-300 text-center">
-                    {Math.round(item.target_prod - item.ach).toLocaleString()}
+                  <td className="border border-gray-300 text-center">{(item.target_prod || 0 ).toLocaleString()}</td>
+                  <td className="border border-gray-300 text-center">{(item.prod_total || 0 ).toLocaleString()}</td>
+                  <td className="border border-gray-300 text-center" style={{ color: item.target_prod - item.prod_total < 0 ? 'red' : 'black' }}>
+                    {Math.round((item.target_prod - item.prod_total) || 0 ).toLocaleString()}
                   </td>
-                  <td className="border border-gray-300 text-center">{item.ach}</td>
-                  <td className="border border-gray-300 text-center">{item.utl}</td>
-                  <td className="border border-gray-300 text-center">{(item.prod_ng).toLocaleString()}</td>
-                  <td className="border border-gray-300 text-center">{item.yield}</td>
+                  <td className="border border-gray-300 text-center">{item.ach ?? 0}</td>
+                  <td className="border border-gray-300 text-center" style={{ color: item.utl < item.target_utl ? "red" : "black" }}>{item.utl}</td>
+                  <td className="border border-gray-300 text-center">{(item.prod_ng || 0 ).toLocaleString()}</td>
+                  <td className="border border-gray-300 text-center" style={{ color: item.yield < item.target_yield ? "red" : "black" }}>{item.yield}</td>
                 </tr>
               ))
             ) : (
@@ -57,15 +57,15 @@ export default function MachineProductionTable({ Arrdata }) {
               Arrdata.N.map((item, i) => (
                 <tr>
                   <th className="border border-gray-300 py-1 bg-gray-100">N</th>
-                  <td className="border border-gray-300 text-center">{(item.target_prod).toLocaleString()}</td>
-                  <td className="border border-gray-300 text-center">{(item.prod_total).toLocaleString()}</td>
-                  <td className="border border-gray-300 text-center">
-                    {Math.round(item.target_prod - item.ach).toLocaleString()}
+                  <td className="border border-gray-300 text-center">{(item.target_prod || 0 ).toLocaleString()}</td>
+                  <td className="border border-gray-300 text-center">{(item.prod_total || 0 ).toLocaleString()}</td>
+                  <td className="border border-gray-300 text-center" style={{ color: item.target_prod - item.prod_total < 0 ? 'red' : 'black' }}>
+                    {Math.round((item.target_prod - item.prod_total) || 0 ).toLocaleString()}
                   </td>
                   <td className="border border-gray-300 text-center">{item.ach}</td>
-                  <td className="border border-gray-300 text-center">{item.utl}</td>
-                  <td className="border border-gray-300 text-center">{(item.prod_ng).toLocaleString()}</td>
-                  <td className="border border-gray-300 text-center">{item.yield}</td>
+                  <td className="border border-gray-300 text-center" style={{ color: item.utl < item.target_utl ? "red" : "black" }}>{item.utl}</td>
+                  <td className="border border-gray-300 text-center">{(item.prod_ng || 0 ).toLocaleString()}</td>
+                  <td className="border border-gray-300 text-center" style={{ color: item.yield < item.target_yield ? "red" : "black" }}>{item.yield}</td>
                 </tr>
               ))
             ) : (
@@ -86,15 +86,15 @@ export default function MachineProductionTable({ Arrdata }) {
                   <th className="border border-gray-300 py-1 bg-gray-100">
                     Total
                   </th>
-                  <td className="border border-gray-300 text-center">{(item.target_prod).toLocaleString()}</td>
-                  <td className="border border-gray-300 text-center">{(item.prod_total).toLocaleString()}</td>
-                  <td className="border border-gray-300 text-center">
-                    {Math.round(item.target_prod - item.ach).toLocaleString()}
+                  <td className="border border-gray-300 text-center">{(item.target_prod || 0 ).toLocaleString()}</td>
+                  <td className="border border-gray-300 text-center">{(item.prod_total || 0 ).toLocaleString()}</td>
+                  <td className="border border-gray-300 text-center" style={{ color: item.target_prod - item.prod_total < 0 ? 'red' : 'black' }}>
+                    {Math.round((item.target_prod - item.prod_total) || 0 ).toLocaleString()}
                   </td>
                   <td className="border border-gray-300 text-center">{item.ach}</td>
-                  <td className="border border-gray-300 text-center">{item.utl}</td>
-                  <td className="border border-gray-300 text-center">{(item.prod_ng).toLocaleString()}</td>
-                  <td className="border border-gray-300 text-center">{item.yield}</td>
+                  <td className="border border-gray-300 text-center" style={{ color: item.utl < item.target_utl ? "red" : "black" }}>{item.utl}</td>
+                  <td className="border border-gray-300 text-center">{(item.prod_ng || 0 ).toLocaleString()}</td>
+                  <td className="border border-gray-300 text-center" style={{ color: item.yield < item.target_yield ? "red" : "black" }}>{item.yield}</td>
                 </tr>
               ))
             ) : (

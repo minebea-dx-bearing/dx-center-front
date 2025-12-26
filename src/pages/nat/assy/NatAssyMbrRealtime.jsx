@@ -89,22 +89,24 @@ export default function NatAssyMbrRealtime() {
         {realtime_data.map((mc) => {
           return (
             <div className="m-2" key={mc.mc_no}>
-              <CardMC
-                mc_no={mc.mc_no}
-                part_no={mc.part_no}
-                process={mc.process}
-                target={mc.target_actual}
-                actual={mc.prod_ok}
-                actual_ng={mc.prod_ng}
-                diff_actual={mc.diff_prod}
-                target_ct={mc.target_ct}
-                actual_ct={mc.cycle_t}
-                diff_ct={mc.diff_ct}
-                yield_target={mc.target_yield}
-                yield_rate={mc.yield_rate}
-                opn={mc.opn}
-                status={mc.status_alarm}
-              />
+              <a href={`/nat/assy/analysis-mc?mc_no=${mc.mc_no}`}>
+                <CardMC
+                  mc_no={mc.mc_no}
+                  part_no={mc.part_no}
+                  process={mc.process}
+                  target={mc.target_actual}
+                  actual={mc.prod_ok}
+                  actual_ng={mc.prod_ng}
+                  diff_actual={mc.diff_prod}
+                  target_ct={mc.target_ct}
+                  actual_ct={mc.cycle_t}
+                  diff_ct={mc.diff_ct}
+                  yield_target={mc.target_yield}
+                  yield_rate={mc.yield_rate}
+                  opn={mc.opn}
+                  status={mc.status_alarm}
+                />
+              </a>
             </div>
           );
         })}

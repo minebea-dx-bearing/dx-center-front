@@ -2,7 +2,7 @@ const CardProcess = ({ title, subTitle, processes, data, showArrow = true }) => 
   // function จัด format
   const formatNumber = (num) => num?.toLocaleString();
   const formatCT = (num) => (num !== undefined && num !== null ? Number(num).toFixed(2) : 0);
-  const formatDiff = (value) => (value > 0 ? `+${value.toLocaleString()}` : value.toLocaleString());
+  const formatDiff = (value) => (value > 0 ? `+${value.toLocaleString()}` : value?.toLocaleString() || 0);
   const colorStatus = (status) => {
     switch (status) {
       case "RUNNING":
@@ -88,7 +88,7 @@ const CardProcess = ({ title, subTitle, processes, data, showArrow = true }) => 
             <div>Actual</div>
           </div>
           <div className="p-0 text-center text-ellipsis overflow-hidden whitespace-nowrap text-[clamp(0.75rem,0.83vw,1rem)] flex flex-col justify-center">
-            <div>{formatNumber(data.prodActual[0].value)}</div>
+            <div>{formatNumber(data.prodActual[0].value) || 0}</div>
             <div className={`${colorProd(data.prodActual[0].diff)} font-bold`}>({formatDiff(data.prodActual[0].diff)})</div>
           </div>
           {isDoubleProcess && (

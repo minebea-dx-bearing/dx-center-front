@@ -1,4 +1,3 @@
-import React from "react";
 import * as echarts from "echarts"; // ✅ ต้อง import ตัวหลักด้วย
 import ReactECharts from "echarts-for-react";
 import moment from "moment";
@@ -12,7 +11,7 @@ const MachineStatusTimeline = ({ Arrdata }) => {
      const start = moment(item.occurred_start).utc().format("YYYY-MM-DD HH:mm:ss");
     const end = moment(item.occurred_end).utc().format("YYYY-MM-DD HH:mm:ss");
     return {
-      name: item.alarm_base,
+      name: item.status_alarm,
       value: [
         0,
         start,
@@ -22,14 +21,15 @@ const MachineStatusTimeline = ({ Arrdata }) => {
         item.occurred_end,
       ],
       itemStyle: { color: item.color },
-      // itemStyle: { color: getColor(item.alarm_base) },
+      // itemStyle: { color: getColor(item.status_alarm) },
     };
   });
 
   const startDay = new Date(Arrdata[0].occurred_start);
   startDay.setHours(7, 0, 0, 0); // เริ่มจาก 07:00
   const endDay = new Date(startDay);
-  endDay.setHours(6 + 24, 59, 59, 999); // จบที่ 06:00 วันถัดไป
+  // endDay.setHours(6 + 24, 59, 59, 999); // จบที่ 06:59:59 วันถัดไป << เฟิน ดูนี้!!!!!!!!!!!!!!!!!
+  endDay.setHours(7 + 24, 0, 0, 0); // จบที่ 07:00:00 วันถัดไป << แก้ไขเนื่องจาก bug ข้อมูลที่จบ 07:00:00 ไม่แสดงผล
 
   // ----------------------------
   // renderItem สำหรับ custom series
