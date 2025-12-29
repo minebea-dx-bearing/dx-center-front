@@ -68,7 +68,7 @@ export default function NatAluRt() {
         {loading && <Loading />}
         <MasterRtPage
             plant_={"nat"}
-            process_={"FIM"}
+            process_={"ALU"}
             data={dataSource}
             dataSum={dataSummary}
         />
