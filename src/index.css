@@ -163,6 +163,16 @@ layer(base);
   --z-index-9999: 9999;
   --z-index-99999: 99999;
   --z-index-999999: 999999;
+
+  /* additional */
+  --color-lightblue: #EBF4FF;
+  --color-bluegray: #C6D5E7;
+  --color-darkbluegray: #98AFC9;
+  --color-bggray: #FCFCFC;
+  --color-bordergray: #DFDFDF;
+  --color-run: #BDEAB8;
+  --color-good: #61C156;
+  
 }
 
 /*

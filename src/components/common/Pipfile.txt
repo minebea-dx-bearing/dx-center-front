@@ -1,0 +1,146 @@
+import React from "react";
+import * as echarts from "echarts";          // ✅ ต้อง import ตัวหลักด้วย
+import ReactECharts from "echarts-for-react";
+
+const StatusTimelineChart = () => {
+  // ----------------------------
+  // 1️⃣ ข้อมูลตัวอย่าง
+  // ----------------------------
+  const rawData = [
+    { status: "RUN", start: "2025-10-25 07:00:00", end: "2025-10-25 09:45:30", duration: 9930 },
+    { status: "STOP", start: "2025-10-25 09:45:30", end: "2025-10-25 10:15:00", duration: 1770 },
+    { status: "ALARM", start: "2025-10-25 10:15:00", end: "2025-10-25 10:45:00", duration: 1800 },
+    { status: "MAINT", start: "2025-10-25 10:45:00", end: "2025-10-25 11:10:00", duration: 1500 },
+    { status: "RUN", start: "2025-10-25 11:10:00", end: "2025-10-25 12:00:00", duration: 3000 },
+  ];
+
+  // ----------------------------
+  // 2️⃣ สร้าง color map (fix RUN/STOP, others random)
+  // ----------------------------
+  const colorMap = {};
+  const palette = [
+    "#F59127", "#0BB6F4", "#A9AFB1", "#9C27B0", "#FF9800",
+    "#009688", "#795548", "#607D8B", "#FFC107", "#673AB7"
+  ];
+
+  const getColor = (status) => {
+    if (status === "RUN") return "#16C809";
+    if (status === "STOP") return "#F40B0B";
+    if (!colorMap[status]) {
+      colorMap[status] = palette[Object.keys(colorMap).length % palette.length];
+    }
+    return colorMap[status];
+  };
+
+  // ----------------------------
+  // 3️⃣ แปลงข้อมูลสำหรับ ECharts
+  // ----------------------------
+  const data = rawData.map((item) => {
+    const start = new Date(item.start).getTime();
+    const end = new Date(item.end).getTime();
+    return {
+      name: item.status,
+      value: [0, start, end, item.duration, item.start, item.end],
+      itemStyle: { color: getColor(item.status) },
+    };
+  });
+
+  // ----------------------------
+  // 4️⃣ renderItem สำหรับ custom series
+  // ----------------------------
+  const renderItem = (params, api) => {
+    const categoryIndex = api.value(0);
+    const start = api.coord([api.value(1), categoryIndex]);
+    const end = api.coord([api.value(2), categoryIndex]);
+    const height = api.size([0, 1])[1] * 0.6;
+
+    const rectShape = echarts.graphic.clipRectByRect(
+      {
+        x: start[0],
+        y: start[1] - height / 2,
+        width: end[0] - start[0],
+        height,
+      },
+      {
+        x: params.coordSys.x,
+        y: params.coordSys.y,
+        width: params.coordSys.width,
+        height: params.coordSys.height,
+      }
+    );
+
+    return rectShape && {
+      type: "rect",
+      shape: rectShape,
+      style: api.style(),
+    };
+  };
+
+  // ----------------------------
+  // 5️⃣ ตั้งค่า Option
+  // ----------------------------
+  const option = {
+    title: {
+      text: "Machine Status Timeline",
+      left: "center",
+    },
+    tooltip: {
+      formatter: (params) => {
+        const v = params.value;
+        return `
+          <b>Status:</b> ${params.name}<br/>
+          <b>Start:</b> ${v[4]}<br/>
+          <b>End:</b> ${v[5]}<br/>
+          <b>Duration:</b> ${v[3]} sec
+        `;
+      },
+    },
+    grid: {
+      height: 120,
+      top: 80,
+      left: 60,
+      right: 30,
+    },
+    dataZoom: [
+      { type: "slider", showDataShadow: false, height: 20, bottom: 10 },
+      { type: "inside" },
+    ],
+    xAxis: {
+      type: "time",
+      min: new Date("2025-10-25 07:00:00").getTime(),
+      max: new Date("2025-10-26 07:00:00").getTime(),
+      axisLabel: {
+        formatter: (val) => echarts.format.formatTime("hh:mm", new Date(val)),
+      },
+    },
+    yAxis: {
+      data: ["Status"],
+    },
+    series: [
+      {
+        type: "custom",
+        renderItem,
+        itemStyle: { opacity: 0.8 },
+        encode: { x: [1, 2], y: 0 },
+        data,
+      },
+    ],
+  };
+
+  // ----------------------------
+  // 6️⃣ Return JSX
+  // ----------------------------
+  return (
+    <div style={{ width: "100%", height: "400px" }}>
+      <ReactECharts
+        option={option}
+        style={{ height: "100%", width: "100%" }}
+        notMerge={true}
+        lazyUpdate={true}
+        theme="light"
+      />
+    </div>
+  );
+};
+
+export default MachineStatusTimeline;

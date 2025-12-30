@@ -9,7 +9,7 @@ const navItems = [
     icon: <Squares2X2Icon />,
     name: "TURNING",
     subItems: [
-      { name: "TN REALTIME", path: "/nat/tn/tn-realtime" },
+      { name: "TN REALTIME", path: "/nat/tn-realtime_new" },
       { name: "TN REALTIME OEE", path: "/nat/tn/tn-realtime-oee" },
       { name: "TN DAILY", path: "/nat/tn/tn-daily" },
       { name: "TN SUMMARY PROD.", path: "/nat/tn/tn-summary-prod" },
@@ -43,6 +43,8 @@ const navItems = [
       { name: "ANT REALTIME", path: "/nat/assy/ant-realtime" },
       { name: "AVS REALTIME", path: "/nat/assy/avs-realtime" },
       { name: "ALU REALTIME", path: "/nat/assy/alu-realtime" },
+      { name: "MBR ANALYSIS", path: "/nat/assy/analysis-mc" },
+      { name: "MBR UNMATCH", path: "/nat/assy/mbr-unmatch" },
     ],
   },
 ];

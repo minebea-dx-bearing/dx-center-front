@@ -14,3 +14,7 @@ export const key = {
 export var levelUser = "";
 export const NOK = "Not OK";
 export const OK = "OK";
+export const LOCAL_URL = "http://10.128.16.110:8009";
+export const NHB_TN_URL = "http://10.120.117.23:3005";
+export const TWN_URL = "http://10.120.139.25:4005";
+// export const TWN_URL = "http://localhost:8009";
