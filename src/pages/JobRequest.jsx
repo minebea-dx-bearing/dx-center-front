@@ -1,13 +1,13 @@
 import { Component } from "react";
-import { Card, Button, Form, Input, Select, Space, DatePicker } from "antd";
-import { UploadOutlined,MinusCircleOutlined,PlusOutlined,RightCircleOutlined,
-DownloadOutlined,FileZipOutlined,UserSwitchOutlined,CloseCircleOutlined } from "@ant-design/icons";
+import {Card,Button,Form,Input,Select,Space,DatePicker,Tooltip,Row,Col} from "antd";
+import {UploadOutlined,MinusCircleOutlined,PlusOutlined,RightCircleOutlined,DownloadOutlined,
+  FileZipOutlined,UserSwitchOutlined,CloseCircleOutlined,} from "@ant-design/icons";
 import Swal from "sweetalert2";
 import moment from "moment";
 import { BASE_URL, NOK } from "../constance/constance";
 import { CSVLink } from "react-csv";
 import axios from "axios";
-import PageBreadcrumb from "../components/common/PageBreadCrumb";
+import PageBreadcrumb from "../components/common/PageBreadcrumb";
 import dayjs from "dayjs";
 import ReactECharts from "echarts-for-react";
 
@@ -100,7 +100,7 @@ class JobRequest extends Component {
       RequestListDisplay: "block",
       DepDisplay: "none",
       DashDisplay: "none",
-      DepAdminDisplay: "none",
+      DepAdminDisplay: "block",
       DateSelectDisplay: "none",
       MainAdminDisplay: "block",
       record_table: [],
@@ -207,7 +207,7 @@ class JobRequest extends Component {
     try {
       const { searchTerm, YearMonth, Factory, Process, Category, Status } = this.state;
       let res = await axios.post(`${BASE_URL}/JobRequest/filterWork`, {
-        searchTerm,YearMonth,Factory,Process,Category,Status
+        searchTerm,YearMonth,Factory,Process,Category,Status,
       });
       if (res.data.api_result === "ok") {
         this.setState({
@@ -233,38 +233,39 @@ class JobRequest extends Component {
   };
   renderYearMonth = () => {
     return this.state.eventYearMonth?.map((item, index) => (
-      <option key={index} value={item.YearMonth}>
-        {item.YearMonth}
-      </option>
+      <option key={index} value={item.YearMonth}>{item.YearMonth}</option>
     ));
   };
   renderFactory = () => {
     return this.state.eventFactory?.map((item, index) => (
-      <option key={index} value={item.Factory}>
-        {item.Factory}
-      </option>
+      <option key={index} value={item.Factory}>{item.Factory}</option>
     ));
   };
   renderProcess = () => {
     return this.state.eventProcess?.map((item, index) => (
-      <option key={index} value={item.Process}>
-        {item.Process}
-      </option>
+      <option key={index} value={item.Process}>{item.Process}</option>
     ));
   };
   renderCategory = () => {
     return this.state.eventCategory?.map((item, index) => (
-      <option key={index} value={item.Category}>
-        {item.Category}
-      </option>
+      <option key={index} value={item.Category}>{item.Category}</option>
     ));
   };
   renderStatus = () => {
     return this.state.eventStatus?.map((item, index) => (
-      <option key={index} value={item.Status}>
-        {item.Status}
-      </option>
+      <option key={index} value={item.Status}>{item.Status}</option>
     ));
+  };
+  getStatusClass = (status) => {
+    const baseClass = "px-2 py-0 rounded-full text-xs font-semibold border inline-block";
+    const currentStatus = status ? status.trim() : "";
+    switch (currentStatus) {
+      case "Finished": return `${baseClass} bg-green-100 text-green-700 border-green-200`;
+      case "On-Going": return `${baseClass} bg-blue-100 text-blue-700 border-blue-200`;
+      case "Waiting": return `${baseClass} bg-yellow-100 text-yellow-700 border-yellow-200`;
+      case "Cancelled": return `${baseClass} bg-red-100 text-red-700 border-red-200`;
+      default: return `${baseClass} bg-gray-100 text-gray-700 border-gray-200`;
+    }
   };
   renderTableRecord = () => {
     try {
@@ -280,111 +281,104 @@ class JobRequest extends Component {
             <td style={{ padding: "5px", textAlign: "center" }}>{item.Category}</td>
             <td className="withprewrap" style={{ padding: "5px", textAlign: "left", minWidth: "100px" }}>{item.ReqTitle}</td>
             <td style={{ padding: "5px", textAlign: "center" }}>{item.ImproveM.toLocaleString()}</td>
-            <td style={{ padding: "5px", textAlign: "center" }}><span className={item.badge_col}>{item.Status}</span></td>
+            <td className="p-1.5 text-center"><span className={this.getStatusClass(item.Status)}>{item.Status}</span></td>
             <td style={{ padding: "5px", textAlign: "center" }}>{findLatestDate([item.ToDate1,item.ToDate2,item.ToDate3,item.ToDate4,item.ToDate5])}</td>
             <td style={{ padding: "5px", textAlign: "center" }}>
-              <div class="btn-group">
-                <button
-                  type="button"
-                  disabled=""
-                  class="btn btn-sm btn-outline-success"
-                  style={{ padding: "5px", margin: 0 }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    this.viewFile(item.DocReq);
-                  }}
-                >
-                  <FileZipOutlined />
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-sm btn-outline-primary"
-                  style={{ padding: "5px", margin: 0 }}
+              <Space.Compact>
+                <Tooltip title="View File">
+                  <Button
+                    size="small"
+                    style={{ color: "#52c41a", borderColor: "#52c41a" }}
+                    icon={<FileZipOutlined />}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      this.viewFile(item.DocReq);
+                    }}
+                  />
+                </Tooltip>
+                <Tooltip title="Switch User">
+                  <Button
+                    size="small"
+                    type="outline"
+                    style={{ color: "#1677ff", borderColor: "#1677ff" }}
+                    icon={<UserSwitchOutlined />}
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      const newState = {
+                        NewReqDisplay: "none",
+                        RequestListDisplay: "none",
+                        DepDisplay: "block",
+                        DashDisplay: "none",
+                        DepAdminDisplay: "block",
+                        DateSelectDisplay: "none",
+                        DocReq: item.DocReq,
+                        UserReq: item.UserReq,
+                        Gmail: item.Gmail,
+                        Factory: item.Factory,
+                        Process: item.Process,
+                        Category: item.Category,
+                        ReqTitle: item.ReqTitle,
+                        Before: item.Before,
+                        After: item.After,
+                        ImproveM: item.ImproveM,
+                        ReducedY: item.ReducedY,
+                        CostDetail: item.CostDetail,
+                        BfStep1: item.BfStep1,
+                        BfStep2: item.BfStep2,
+                        BfStep3: item.BfStep3,
+                        BfStep4: item.BfStep4,
+                        BfStep5: item.BfStep5,
+                        BfStep6: item.BfStep6,
+                        BfStep7: item.BfStep8,
+                        BfStep9: item.BfStep9,
+                        BfStep10: item.BfStep10,
+                        AfStep1: item.AfStep1,
+                        AfStep2: item.AfStep2,
+                        AfStep3: item.AfStep3,
+                        AfStep4: item.AfStep4,
+                        AfStep5: item.AfStep5,
+                        AfStep6: item.AfStep6,
+                        AfStep7: item.AfStep7,
+                        AfStep8: item.AfStep8,
+                        AfStep9: item.AfStep9,
+                        AfStep10: item.AfStep10,
+                        FromDate1: item.FromDate1,
+                        ToDate1: item.ToDate1,
+                        Detail1: item.Detail1,
+                        FromDate2: item.FromDate2,
+                        ToDate2: item.ToDate2,
+                        Detail2: item.Detail2,
+                        FromDate3: item.FromDate3,
+                        ToDate3: item.ToDate3,
+                        Detail3: item.Detail3,
+                        FromDate4: item.FromDate4,
+                        ToDate4: item.ToDate4,
+                        Detail4: item.Detail4,
+                        FromDate5: item.FromDate5,
+                        ToDate5: item.ToDate5,
+                        Detail5: item.Detail5,
+                        Responsible: localStorage.getItem("empNumber"),
+                        Status: item.Status,
+                        URLlink: item.URLlink,
+                      };
+                      await this.setState(newState);
+                    }}
+                  />
+                </Tooltip>
+              </Space.Compact>
+            </td>
+            <td style={{padding: "4px 0px 0px 0px",justifyContent: "center",display: this.state.MainAdminDisplay}}>
+              <Tooltip title="Cancel Document">
+                <Button
+                  size="small"
+                  danger
+                  icon={<CloseCircleOutlined />}
                   onClick={async (e) => {
                     e.preventDefault();
-                    const newState = {
-                      NewReqDisplay: "none",
-                      RequestListDisplay: "none",
-                      DepDisplay: "block",
-                      DashDisplay: "none",
-                      DepAdminDisplay: "block",
-                      DateSelectDisplay: "none",
-                      DocReq: item.DocReq,
-                      UserReq: item.UserReq,
-                      Gmail: item.Gmail,
-                      Factory: item.Factory,
-                      Process: item.Process,
-                      Category: item.Category,
-                      ReqTitle: item.ReqTitle,
-                      Before: item.Before,
-                      After: item.After,
-                      ImproveM: item.ImproveM,
-                      ReducedY: item.ReducedY,
-                      CostDetail: item.CostDetail,
-                      BfStep1: item.BfStep1,
-                      BfStep2: item.BfStep2,
-                      BfStep3: item.BfStep3,
-                      BfStep4: item.BfStep4,
-                      BfStep5: item.BfStep5,
-                      BfStep6: item.BfStep6,
-                      BfStep7: item.BfStep8,
-                      BfStep9: item.BfStep9,
-                      BfStep10: item.BfStep10,
-                      AfStep1: item.AfStep1,
-                      AfStep2: item.AfStep2,
-                      AfStep3: item.AfStep3,
-                      AfStep4: item.AfStep4,
-                      AfStep5: item.AfStep5,
-                      AfStep6: item.AfStep6,
-                      AfStep7: item.AfStep7,
-                      AfStep8: item.AfStep8,
-                      AfStep9: item.AfStep9,
-                      AfStep10: item.AfStep10,
-                      FromDate1: item.FromDate1,
-                      ToDate1: item.ToDate1,
-                      Detail1: item.Detail1,
-                      FromDate2: item.FromDate2,
-                      ToDate2: item.ToDate2,
-                      Detail2: item.Detail2,
-                      FromDate3: item.FromDate3,
-                      ToDate3: item.ToDate3,
-                      Detail3: item.Detail3,
-                      FromDate4: item.FromDate4,
-                      ToDate4: item.ToDate4,
-                      Detail4: item.Detail4,
-                      FromDate5: item.FromDate5,
-                      ToDate5: item.ToDate5,
-                      Detail5: item.Detail5,
-                      Responsible: localStorage.getItem("empNumber"),
-                      Status: item.Status,
-                      URLlink: item.URLlink,
-                    };
-                    await this.setState(newState);
+                    this.CancelledDoc(item.DocReq);
                   }}
-                >
-                  <UserSwitchOutlined />
-                </button>
-              </div>
-            </td>
-            <td
-              style={{
-                padding: "4px 0px 0px 0px",
-                justifyContent: "center",
-                display: this.state.MainAdminDisplay,
-              }}
-            >
-              <button
-                type="button"
-                disabled=""
-                class="btn btn-sm btn-outline-danger"
-                style={{ padding: "5px", margin: 0 }}
-                onClick={async (e) => {
-                  e.preventDefault();
-                  this.CancelledDoc(item.DocReq);
-                }}
-              >
-                <CloseCircleOutlined />
-              </button>
+                />
+              </Tooltip>
             </td>
           </tr>
         ));
@@ -394,14 +388,11 @@ class JobRequest extends Component {
   viewFile = async (DocReq) => {
     try {
       if (DocReq !== null && DocReq !== "") {
-        let link1 = await axios.get(
-          `${BASE_URL}` + "/JobRequest/getfilePDF" + `/` + DocReq
-        );
+        let link1 = await axios.get(`${BASE_URL}` + "/JobRequest/getfilePDF" + `/` + DocReq);
         if (link1.data.message !== NOK) {
           await this.setState({ link1: link1.config.url });
           window.open(link1.config.url, "_blank");
-        } else {
-          alert("Do not have file");
+        } else {alert("Do not have file");
         }
       } else {
         alert("Do not have file");
@@ -422,7 +413,7 @@ class JobRequest extends Component {
   ShowSummaryAll = async () => {
     try {
       const response = await axios.post(`${BASE_URL}/JobRequest/SummaryAll`, {
-        DateForm: this.state.DateForm,DateTo: this.state.DateTo
+        DateForm: this.state.DateForm,DateTo: this.state.DateTo,
       });
       if (response.data?.api_result === "ok") {
         const dataRow = response.data.result?.[0] || {};
@@ -438,7 +429,7 @@ class JobRequest extends Component {
   };
   getChartStatus = async () => {
     let response = await axios.post(`${BASE_URL}/JobRequest/ChartStatus`, {
-      DateForm: this.state.DateForm,DateTo: this.state.DateTo
+      DateForm: this.state.DateForm,DateTo: this.state.DateTo,
     });
     if (response.data?.api_result === "ok") {
       this.setState({ dataChartStatus: response.data.result });
@@ -467,7 +458,8 @@ class JobRequest extends Component {
     var totalSum = 0;
     if (this.state.dataChartStatus !== null) {
       chartData = this.state.dataChartStatus.map((item) => ({
-        name: item.Status,value: item.Total
+        name: item.Status,
+        value: item.Total,
       }));
       totalSum = chartData.reduce((a, b) => a + b.value, 0);
     }
@@ -543,7 +535,7 @@ class JobRequest extends Component {
     return (
       <div className="content">
         <div className="row" style={{ justifyContent: "left" }}>
-          <div id="chart" style={{ width: "365px" }}>
+          <div id="chart" style={{ width: "350px" }}>
             <ReactECharts
               option={option}
               style={{ height: "260px", width: "100%" }}
@@ -675,7 +667,7 @@ class JobRequest extends Component {
   };
   getChartStackFac = async () => {
     let response = await axios.post(`${BASE_URL}/JobRequest/ChartStackFac`, {
-      DateForm: this.state.DateForm,DateTo: this.state.DateTo
+      DateForm: this.state.DateForm,DateTo: this.state.DateTo,
     });
     if (response.data?.api_result === "ok") {
       this.setState({ dataStackFac: response.data.result });
@@ -881,7 +873,7 @@ class JobRequest extends Component {
   };
   getChartCouCate = async () => {
     let response = await axios.post(`${BASE_URL}/JobRequest/ChartBarCategory`, {
-      DateForm: this.state.DateForm,DateTo: this.state.DateTo
+      DateForm: this.state.DateForm,DateTo: this.state.DateTo,
     });
     if (response.data?.api_result === "ok") {
       this.setState({ dataChartCouCate: response.data.result });
@@ -910,7 +902,8 @@ class JobRequest extends Component {
     var totalSum = 0;
     if (this.state.dataChartCouCate !== null) {
       chartData = this.state.dataChartCouCate.map((item) => ({
-        name: item.Category,value: item.CouTotal
+        name: item.Category,
+        value: item.CouTotal,
       }));
       totalSum = chartData.reduce((a, b) => a + b.value, 0);
     }
@@ -999,7 +992,7 @@ class JobRequest extends Component {
   };
   getChartSumCate = async () => {
     let response = await axios.post(`${BASE_URL}/JobRequest/ChartBarCategory`, {
-      DateForm: this.state.DateForm,DateTo: this.state.DateTo
+      DateForm: this.state.DateForm,DateTo: this.state.DateTo,
     });
     if (response.data?.api_result === "ok") {
       this.setState({ dataChartSumCate: response.data.result });
@@ -1028,7 +1021,8 @@ class JobRequest extends Component {
     var totalSum = 0;
     if (this.state.dataChartSumCate !== null) {
       chartData = this.state.dataChartSumCate.map((item) => ({
-        name: item.Category,value: item.SumTotal
+        name: item.Category,
+        value: item.SumTotal,
       }));
       totalSum = chartData.reduce((a, b) => a + b.value, 0);
     }
@@ -1114,7 +1108,7 @@ class JobRequest extends Component {
   };
   getChartBarCate = async () => {
     let response = await axios.post(`${BASE_URL}/JobRequest/ChartBarCategory`, {
-      DateForm: this.state.DateForm,DateTo: this.state.DateTo
+      DateForm: this.state.DateForm,DateTo: this.state.DateTo,
     });
     if (response.data?.api_result === "ok") {
       this.setState({ dataBarCate: response.data.result });
@@ -1281,10 +1275,14 @@ class JobRequest extends Component {
   };
   SaveJobRequest = async () => {
     if (
-      this.state.UserReq === "" || this.state.Gmail === "" ||
-      this.state.Factory === "" || this.state.Process === "" ||
-      this.state.Category === "" || this.state.ReqTitle === "" ||
-      this.state.Before === "" || this.state.After === "" ||
+      this.state.UserReq === "" ||
+      this.state.Gmail === "" ||
+      this.state.Factory === "" ||
+      this.state.Process === "" ||
+      this.state.Category === "" ||
+      this.state.ReqTitle === "" ||
+      this.state.Before === "" ||
+      this.state.After === "" ||
       this.state.CostDetail === ""
     ) {
       await Swal.fire({
@@ -1319,8 +1317,18 @@ class JobRequest extends Component {
       formData.append("ReqTitle", this.state.ReqTitle);
       formData.append("Before", this.state.Before);
       formData.append("After", this.state.After);
-      formData.append("ImproveM", this.state.ImproveM ? this.state.ImproveM.toString().replace(/,/g, "") : "");
-      formData.append("ReducedY", this.state.ReducedY ? this.state.ReducedY.toString().replace(/,/g, "") : "");
+      formData.append(
+        "ImproveM",
+        this.state.ImproveM
+          ? this.state.ImproveM.toString().replace(/,/g, "")
+          : ""
+      );
+      formData.append(
+        "ReducedY",
+        this.state.ReducedY
+          ? this.state.ReducedY.toString().replace(/,/g, "")
+          : ""
+      );
       formData.append("CostDetail", this.state.CostDetail);
       formData.append("BfStep1", this.state.BfStep1);
       formData.append("BfStep2", this.state.BfStep2);
@@ -1342,7 +1350,9 @@ class JobRequest extends Component {
       formData.append("AfStep8", this.state.AfStep8);
       formData.append("AfStep9", this.state.AfStep9);
       formData.append("AfStep10", this.state.AfStep10);
-      if (this.state.FilePic) {formData.append("FilePic", this.state.FilePic);}
+      if (this.state.FilePic) {
+        formData.append("FilePic", this.state.FilePic);
+      }
       formData.append("URLlink", this.state.URLlink);
       formData.append("FromDate1", this.state.FromDate1);
       formData.append("ToDate1", this.state.ToDate1);
@@ -1549,7 +1559,9 @@ class JobRequest extends Component {
             />
           </div>
         )}
-        <oi style={{ color: "#ffffff" }}>{localStorage.getItem("levelUser")}</oi>
+        <oi style={{ color: "#ffffff" }}>
+          {localStorage.getItem("levelUser")}
+        </oi>
       </div>
     );
   };
@@ -1721,16 +1733,36 @@ class JobRequest extends Component {
             <thead className="sticky top-0 bg-gray-100">
               <tr className="text-center align-middle font-semibold whitespace-nowrap">
                 <th className="p-2 border border-gray-300 align-middle">Row</th>
-                <th className="p-2 border border-gray-300 align-middle">Doc No</th>
-                <th className="p-2 border border-gray-300 align-middle">Date</th>
-                <th className="p-2 border border-gray-300 align-middle">Factory</th>
-                <th className="p-2 border border-gray-300 align-middle">Process</th>
-                <th className="p-2 border border-gray-300 align-middle">Category</th>
-                <th className="p-2 border border-gray-300 align-middle">Detail</th>
-                <th className="p-2 border border-gray-300">Reduced <br /> Month(฿)</th>
-                <th className="p-2 border border-gray-300 align-middle">Status</th>
-                <th className="p-2 border border-gray-300 align-middle">DueDate</th>
-                <th className="p-2 border border-gray-300 align-middle">File|View</th>
+                <th className="p-2 border border-gray-300 align-middle">
+                  Doc No
+                </th>
+                <th className="p-2 border border-gray-300 align-middle">
+                  Date
+                </th>
+                <th className="p-2 border border-gray-300 align-middle">
+                  Factory
+                </th>
+                <th className="p-2 border border-gray-300 align-middle">
+                  Process
+                </th>
+                <th className="p-2 border border-gray-300 align-middle">
+                  Category
+                </th>
+                <th className="p-2 border border-gray-300 align-middle">
+                  Detail
+                </th>
+                <th className="p-2 border border-gray-300">
+                  Reduced <br /> Month(฿)
+                </th>
+                <th className="p-2 border border-gray-300 align-middle">
+                  Status
+                </th>
+                <th className="p-2 border border-gray-300 align-middle">
+                  DueDate
+                </th>
+                <th className="p-2 border border-gray-300 align-middle">
+                  File|View
+                </th>
                 <th
                   className={`p-2 border border-gray-300 align-middle ${
                     this.state.MainAdminDisplay === "none"
@@ -1860,21 +1892,37 @@ class JobRequest extends Component {
                     }}
                   >
                     <Select.Option value="null">-Select-</Select.Option>
-                    <Select.Option value="COLD FORMING">COLD FORMING</Select.Option>
-                    <Select.Option value="ROUGH GRINDING">ROUGH GRINDING</Select.Option>
+                    <Select.Option value="COLD FORMING">
+                      COLD FORMING
+                    </Select.Option>
+                    <Select.Option value="ROUGH GRINDING">
+                      ROUGH GRINDING
+                    </Select.Option>
                     <Select.Option value="TURNING">TURNING</Select.Option>
-                    <Select.Option value="HEAT TREATMENT">HEAT TREATMENT</Select.Option>
-                    <Select.Option value="1ST GRINDING">1ST GRINDING</Select.Option>
-                    <Select.Option value="2ND GRINDING">2ND GRINDING</Select.Option>
+                    <Select.Option value="HEAT TREATMENT">
+                      HEAT TREATMENT
+                    </Select.Option>
+                    <Select.Option value="1ST GRINDING">
+                      1ST GRINDING
+                    </Select.Option>
+                    <Select.Option value="2ND GRINDING">
+                      2ND GRINDING
+                    </Select.Option>
                     <Select.Option value="WASHING">WASHING</Select.Option>
                     <Select.Option value="AUTO LINE">AUTO LINE</Select.Option>
                     <Select.Option value="MANUAL">MANUAL</Select.Option>
                     <Select.Option value="PACKING">PACKING</Select.Option>
                     <Select.Option value="DESPATCH">DESPATCH</Select.Option>
-                    <Select.Option value="PRODUCTION CONTROL">PRODUCTION CONTROL</Select.Option>
-                    <Select.Option value="QUALITY CONTROL">QUALITY CONTROL</Select.Option>
+                    <Select.Option value="PRODUCTION CONTROL">
+                      PRODUCTION CONTROL
+                    </Select.Option>
+                    <Select.Option value="QUALITY CONTROL">
+                      QUALITY CONTROL
+                    </Select.Option>
                     <Select.Option value="ENGINEER">ENGINEER</Select.Option>
-                    <Select.Option value="MAINTENANCE">MAINTENANCE</Select.Option>
+                    <Select.Option value="MAINTENANCE">
+                      MAINTENANCE
+                    </Select.Option>
                     <Select.Option value="TOOLING">TOOLING</Select.Option>
                     <Select.Option value="STORE">STORE</Select.Option>
                     <Select.Option value="OTHERS">OTHERS</Select.Option>
@@ -1902,11 +1950,16 @@ class JobRequest extends Component {
                     }}
                   >
                     <Select.Option value="null">-Select-</Select.Option>
-                    <Select.Option value="Modify M/C Program">Modify M/C Program</Select.Option>
+                    <Select.Option value="Modify M/C Program">
+                      Modify M/C Program
+                    </Select.Option>
                     <Select.Option value="e-Record">e-Record</Select.Option>
-                    <Select.Option value="Dashboard Report">Dashboard Report</Select.Option>
+                    <Select.Option value="Dashboard Report">
+                      Dashboard Report
+                    </Select.Option>
                     <Select.Option value="Auto input AS400">
-Auto input AS400</Select.Option>
+                      Auto input AS400
+                    </Select.Option>
                     <Select.Option value="Other">Other</Select.Option>
                   </Select>
                 </Form.Item>
@@ -2331,10 +2384,13 @@ Auto input AS400</Select.Option>
               </div>
               <div className="col-span-full md:col-span-3">
                 <Form.Item label="Process" style={{ margin: 0 }}>
-                  <Input value={this.state.Process} readOnly />
+                  <Input
+                    value={this.state.Process}
+                    readOnly
+                    style={{ margin: "1px 0 5px 0px" }}
+                  />
                 </Form.Item>
               </div>
-              <h5 />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-12">
               <div className="col-span-full md:col-span-3">
@@ -2351,7 +2407,7 @@ Auto input AS400</Select.Option>
                   label="Request Title"
                   labelCol={{ flex: "90%", span: 3 }}
                   wrapperCol={{ flex: "auto" }}
-                  style={{ margin: "1px 0 8px -18px" }}
+                  style={{ margin: "1px 0 6px -18px" }}
                 >
                   <Input.TextArea value={this.state.ReqTitle} readOnly />
                 </Form.Item>
@@ -2390,6 +2446,7 @@ Auto input AS400</Select.Option>
                   <Input
                     addonAfter="Bath/Year"
                     value={this.state.ReducedY}
+                    style={{ margin: "1px 0 5px 0px" }}
                     readOnly
                   />
                 </Form.Item>
@@ -2402,7 +2459,7 @@ Auto input AS400</Select.Option>
                   label="Cost Detail"
                   labelCol={{ span: 2 }}
                   wrapperCol={{ span: 22 }}
-                  style={{ margin: 0 }}
+                  style={{ margin: "1px 0 5px 0px" }}
                 >
                   <Input.TextArea value={this.state.CostDetail} readOnly />
                 </Form.Item>
@@ -2413,6 +2470,7 @@ Auto input AS400</Select.Option>
               <div className="col-span-full md:col-span-6">
                 <Card
                   type="inner"
+                  size="small"
                   title={
                     <div style={{ textAlign: "left", fontWeight: "bold" }}>
                       Before
@@ -2522,6 +2580,7 @@ Auto input AS400</Select.Option>
               <div className="col-span-full md:col-span-6">
                 <Card
                   type="inner"
+                  size="small"
                   title={
                     <div style={{ textAlign: "left", fontWeight: "bold" }}>
                       After
@@ -2629,422 +2688,340 @@ Auto input AS400</Select.Option>
                 </Card>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-12">
-              <div className="col-span-full md:col-span-12">
-                <Card
-                  type="inner"
-                  title={
-                    <div style={{ textAlign: "left", fontWeight: "bold" }}>
-                      Action Database | For Programmer
-                    </div>
-                  }
+            <div className="p-0 bg-gray-100">
+              <Card
+                size="small"
+                type="inner"
+                title={
+                  <span className="font-bold text-gray-700">
+                    Action Database | For Programmer
+                  </span>
+                }
+                className="shadow-md"
+              >
+                <Row
+                  gutter={0}
+                  className="bg-gray-50 border-b border-gray-200 text-center font-bold"
                 >
-                  <div className="row">
-                    <div className="col-sm-1 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        disabled
-                        defaultValue="Item"
-                        style={{
-                          textAlign: "center",
-                          color: "black",
-                          backgroundColor: "#fafafa",
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-2 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        disabled
-                        defaultValue="From Date"
-                        style={{ color: "black", backgroundColor: "#fafafa" }}
-                      />
-                    </div>
-                    <div className="col-sm-2 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        disabled
-                        defaultValue="To Date"
-                        style={{ color: "black", backgroundColor: "#fafafa" }}
-                      />
-                    </div>
-                    <div className="col-sm-7 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        disabled
-                        defaultValue="Detail"
-                        style={{ color: "black", backgroundColor: "#fafafa" }}
-                      />
-                    </div>
-                    <div className="col-sm-1 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        disabled
-                        defaultValue="#1"
-                        style={{
-                          textAlign: "center",
-                          color: "black",
-                          backgroundColor: "#fafafa",
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-2 p-0">
-                      <DatePicker
-                        className="w-full h-full"
-                        value={
-                          this.state.FromDate1
-                            ? dayjs(this.state.FromDate1)
-                            : null
-                        }
-                        onChange={(date, dateString) => {
-                          this.setState({
-                            FromDate1: dateString,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-2 p-0">
-                      <DatePicker
-                        className="w-full h-full"
-                        value={
-                          this.state.ToDate1 ? dayjs(this.state.ToDate1) : null
-                        }
-                        onChange={(date, dateString) => {
-                          this.setState({
-                            ToDate1: dateString,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-7 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        value={this.state.Detail1}
-                        onChange={(e) => {
-                          this.setState({
-                            Detail1: e.target.value,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-1 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        disabled
-                        defaultValue="#2"
-                        style={{
-                          textAlign: "center",
-                          color: "black",
-                          backgroundColor: "#fafafa",
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-2 p-0">
-                      <DatePicker
-                        className="w-full h-full"
-                        value={
-                          this.state.FromDate2
-                            ? dayjs(this.state.FromDate2)
-                            : null
-                        }
-                        onChange={(date, dateString) => {
-                          this.setState({
-                            FromDate2: dateString,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-2 p-0">
-                      <DatePicker
-                        className="w-full h-full"
-                        value={
-                          this.state.ToDate2 ? dayjs(this.state.ToDate2) : null
-                        }
-                        onChange={(date, dateString) => {
-                          this.setState({
-                            ToDate2: dateString,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-7 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        value={this.state.Detail2}
-                        onChange={(e) => {
-                          this.setState({
-                            Detail2: e.target.value,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-1 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        disabled
-                        defaultValue="#3"
-                        style={{
-                          textAlign: "center",
-                          color: "black",
-                          backgroundColor: "#fafafa",
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-2 p-0">
-                      <DatePicker
-                        className="w-full h-full"
-                        value={
-                          this.state.FromDate3
-                            ? dayjs(this.state.FromDate3)
-                            : null
-                        }
-                        onChange={(date, dateString) => {
-                          this.setState({
-                            FromDate3: dateString,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-2 p-0">
-                      <DatePicker
-                        className="w-full h-full"
-                        value={
-                          this.state.ToDate3 ? dayjs(this.state.ToDate3) : null
-                        }
-                        onChange={(date, dateString) => {
-                          this.setState({
-                            ToDate3: dateString,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-7 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        value={this.state.Detail3}
-                        onChange={(e) => {
-                          this.setState({
-                            Detail3: e.target.value,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-1 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        disabled
-                        defaultValue="#4"
-                        style={{
-                          textAlign: "center",
-                          color: "black",
-                          backgroundColor: "#fafafa",
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-2 p-0">
-                      <DatePicker
-                        className="w-full h-full"
-                        value={
-                          this.state.FromDate4
-                            ? dayjs(this.state.FromDate4)
-                            : null
-                        }
-                        onChange={(date, dateString) => {
-                          this.setState({
-                            FromDate4: dateString,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-2 p-0">
-                      <DatePicker
-                        className="w-full h-full"
-                        value={
-                          this.state.ToDate4 ? dayjs(this.state.ToDate4) : null
-                        }
-                        onChange={(date, dateString) => {
-                          this.setState({
-                            ToDate4: dateString,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-7 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        value={this.state.Detail4}
-                        onChange={(e) => {
-                          this.setState({
-                            Detail4: e.target.value,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-1 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        disabled
-                        defaultValue="#5"
-                        style={{
-                          textAlign: "center",
-                          color: "black",
-                          backgroundColor: "#fafafa",
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-2 p-0">
-                      <DatePicker
-                        className="w-full h-full"
-                        value={
-                          this.state.FromDate5
-                            ? dayjs(this.state.FromDate5)
-                            : null
-                        }
-                        onChange={(date, dateString) => {
-                          this.setState({
-                            FromDate5: dateString,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-2 p-0">
-                      <DatePicker
-                        className="w-full h-full"
-                        value={
-                          this.state.ToDate5 ? dayjs(this.state.ToDate5) : null
-                        }
-                        onChange={(date, dateString) => {
-                          this.setState({
-                            ToDate5: dateString,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-7 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        value={this.state.Detail5}
-                        onChange={(e) => {
-                          this.setState({
-                            Detail5: e.target.value,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-1 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        disabled
-                        defaultValue="ActionBy :"
-                        style={{
-                          textAlign: "center",
-                          color: "black",
-                          backgroundColor: "#fafafa",
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-1 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        value={this.state.Responsible}
-                        onChange={(e) => {
-                          this.setState({
-                            Responsible: e.target.value,
-                          });
-                        }}
-                        readOnly
-                      />
-                    </div>
-                    <div className="col-sm-1 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        disabled
-                        defaultValue="Status :"
-                        style={{
-                          textAlign: "center",
-                          color: "black",
-                          backgroundColor: "#fafafa",
-                          height: "38px",
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-1 p-0">
-                      <Select
-                        value={this.state.Status}
-                        style={{
-                          width: "100%",
-                          height: "38px",
-                        }}
-                        onChange={(value) => {
-                          this.setState({ Status: value });
-                        }}
+                  <Col span={2} className="border-r p-1">
+                    Item
+                  </Col>
+                  <Col span={4} className="border-r p-1">
+                    From Date
+                  </Col>
+                  <Col span={4} className="border-r p-1">
+                    To Date
+                  </Col>
+                  <Col span={14} className="p-1 text-left pl-4">
+                    Detail
+                  </Col>
+                </Row>
+                <Row
+                  gutter={0}
+                  className="border-b border-gray-200 items-stretch"
+                >
+                  <Col
+                    span={2}
+                    className="flex text-center justify-center bg-gray-50 border-r font-bold"
+                  >
+                    #1
+                  </Col>
+                  <Col span={4} className="border-r">
+                    <DatePicker
+                      variant="borderless"
+                      className="w-full"
+                      value={
+                        this.state.FromDate1
+                          ? dayjs(this.state.FromDate1)
+                          : null
+                      }
+                      onChange={(date, dateString) =>
+                        this.setState({ FromDate1: dateString })
+                      }
+                    />
+                  </Col>
+                  <Col span={4} className="border-r">
+                    <DatePicker
+                      variant="borderless"
+                      className="w-full"
+                      value={
+                        this.state.ToDate1 ? dayjs(this.state.ToDate1) : null
+                      }
+                      onChange={(date, dateString) =>
+                        this.setState({ ToDate1: dateString })
+                      }
+                    />
+                  </Col>
+                  <Col span={14}>
+                    <Input
+                      variant="borderless"
+                      value={this.state.Detail1}
+                      onChange={(e) =>
+                        this.setState({ Detail1: e.target.value })
+                      }
+                    />
+                  </Col>
+                </Row>
+                <Row
+                  gutter={0}
+                  className="border-b border-gray-200 items-stretch"
+                >
+                  <Col
+                    span={2}
+                    className="flex text-center justify-center bg-gray-50 border-r font-bold"
+                  >
+                    #2
+                  </Col>
+                  <Col span={4} className="border-r">
+                    <DatePicker
+                      variant="borderless"
+                      className="w-full"
+                      value={
+                        this.state.FromDate2
+                          ? dayjs(this.state.FromDate2)
+                          : null
+                      }
+                      onChange={(date, dateString) =>
+                        this.setState({ FromDate2: dateString })
+                      }
+                    />
+                  </Col>
+                  <Col span={4} className="border-r">
+                    <DatePicker
+                      variant="borderless"
+                      className="w-full"
+                      value={
+                        this.state.ToDate2 ? dayjs(this.state.ToDate2) : null
+                      }
+                      onChange={(date, dateString) =>
+                        this.setState({ ToDate2: dateString })
+                      }
+                    />
+                  </Col>
+                  <Col span={14}>
+                    <Input
+                      variant="borderless"
+                      value={this.state.Detail2}
+                      onChange={(e) =>
+                        this.setState({ Detail2: e.target.value })
+                      }
+                    />
+                  </Col>
+                </Row>
+                <Row
+                  gutter={0}
+                  className="border-b border-gray-200 items-stretch"
+                >
+                  <Col
+                    span={2}
+                    className="flex text-center justify-center bg-gray-50 border-r font-bold"
+                  >
+                    #3
+                  </Col>
+                  <Col span={4} className="border-r">
+                    <DatePicker
+                      variant="borderless"
+                      className="w-full"
+                      value={
+                        this.state.FromDate3
+                          ? dayjs(this.state.FromDate3)
+                          : null
+                      }
+                      onChange={(date, dateString) =>
+                        this.setState({ FromDate3: dateString })
+                      }
+                    />
+                  </Col>
+                  <Col span={4} className="border-r">
+                    <DatePicker
+                      variant="borderless"
+                      className="w-full"
+                      value={
+                        this.state.ToDate3 ? dayjs(this.state.ToDate3) : null
+                      }
+                      onChange={(date, dateString) =>
+                        this.setState({ ToDate3: dateString })
+                      }
+                    />
+                  </Col>
+                  <Col span={14}>
+                    <Input
+                      variant="borderless"
+                      value={this.state.Detail3}
+                      onChange={(e) =>
+                        this.setState({ Detail3: e.target.value })
+                      }
+                    />
+                  </Col>
+                </Row>
+                <Row
+                  gutter={0}
+                  className="border-b border-gray-200 items-stretch"
+                >
+                  <Col
+                    span={2}
+                    className="flex text-center justify-center bg-gray-50 border-r font-bold"
+                  >
+                    #4
+                  </Col>
+                  <Col span={4} className="border-r">
+                    <DatePicker
+                      variant="borderless"
+                      className="w-full"
+                      value={
+                        this.state.FromDate4
+                          ? dayjs(this.state.FromDate4)
+                          : null
+                      }
+                      onChange={(date, dateString) =>
+                        this.setState({ FromDate4: dateString })
+                      }
+                    />
+                  </Col>
+                  <Col span={4} className="border-r">
+                    <DatePicker
+                      variant="borderless"
+                      className="w-full"
+                      value={
+                        this.state.ToDate4 ? dayjs(this.state.ToDate4) : null
+                      }
+                      onChange={(date, dateString) =>
+                        this.setState({ ToDate4: dateString })
+                      }
+                    />
+                  </Col>
+                  <Col span={14}>
+                    <Input
+                      variant="borderless"
+                      value={this.state.Detail4}
+                      onChange={(e) =>
+                        this.setState({ Detail4: e.target.value })
+                      }
+                    />
+                  </Col>
+                </Row>
+                <Row
+                  gutter={0}
+                  className="border-b border-gray-200 items-stretch"
+                >
+                  <Col
+                    span={2}
+                    className="flex text-center justify-center bg-gray-50 border-r font-bold"
+                  >
+                    #5
+                  </Col>
+                  <Col span={4} className="border-r">
+                    <DatePicker
+                      variant="borderless"
+                      className="w-full"
+                      value={
+                        this.state.FromDate5
+                          ? dayjs(this.state.FromDate5)
+                          : null
+                      }
+                      onChange={(date, dateString) =>
+                        this.setState({ FromDate5: dateString })
+                      }
+                    />
+                  </Col>
+                  <Col span={4} className="border-r">
+                    <DatePicker
+                      variant="borderless"
+                      className="w-full"
+                      value={
+                        this.state.ToDate5 ? dayjs(this.state.ToDate5) : null
+                      }
+                      onChange={(date, dateString) =>
+                        this.setState({ ToDate5: dateString })
+                      }
+                    />
+                  </Col>
+                  <Col span={14}>
+                    <Input
+                      variant="borderless"
+                      value={this.state.Detail5}
+                      onChange={(e) =>
+                        this.setState({ Detail5: e.target.value })
+                      }
+                    />
+                  </Col>
+                </Row>
+                <div className="mt-1 p-1">
+                  <Row gutter={[16, 8]} align="middle">
+                    <Col xs={24} md={6}>
+                      <div className="flex items-center">
+                        <span className="mr-2 font-bold whitespace-nowrap">
+                          Action By:
+                        </span>
+                        <Input
+                          value={this.state.Responsible}
+                          readOnly
+                          className="bg-white"
+                        />
+                      </div>
+                    </Col>
+                    <Col xs={24} md={6}>
+                      <div className="flex items-center">
+                        <span className="mr-2 font-bold whitespace-nowrap">
+                          Status:
+                        </span>
+                        <Select
+                          className="w-full"
+                          value={this.state.Status}
+                          onChange={(value) => this.setState({ Status: value })}
+                        >
+                          <Select.Option value="null">-Select-</Select.Option>
+                          <Select.Option value="Waiting">Waiting</Select.Option>
+                          <Select.Option value="On-Going">
+                            On-Going
+                          </Select.Option>
+                          <Select.Option value="Finished">
+                            Finished
+                          </Select.Option>
+                        </Select>
+                      </div>
+                    </Col>
+                    <Col xs={24} md={10}>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold whitespace-nowrap">
+                          URL:
+                        </span>
+                        <Input
+                          placeholder="Paste link here..."
+                          value={this.state.URLlink}
+                          onChange={(e) =>
+                            this.setState({ URLlink: e.target.value })
+                          }
+                        />
+                        {this.state.MainAdminDisplay === "block" && (
+                          <Button
+                            type="primary"
+                            onClick={() => this.DevSavedata()}
+                          >
+                            Submit
+                          </Button>
+                        )}
+                      </div>
+                    </Col>
+                    <Col xs={24} md={2}>
+                      <div
+                        className="flex items-center gap-2"
+                        style={{ display: this.state.MainAdminDisplay }}
                       >
-                        <Select.Option value="null">-Select-</Select.Option>
-                        <Select.Option value="Waiting">Waiting</Select.Option>
-                        <Select.Option value="On-Going">On-Going</Select.Option>
-                        <Select.Option value="Finished">Finished</Select.Option>
-                      </Select>
-                    </div>
-                    <div className="col-sm-1 p-0">
-                      <Input
-                        type="text"
-                        className="form-control"
-                        disabled
-                        defaultValue="URL Link :"
-                        style={{
-                          textAlign: "center",
-                          color: "black",
-                          backgroundColor: "#fafafa",
-                        }}
-                      />
-                    </div>
-                    <div className="col-sm-7 p-0">
-                      <Input
-                        type="text"
-                        maxLength={255}
-                        className="form-control"
-                        value={this.state.URLlink}
-                        onChange={(e) => {
-                          this.setState({
-                            URLlink: e.target.value,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div
-                      className="col-sm-1 p-0"
-                      style={{ display: this.state.MainAdminDisplay }}
-                    >
-                      <Button
-                        type="primary"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          this.DevSavedata();
-                        }}
-                      >
-                        Submit
-                      </Button>
-                    </div>
-                  </div>
-                </Card>
-              </div>
+                        <Button
+                          type="primary"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            this.DevSavedata();
+                          }}
+                        >
+                          Submit
+                        </Button>
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+              </Card>
             </div>
           </Form>
         </div>

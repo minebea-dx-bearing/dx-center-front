@@ -3,7 +3,7 @@ import { Button, Form, Input, Select, Checkbox } from "antd";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { BASE_URL, key } from "../constance/constance";
-import PageBreadcrumb from "../components/common/PageBreadCrumb";
+import PageBreadcrumb from "../components/common/PageBreadcrumb";
 
 const { Option } = Select;
 const onFinish = (values) => {
@@ -30,8 +30,7 @@ export default function UserLogin() {
   };
   const doLogin = useCallback(async () => {
     let command = await axios.post(`${BASE_URL}` + "/user/login", {
-      empNumber: state.empNumber,
-      password: state.password,
+      empNumber: state.empNumber,password: state.password,
     });
     if (command.data.api_result === "ok") {
       localStorage.setItem(key.LOGIN_PASSED, "yes");
@@ -96,12 +95,8 @@ export default function UserLogin() {
       }
     }
   }, [
-    state.division,
-    state.levelUser,
-    state.confirmpassword,
-    state.password,
-    state.username,
-    state.empNumber,
+    state.division,state.levelUser,state.confirmpassword,
+    state.password,state.username,state.empNumber,
   ]);
   const doChangPass = useCallback(async () => {
     if (state.confirmpassword !== state.password) {
@@ -114,10 +109,8 @@ export default function UserLogin() {
       return;
     }
     if (
-      state.empNumber === "" ||
-      state.oldpassword === "" ||
-      state.password === "" ||
-      state.confirmpassword === ""
+      state.empNumber === "" || state.oldpassword === "" ||
+      state.password === "" || state.confirmpassword === ""
     ) {
       Swal.fire({
         icon: "error",
@@ -135,7 +128,6 @@ export default function UserLogin() {
       password: state.password,
       confirmpassword: state.confirmpassword,
     });
-    console.log(command);
     if (command.data.api_result === "ok") {
       window.location.reload();
     } else {
@@ -145,414 +137,366 @@ export default function UserLogin() {
       });
     }
   }, [
-    state.confirmpassword,
-    state.password,
-    state.empNumber,
-    state.oldpassword,
+    state.confirmpassword,state.password,
+    state.empNumber,state.oldpassword,
   ]);
   const renderLogin = () => {
     return (
       <div className="content" style={{ display: state.LoginDisplay }}>
+        <div
+          className="form-container shadow-lg"
+          style={{
+            width: "330px",
+            textAlign: "center",
+            padding: "20px",
+            border: "2px solid #cce1f9",
+            borderRadius: "10px",
+          }}
+        >
+          <h3 className="title">DX Bearing</h3>
+          <span className="description">Sign in to start your session</span>
+          <Form
+            name="basic_login"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            style={{ maxWidth: 600, marginTop: "20px" }}
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+          >
+            <Form.Item
+              label="Username"
+              name="empNumber"
+              rules={[{required: true,message: "Please input your Emp.Number!"}]}
+            >
+              <Input
+                placeholder="Emp Number"
+                value={state.empNumber.toUpperCase()}
+                onChange={(e) =>
+                  updateState({ empNumber: e.target.value.toUpperCase() })
+                }
+              />
+            </Form.Item>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[{ required: true, message: "Please input your password!" }]}
+            >
+              <Input.Password
+                value={state.password}
+                onChange={(e) => updateState({ password: e.target.value })}
+              />
+            </Form.Item>
+            <Form.Item name="remember" valuePropName="checked" label={null}>
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
             <div
-              className="form-container shadow-lg"
               style={{
-                width: "330px",
-                textAlign: "center",
-                padding: "20px",
-                border: "2px solid #cce1f9",
-                borderRadius: "10px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                marginTop: "20px",
               }}
             >
-              <h3 className="title">DX Bearing</h3>
-              <span className="description">Sign in to start your session</span>
-              <Form
-                name="basic_login"
-                labelCol={{ span: 8 }}
-                wrapperCol={{ span: 16 }}
-                style={{ maxWidth: 600, marginTop: "20px" }}
-                initialValues={{ remember: true }}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                autoComplete="off"
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{ width: "100%" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  doLogin();
+                }}
               >
-                <Form.Item
-                  label="Username"
-                  name="empNumber"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Emp.Number!",
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder="Emp Number"
-                    value={state.empNumber.toUpperCase()}
-                    onChange={(e) =>
-                      updateState({ empNumber: e.target.value.toUpperCase() })
-                    }
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Password"
-                  name="password"
-                  rules={[
-                    { required: true, message: "Please input your password!" },
-                  ]}
-                >
-                  <Input.Password
-                    value={state.password}
-                    onChange={(e) => updateState({ password: e.target.value })}
-                  />
-                </Form.Item>
-                <Form.Item name="remember" valuePropName="checked" label={null}>
-                  <Checkbox>Remember me</Checkbox>
-                </Form.Item>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "10px",
-                    marginTop: "20px",
-                  }}
-                >
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    style={{ width: "100%" }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      doLogin();
-                    }}
-                  >
-                    Log In
-                  </Button>
-                  <Button
-                    type="primary"
-                    style={{ width: "100%" }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      updateState({
-                        LoginDisplay: "none",
-                        RegisterDisplay: "block",
-                        ChangPassDisplay: "none",
-                      });
-                    }}
-                  >
-                    Register
-                  </Button>
-                  <Button
-                    type="primary"
-                    style={{ width: "100%" }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      updateState({
-                        LoginDisplay: "none",
-                        RegisterDisplay: "none",
-                        ChangPassDisplay: "block",
-                      });
-                    }}
-                  >
-                    Change Password
-                  </Button>
-                </div>
-              </Form>
+                Log In
+              </Button>
+              <Button
+                type="primary"
+                style={{ width: "100%" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  updateState({
+                    LoginDisplay: "none",
+                    RegisterDisplay: "block",
+                    ChangPassDisplay: "none",
+                  });
+                }}
+              >
+                Register
+              </Button>
+              <Button
+                type="primary"
+                style={{ width: "100%" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  updateState({
+                    LoginDisplay: "none",
+                    RegisterDisplay: "none",
+                    ChangPassDisplay: "block",
+                  });
+                }}
+              >
+                Change Password
+              </Button>
             </div>
+          </Form>
+        </div>
       </div>
     );
   };
   const renderRegister = () => {
     return (
       <div className="content" style={{ display: state.RegisterDisplay }}>
-            <div
-              className="form-container shadow-lg"
-              style={{
-                width: "330px",
-                textAlign: "center",
-                padding: "20px",
-                border: "2px solid #cce1f9",
-                borderRadius: "10px",
-              }}
+        <div
+          className="form-container shadow-lg"
+          style={{
+            width: "330px",
+            textAlign: "center",
+            padding: "20px",
+            border: "2px solid #cce1f9",
+            borderRadius: "10px",
+          }}
+        >
+          <h3 className="title">Registration</h3>
+          <span className="description">Register a new membership</span>
+          <Form
+            name="basic_register"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            style={{ maxWidth: 600, marginTop: "20px" }}
+            initialValues={{ remember: true }}
+            autoComplete="off"
+          >
+            <Form.Item
+              label="Username"
+              name="username"
+              rules={[{ required: true, message: "Please input your Username!" }]}
             >
-              <h3 className="title">Registration</h3>
-              <span className="description">Register a new membership</span>
-              <Form
-                name="basic_register"
-                labelCol={{ span: 8 }}
-                wrapperCol={{ span: 16 }}
-                style={{ maxWidth: 600, marginTop: "20px" }}
-                initialValues={{ remember: true }}
-                autoComplete="off"
+              <Input
+                placeholder="Username"
+                value={state.username}
+                onChange={(e) => {
+                  updateState({ username: e.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Emp. No"
+              name="empNumber"
+              rules={[{required: true,message: "Please input your Emp.Number!"}]}
+            >
+              <Input
+                placeholder="Emp Number"
+                value={state.empNumber}
+                onChange={(e) => {
+                  updateState({ empNumber: e.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[{ required: true, message: "Please input your password!" }]}
+            >
+              <Input.Password
+                placeholder="Password"
+                value={state.password}
+                onChange={(e) => {
+                  updateState({ password: e.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Confirm PW"
+              name="confirmpassword"
+              rules={[{required: true,message: "Please input your Confirmpassword!"}]}
+            >
+              <Input.Password
+                placeholder="Confirm Password"
+                value={state.confirmpassword}
+                onChange={(e) => {
+                  updateState({ confirmpassword: e.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Divition"
+              name="division"
+              rules={[{ required: true, message: "Please input your Divition!" }]}
+            >
+              <Select
+                placeholder="Select Division"
+                value={state.division}
+                onChange={(value) => updateState({ division: value })}
               >
-                <Form.Item
-                  label="Username"
-                  name="username"
-                  rules={[
-                    { required: true, message: "Please input your Username!" },
-                  ]}
-                >
-                  <Input
-                    placeholder="Username"
-                    value={state.username}
-                    onChange={(e) => {
-                      updateState({ username: e.target.value });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Emp. No"
-                  name="empNumber"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Emp.Number!",
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder="Emp Number"
-                    value={state.empNumber}
-                    onChange={(e) => {
-                      updateState({ empNumber: e.target.value });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Password"
-                  name="password"
-                  rules={[
-                    { required: true, message: "Please input your password!" },
-                  ]}
-                >
-                  <Input.Password
-                    placeholder="Password"
-                    value={state.password}
-                    onChange={(e) => {
-                      updateState({ password: e.target.value });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Confirm PW"
-                  name="confirmpassword"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Confirmpassword!",
-                    },
-                  ]}
-                >
-                  <Input.Password
-                    placeholder="Confirm Password"
-                    value={state.confirmpassword}
-                    onChange={(e) => {
-                      updateState({ confirmpassword: e.target.value });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Divition"
-                  name="division"
-                  rules={[
-                    { required: true, message: "Please input your Divition!" },
-                  ]}
-                >
-                  <Select
-                    placeholder="Select Division"
-                    value={state.division}
-                    onChange={(value) => updateState({ division: value })}
-                  >
-                    <Option value="NMB Bearing">NMB Bearing</Option>
-                    <Option value="PELMEC Bearing">PELMEC Bearing</Option>
-                    <Option value="NHB Bearing">NHB Bearing</Option>
-                    <Option value="NHT Bearing">NHT Bearing</Option>
-                    <Option value="NAT Bearing">NAT Bearing</Option>
-                  </Select>
-                </Form.Item>
-                <Form.Item
-                  label="LevelUser"
-                  name="levelUser"
-                  rules={[
-                    { required: true, message: "Please input your LevelUser!" },
-                  ]}
-                >
-                  <Select
-                    placeholder="Select LevelUser"
-                    value={state.levelUser}
-                    onChange={(value) => updateState({ levelUser: value })}
-                  >
-                    <Option value="Admin">Admin</Option>
-                    <Option value="User">User</Option>
-                    <Option value="Guest">Guest</Option>
-                  </Select>
-                </Form.Item>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "10px",
-                    marginTop: "20px",
-                  }}
-                >
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    style={{ width: "100%" }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      doRegister();
-                    }}
-                  >
-                    Register
-                  </Button>
-                  <Button
-                    type="primary"
-                    style={{ width: "100%" }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      updateState({
-                        LoginDisplay: "block",
-                        RegisterDisplay: "none",
-                        ChangPassDisplay: "none",
-                      });
-                    }}
-                  >
-                    Log In
-                  </Button>
-                </div>
-              </Form>
+                <Option value="NMB Bearing">NMB Bearing</Option>
+                <Option value="PELMEC Bearing">PELMEC Bearing</Option>
+                <Option value="NHB Bearing">NHB Bearing</Option>
+                <Option value="NHT Bearing">NHT Bearing</Option>
+                <Option value="NAT Bearing">NAT Bearing</Option>
+              </Select>
+            </Form.Item>
+            <Form.Item
+              label="LevelUser"
+              name="levelUser"
+              rules={[{ required: true, message: "Please input your LevelUser!" }]}
+            >
+              <Select
+                placeholder="Select LevelUser"
+                value={state.levelUser}
+                onChange={(value) => updateState({ levelUser: value })}
+              >
+                <Option value="Admin">Admin</Option>
+                <Option value="User">User</Option>
+                <Option value="Guest">Guest</Option>
+              </Select>
+            </Form.Item>
+            <div style={{display: "flex",flexDirection: "column",gap: "10px",marginTop: "20px"}}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{ width: "100%" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  doRegister();
+                }}
+              >
+                Register
+              </Button>
+              <Button
+                type="primary"
+                style={{ width: "100%" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  updateState({
+                    LoginDisplay: "block",
+                    RegisterDisplay: "none",
+                    ChangPassDisplay: "none",
+                  });
+                }}
+              >
+                Log In
+              </Button>
             </div>
-          </div> 
+          </Form>
+        </div>
+      </div>
     );
   };
   const renderChangPass = () => {
     return (
       <div className="content" style={{ display: state.ChangPassDisplay }}>
+        <div
+          className="form-container shadow-lg"
+          style={{
+            width: "330px",
+            textAlign: "center",
+            padding: "20px",
+            border: "2px solid #cce1f9",
+            borderRadius: "10px",
+          }}
+        >
+          <h3 className="title">Change Password</h3>
+          <span className="description" style={{ fontSize: "15px" }}>
+            You are only one step a way from your new password, recover your
+            password now.
+          </span>
+          <Form
+            name="basic_changepass"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            style={{ maxWidth: 600, marginTop: "20px" }}
+            initialValues={{ remember: true }}
+            autoComplete="off"
+          >
+            <Form.Item
+              label="Emp. No"
+              name="empNumber"
+              rules={[{ required: true, message: "Please input your EmpNumber!" }]}
+            >
+              <Input
+                placeholder="Emp Number"
+                value={state.empNumber}
+                onChange={(e) => {
+                  updateState({ empNumber: e.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Current PW"
+              name="oldpassword"
+              rules={[{required: true,message: "Please input your Current Password!"}]}
+            >
+              <Input
+                placeholder="Current Password"
+                value={state.oldpassword}
+                onChange={(e) => {
+                  updateState({ oldpassword: e.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[{ required: true, message: "Please input your password!" }]}
+            >
+              <Input.Password
+                placeholder="New Password"
+                value={state.password}
+                onChange={(e) => {
+                  updateState({ password: e.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Confirm PW"
+              name="confirmpassword"
+              rules={[{required: true,message: "Please input your Confirmpassword!"}]}
+            >
+              <Input.Password
+                placeholder="Confirm Password"
+                value={state.confirmpassword}
+                onChange={(e) => {
+                  updateState({ confirmpassword: e.target.value });
+                }}
+              />
+            </Form.Item>
             <div
-              className="form-container shadow-lg"
               style={{
-                width: "330px",
-                textAlign: "center",
-                padding: "20px",
-                border: "2px solid #cce1f9",
-                borderRadius: "10px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                marginTop: "20px",
               }}
             >
-              <h3 className="title">Change Password</h3>
-              <span className="description" style={{ fontSize: "15px" }}>
-                You are only one step a way from your new password, recover your
-                password now.
-              </span>
-              <Form
-                name="basic_changepass"
-                labelCol={{ span: 8 }}
-                wrapperCol={{ span: 16 }}
-                style={{ maxWidth: 600, marginTop: "20px" }}
-                initialValues={{ remember: true }}
-                autoComplete="off"
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{ width: "100%" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  doChangPass();
+                }}
               >
-                <Form.Item
-                  label="Emp. No"
-                  name="empNumber"
-                  rules={[
-                    { required: true, message: "Please input your EmpNumber!" },
-                  ]}
-                >
-                  <Input
-                    placeholder="Emp Number"
-                    value={state.empNumber}
-                    onChange={(e) => {
-                      updateState({ empNumber: e.target.value });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Current PW"
-                  name="oldpassword"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Current Password!",
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder="Current Password"
-                    value={state.oldpassword}
-                    onChange={(e) => {
-                      updateState({ oldpassword: e.target.value });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Password"
-                  name="password"
-                  rules={[
-                    { required: true, message: "Please input your password!" },
-                  ]}
-                >
-                  <Input.Password
-                    placeholder="New Password"
-                    value={state.password}
-                    onChange={(e) => {
-                      updateState({ password: e.target.value });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Confirm PW"
-                  name="confirmpassword"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Confirmpassword!",
-                    },
-                  ]}
-                >
-                  <Input.Password
-                    placeholder="Confirm Password"
-                    value={state.confirmpassword}
-                    onChange={(e) => {
-                      updateState({ confirmpassword: e.target.value });
-                    }}
-                  />
-                </Form.Item>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "10px",
-                    marginTop: "20px",
-                  }}
-                >
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    style={{ width: "100%" }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      doChangPass();
-                    }}
-                  >
-                    Change Password
-                  </Button>
-                  <Button
-                    type="primary"
-                    style={{ width: "100%" }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      updateState({
-                        LoginDisplay: "block",
-                        RegisterDisplay: "none",
-                        ChangPassDisplay: "none",
-                      });
-                    }}
-                  >
-                    Log In
-                  </Button>
-                </div>
-              </Form>
+                Change Password
+              </Button>
+              <Button
+                type="primary"
+                style={{ width: "100%" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  updateState({
+                    LoginDisplay: "block",
+                    RegisterDisplay: "none",
+                    ChangPassDisplay: "none",
+                  });
+                }}
+              >
+                Log In
+              </Button>
             </div>
+          </Form>
+        </div>
       </div>
     );
   };

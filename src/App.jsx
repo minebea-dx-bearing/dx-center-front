@@ -254,7 +254,12 @@ function App() {
               <Route index element={<McbHomeNew/>}/>
             </Route>
 
+
             <Route path="/mcb/assy/analysis-mc" element={<McbAssyAnalysisMachine />} />
+
+            {/* jobrequest */}
+            <Route path="/job_request" element={<JobRequest />} />
+            <Route path="/user_login" element={<UserLogin />} />
 
             {/* page not found */}
             <Route path="*" exact={true} element={<NotFound/>} />
