@@ -243,7 +243,7 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["AOD-FIRST"]?.act_ct,
+                        value: data["AOD-FIRST"]?.act_pd,
                         diff: data["AOD-FIRST"]?.diff_pd,
                       },
                     ],
@@ -267,7 +267,7 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["AVS-FIRST"]?.act_ct,
+                        value: data["AVS-FIRST"]?.act_pd,
                         diff: data["AVS-FIRST"]?.diff_pd,
                       },
                     ],
@@ -292,7 +292,7 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["ALU-FIRST"]?.act_ct,
+                        value: data["ALU-FIRST"]?.act_pd,
                         diff: data["ALU-FIRST"]?.diff_pd,
                       },
                     ],
@@ -449,7 +449,7 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["AOD-SECOND"]?.act_ct,
+                        value: data["AOD-SECOND"]?.act_pd,
                         diff: data["AOD-SECOND"]?.diff_pd,
                       },
                     ],
@@ -473,7 +473,7 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["AVS-SECOND"]?.act_ct,
+                        value: data["AVS-SECOND"]?.act_pd,
                         diff: data["AVS-SECOND"]?.diff_pd,
                       },
                     ],
@@ -498,7 +498,7 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["ALU-SECOND"]?.act_ct,
+                        value: data["ALU-SECOND"]?.act_pd,
                         diff: data["ALU-SECOND"]?.diff_pd,
                       },
                     ],
