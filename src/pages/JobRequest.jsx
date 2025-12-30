@@ -2281,7 +2281,7 @@ class JobRequest extends Component {
               <h5 className="text-md font-medium text-gray-600 ml-5 text-left mb-1">
                 Total Reduced Cost
               </h5>
-              <h1 className="text-4xl font-bold text-red-600 text-center mt-auto">
+              <h1 className="text-4xl font-bold text-blue-600 text-center mt-auto">
                 ฿ {this.state.SumTotalReq.toLocaleString()}
               </h1>
             </div>
