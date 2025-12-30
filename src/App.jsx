@@ -83,7 +83,7 @@ import PelmecHomeNew from "./pages/pelmecNew/PelmecHomeNew";
 // NHB
 import NhbHomeNew from "./pages/nhbNew/NhbHomeNew";
 import NhbTnRt from "./pages/nhbNew/tn/NhbTnRt";
-import NhbIRBoreRt from "./pages/nhbNew/gd2/NhbIRBoreRt";
+
 // MCB
 import McbHomeNew from "./pages/mcbNew/McbHomeNew";
 import McbAssyAnalysisMachine from "./pages/mcb/assy/McbAssyAnalysisMachine";
@@ -91,7 +91,6 @@ import McbAssyAnalysisMachine from "./pages/mcb/assy/McbAssyAnalysisMachine";
 import NotFound from "./components/common/NotFound";
 
 import NhbGdHome from "./pages/nhb/gd2/NhbGdHome";
-import NhbGd2IRBore from "./pages/nhb/gd2/NhbGd2IRBore";
 import NatTnAnalysisMachine from "./pages/natNew/tn/NatTnAnalysisMachine";
 import NatIRBoreAnalysisMachine from "./pages/natNew/gd2/ir/NatIRBoreAnalysisMachine";
 import NatIRRwAnalysisMachine from "./pages/natNew/gd2/ir/NatIRRwAnalysisMachine";
@@ -109,6 +108,7 @@ import NatAvsRt from "./pages/natNew/assy/NatAvsRt";
 import NatAvsAnalysisMachine from "./pages/natNew/assy/NatAvsAnalysisMachine";
 import NatAluRt from "./pages/natNew/assy/NatAluRt";
 import NatAluAnalysisMachine from "./pages/natNew/assy/NatAluAnalysisMachine";
+import NhbIRBoreRt from "./pages/nhbNew/gd2/ir/NhbIRBoreRt";
 
 
 
@@ -175,7 +175,7 @@ function App() {
             <Route path="/nhb/tn/tn-realtime" element={<NhbTnTnRealtime />} />
             <Route path="/nhb/tn/analysis-mc" element={<NhbTnAnalysisMachine />} />
             <Route path="/nhb/gd" element={<NhbGdHome />} />
-            <Route path="/nhb/gd/2ndinbore-realtime" element={<NhbGd2IRBore />} />
+            {/* <Route path="/nhb/gd/2ndinbore-realtime" element={<NhbGd2IRBore />} /> */}
 
             <Route path="/nht" element={<NhtHome />} />
             <Route path="/nht/gd" element={<NhtGdHome />} />

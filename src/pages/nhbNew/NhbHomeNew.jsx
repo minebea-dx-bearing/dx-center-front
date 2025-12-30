@@ -27,7 +27,7 @@ export default function NhbHomeNew() {
                     <div className="grid grid-cols-2 gap-5">
                         <div>
                             <CardButton disabled title="I/R Combine" color="bg-lightblue" path="/nhb_new/ir-combine-realtime_new"/>
-                            <CardButton disabled title="I/R Bore" color="bg-bluegray" path="/nhb_new/ir-bore-realtime_new"/>
+                            <CardButton title="I/R Bore" color="bg-bluegray" path="/nhb_new/ir-bore-realtime_new"/>
                             <CardButton disabled title="I/R Raceway" color="bg-bluegray" path="/nhb_new/ir-rw-realtime_new"/>
                             <CardButton disabled title="I/R S/F" color="bg-bluegray" path="/nhb_new/ir-sf-realtime_new"/>
                         </div>
