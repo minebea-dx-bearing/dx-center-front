@@ -48,6 +48,8 @@ import NatAssyGssmDaily from "./pages/nat/assy/NatAssyGssmDaily";
 import NatAssyFimDaily from "./pages/nat/assy/NatAssyFimDaily";
 import NatTnProdDash from "./pages/nat/tn/NatTnProdDash";
 import PelmecHome from "./pages/pelmec/PelmecHome";
+import JobRequest from "./pages/JobRequest";
+import UserLogin from "./pages/UserLogin";
 
 function App() {
   return (
@@ -111,6 +113,9 @@ function App() {
         <Route path="/nht/gd" element={<NhtGdHome />} />
 
         <Route path="/pelmec" element={<PelmecHome />} />
+        <Route path="/job_request" element={<JobRequest />} />
+        <Route path="/user_login" element={<UserLogin />} />
+        
       </Routes>
     </BrowserRouter>
   );
