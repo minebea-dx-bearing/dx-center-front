@@ -39,6 +39,10 @@ const NatSidebar =
         label: <a href="/nat_new/assy-combine-realtime_new">Combine</a>,
         },
         {
+        key: 'assy-report',
+        label: <a href="/nat_new/assy-report">Report</a>,
+        },
+        {
         key: '1st-line',
         label: '1st Line',
         children: [

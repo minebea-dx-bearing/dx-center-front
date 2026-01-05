@@ -91,6 +91,9 @@ import McbAssyAnalysisMachine from "./pages/mcb/assy/McbAssyAnalysisMachine";
 import NotFound from "./components/common/NotFound";
 
 import NhbGdHome from "./pages/nhb/gd2/NhbGdHome";
+import NhbGd2IRBore from "./pages/nhb/gd2/NhbGd2IRBore";
+import NatAssyReport from "./pages/natNew/assy/additional/NatAssyReport";
+import OverviewHome from "./pages/OverviewHome";
 import NatTnAnalysisMachine from "./pages/natNew/tn/NatTnAnalysisMachine";
 import NatIRBoreAnalysisMachine from "./pages/natNew/gd2/ir/NatIRBoreAnalysisMachine";
 import NatIRRwAnalysisMachine from "./pages/natNew/gd2/ir/NatIRRwAnalysisMachine";
@@ -121,6 +124,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<NewHome />} />
+            <Route path="/home-overview" element={<OverviewHome />} />
 
             <Route path="/test" element={<Test />} />
 
@@ -131,6 +135,7 @@ function App() {
               <Route path="tn/tn-realtime-oee" element={<NatTnRealtimeOee />} />
               <Route path="tn/tn-daily" element={<NatTnDaily />} />
               <Route path="tn/tn-summary-prod" element={<NatTnSummary />} />
+              <Route path="tn/tn-prod-dash" element={<NatTnProdDash />} />
 
               <Route path="gd" element={<NatGdHome />} />
               <Route path="gd/2ndinbore-realtime" element={<Nat2ndInBoreRealtime />} />
@@ -154,11 +159,10 @@ function App() {
               <Route path="assy/ant-realtime" element={<NatAssyAntRealtime />} />
               <Route path="assy/avs-realtime" element={<NatAssyAvsRealtime />} />
               <Route path="assy/alu-realtime" element={<NatAssyAluRealtime />} />
-              <Route path="assy/mbr-unmatch" element={<NatAssyUnMatchData />} />
-              
             </Route>
 
             <Route path="/nmb" element={<NmbHome />} />
+            <Route path="/nmb/tn/tn" element={<NmbMmsTurning />} />
             <Route path="/nmb/assy" element={<NmbAssyHome />} />
             <Route path="/nmb/assy/agr-realtime" element={<NmbAssyAgrRealtime />} />
             <Route path="/nmb/assy/alu-realtime" element={<NmbAssyAluRealtime />} />
@@ -179,6 +183,14 @@ function App() {
 
             <Route path="/nht" element={<NhtHome />} />
             <Route path="/nht/gd" element={<NhtGdHome />} />
+
+            <Route path="/pelmec" element={<PelmecHome />} />
+            <Route path="/pelmec/tn/tn" element={<PelmecMmsTurning />} />
+            <Route path="/pelmec/tn/coldforming" element={<PelmecMmsColdForming />} />
+            <Route path="/pelmec/gd/1strough" element={<PelmecMms1stRough />} />
+            <Route path="/pelmec/gd/2ndouter" element={<PelmecMms2ndOuter />} />
+            <Route path="/pelmec/gd/2ndinner" element={<PelmecMms2ndInner />} />
+            <Route path="/pelmec/assy/assy" element={<PelmecMmsAssy />} />
 
             {/* NAT */}
             {/* <Route path="/nat_new" element={<DefaultHeader plant="nat" />}></Route> */}
@@ -215,6 +227,7 @@ function App() {
               <Route path="assy-avs-realtime_new" element={<NatAvsRt />} />
               <Route path="assy-alu-realtime_new" element={<NatAluRt />} />
               {/* Assy additional */}
+              <Route path="assy-report" element={<NatAssyReport />} />
               <Route path="assy-mbr-realtime_new/analysis-mc" element={<NatMbrAnalysisMachine/>} />
               <Route path="assy-arp-realtime_new/analysis-mc" element={<NatArpAnalysisMachine/>} />
               <Route path="assy-fim-realtime_new/analysis-mc" element={<NatFimAnalysisMachine/>} />
