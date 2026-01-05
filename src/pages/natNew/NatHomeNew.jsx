@@ -55,9 +55,9 @@ export default function NatHomeNew() {
                 <CardButton title="ARP" sub_title="Auto Radial Play" color="bg-bluegray" path="/nat_new/assy-arp-realtime_new"/>
               </div>
               <div>
-                <CardButton title="GSSM" sub_title="Grease Shield Snap" color="bg-darkbluegray" path="/nat_new/assy-gssm-realtime_new"/>
+                <CardButton disabled title="GSSM" sub_title="Grease Shield Snap" color="bg-darkbluegray" path="/nat_new/assy-gssm-realtime_new"/>
                 <CardButton title="FIM" sub_title="Final Inspection" color="bg-darkbluegray" path="/nat_new/assy-fim-realtime_new"/>
-                <CardButton title="ANT" sub_title="Auto Noise" color="bg-darkbluegray" path="/nat_new/assy-ant-realtime_new"/>
+                <CardButton disabled title="ANT" sub_title="Auto Noise" color="bg-darkbluegray" path="/nat_new/assy-ant-realtime_new"/>
               </div>
               <div>
                 <CardButton disabled title="AOD" sub_title="Auto OD" color="bg-darkbluegray" path="/nat_new/assy-aod-realtime_new"/>

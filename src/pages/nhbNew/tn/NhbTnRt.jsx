@@ -29,7 +29,6 @@ export default function NhbTnRt() {
           Expires: "0",
         },
       });
-      // console.log(response1.data.data)
       setDataSourse(response1.data.data);
       setdataSummary(response1.data.resultSummary);
     }
@@ -51,7 +50,6 @@ export default function NhbTnRt() {
     fetchData();
     
     setInterval(() => {
-      // console.log('time count down',60-(moment().format("ss")), 'time',moment().format("ss"))
       timeCounter = 60 - moment().format("ss");
       if (timeCounter == 60) {
         fetchData();

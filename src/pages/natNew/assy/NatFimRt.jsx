@@ -2,11 +2,11 @@ import axios from 'axios';
 import moment from 'moment';
 import React, { useEffect, useRef, useState } from 'react'
 import Swal from 'sweetalert2';
-import MasterRtPage from '../../../../components/redesign/realtime/MasterRtPage';
-import Loading from '../../../../components/common/Loading';
-import { TWN_URL } from '../../../../constance/constance';
+import MasterRtPage from '../../../components/redesign/realtime/MasterRtPage';
+import Loading from '../../../components/common/Loading';
+import { TWN_URL } from '../../../constance/constance';
 
-export default function NatIRRwRt() {
+export default function NatFimRt() {
     const isFirstLoad = useRef(true);
     const [loading, setLoading] = useState(false);
     const [dataSource, setDataSourse] = useState([]);
@@ -23,13 +23,14 @@ export default function NatIRRwRt() {
         setLoading(true);
     }
     try{
-        const response1 = await axios.get(`${TWN_URL}/nat/gd/2ndinrace-realtime/machines`, {
+        const response1 = await axios.get(`${TWN_URL}/nat/assy/fim-realtime/machines`, {
         headers: {
             "Cache-Control": "no-cache",
             Pragma: "no-cache",
             Expires: "0",
         },
         });
+        // console.log(response1.data.data)
         setDataSourse(response1.data.data);
         setdataSummary(response1.data.resultSummary);
         if (isFirstLoad.current) {
@@ -67,7 +68,7 @@ export default function NatIRRwRt() {
         {loading && <Loading />}
         <MasterRtPage
             plant_={"nat"}
-            process_={"I/R Raceway"}
+            process_={"FIM"}
             data={dataSource}
             dataSum={dataSummary}
         />

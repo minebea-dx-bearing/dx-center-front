@@ -4,9 +4,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import Swal from 'sweetalert2';
 import MasterRtPage from '../../../../components/redesign/realtime/MasterRtPage';
 import Loading from '../../../../components/common/Loading';
-import { TWN_URL } from '../../../../constance/constance';
+import { NHB_GD_URL } from '../../../../constance/constance';
 
-export default function NatIRRwRt() {
+export default function NhbIRBoreRt() {
     const isFirstLoad = useRef(true);
     const [loading, setLoading] = useState(false);
     const [dataSource, setDataSourse] = useState([]);
@@ -23,7 +23,7 @@ export default function NatIRRwRt() {
         setLoading(true);
     }
     try{
-        const response1 = await axios.get(`${TWN_URL}/nat/gd/2ndinrace-realtime/machines`, {
+        const response1 = await axios.get(`${NHB_GD_URL}/nhb/gd/2ndinbore-realtime/machines`, {
         headers: {
             "Cache-Control": "no-cache",
             Pragma: "no-cache",
@@ -66,8 +66,8 @@ export default function NatIRRwRt() {
     <div>
         {loading && <Loading />}
         <MasterRtPage
-            plant_={"nat"}
-            process_={"I/R Raceway"}
+            plant_={"NHB"}
+            process_={"I/R Bore"}
             data={dataSource}
             dataSum={dataSummary}
         />

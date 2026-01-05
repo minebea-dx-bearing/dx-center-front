@@ -1,10 +1,21 @@
-// =============== Connection ===============
-
 // export const BASE_URL = "http://localhost:2221";
 export const BASE_URL = "http://10.120.10.140:2221";
+export const BASE_URL_NHT_NAT = "http://10.120.139.25:4005"
+
+export const key = {
+  LOGIN_PASSED: "LOGIN_PASSED",
+  USER_LV: "USER_LV",
+  USER_NAME: "USER_NAME",
+  USER_EMP: "USER_EMP",
+  EDITTED_USER: "USER_EMP",
+  TIME_LOGIN: "TIME_LOGIN",
+  DIVISION: "DIVISION",
+};
+export var levelUser = "";
+export const NOK = "Not OK";
+export const OK = "OK";
 export const LOCAL_URL = "http://10.128.16.110:8009";
 export const NHB_TN_URL = "http://10.120.117.23:3005";
+export const NHB_GD_URL = "http://10.120.117.5:3005";
 export const TWN_URL = "http://10.120.139.25:4005";
-
-export const TEST = "http://localhost:1000";
-export const BASE_URL_NHT_NAT = "http://10.120.139.25:4005"
+// export const TWN_URL = "http://localhost:8009";

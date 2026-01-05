@@ -23,18 +23,13 @@ export default function NatAssyCombineRealtime() {
       setLoading(true);
     }
     try {
-      const response1 = await axios.get(
-        `${TWN_URL}/nat/assy/combine-realtime`,
-        // `http://localhost:8009/nat/assy/combine-realtime`,
-        {
-          headers: {
-            "Cache-Control": "no-cache",
-            Pragma: "no-cache",
-            Expires: "0",
-          },
-        }
-      );
-      // console.log(response1.data.data)
+      const response1 = await axios.get(`${TWN_URL}/nat/assy/combine-realtime`, {
+        headers: {
+          "Cache-Control": "no-cache",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      });
       setFetchTime(moment().format("DD-MMM HH:mm"));
       setRealtimeData(response1.data.data);
     } catch (error) {
@@ -75,8 +70,7 @@ export default function NatAssyCombineRealtime() {
       <BreadCrumbs />
       <div className="flex flex-row-reverse">
         <div>
-          Update : {fetchTime}{" "}
-          <span className="text-red-600">(Refresh in {countdown}s)</span>
+          Update : {fetchTime} <span className="text-red-600">(Refresh in {countdown}s)</span>
         </div>
       </div>
 
@@ -84,24 +78,15 @@ export default function NatAssyCombineRealtime() {
         {Object.keys(realtime_data).map((item, index) => {
           const data = realtime_data[item];
           return (
-            <div
-              key={index}
-              className="grid grid-cols-26 grid-rows-15 items-end mb-15"
-            >
+            <div key={index} className="grid grid-cols-26 grid-rows-15 items-end mb-15">
               <div className="col-start-1 row-start-1 col-span-14 row-span-2">
                 <div className="flex gap-[0.83vw] mb-2">
                   <div className="w-[8.33vw] h-[4.0vw] font-semibold text-slate-700 rounded-xl border bg-white shadow-md flex flex-col justify-center items-center">
-                    <div className="text-[clamp(1rem,1.25vw,1.5rem)]">
-                      LINE : {item.split("&")[0]}
-                    </div>
+                    <div className="text-[clamp(1rem,1.25vw,1.5rem)]">LINE : {item.split("&")[0]}</div>
                   </div>
                   <div className="w-[9vw] h-[4.0vw] font-semibold text-slate-700 rounded-xl border bg-white shadow-md flex flex-col justify-center items-center">
-                    <div className="text-[clamp(0.8rem,0.94vw,1.125rem)]">
-                      PACKING
-                    </div>
-                    <div className="text-[clamp(0.875rem,1.04vw,1.25rem)]">
-                      {data["ALU-FIRST"]?.prod_ok.toLocaleString()}
-                    </div>
+                    <div className="text-[clamp(0.8rem,0.94vw,1.125rem)]">PACKING</div>
+                    <div className="text-[clamp(0.875rem,1.04vw,1.25rem)]">{data["ALU-FIRST"]?.act_pd.toLocaleString()}</div>
                   </div>
                 </div>
               </div>
@@ -109,17 +94,11 @@ export default function NatAssyCombineRealtime() {
               <div className="col-start-1 row-start-9 col-span-14 row-span-2">
                 <div className="flex gap-[0.83vw] mb-2">
                   <div className="w-[8.33vw] h-[4.0vw] font-semibold text-slate-700 rounded-xl border bg-white shadow-md flex flex-col justify-center items-center">
-                    <div className="text-[clamp(1rem,1.25vw,1.5rem)]">
-                      LINE : {item.split("&")[1]}
-                    </div>
+                    <div className="text-[clamp(1rem,1.25vw,1.5rem)]">LINE : {item.split("&")[1]}</div>
                   </div>
                   <div className="w-[9vw] h-[4.0vw] font-semibold text-slate-700 rounded-xl border bg-white shadow-md flex flex-col justify-center items-center">
-                    <div className="text-[clamp(0.8rem,0.94vw,1.125rem)]">
-                      PACKING
-                    </div>
-                    <div className="text-[clamp(0.875rem,1.04vw,1.25rem)]">
-                      {data["ALU-SECOND"]?.prod_ok.toLocaleString()}
-                    </div>
+                    <div className="text-[clamp(0.8rem,0.94vw,1.125rem)]">PACKING</div>
+                    <div className="text-[clamp(0.875rem,1.04vw,1.25rem)]">{data["ALU-SECOND"]?.act_pd.toLocaleString()}</div>
                   </div>
                 </div>
               </div>
@@ -150,18 +129,9 @@ export default function NatAssyCombineRealtime() {
                         diff: data["MBR-FIRST"]?.s_diff_ct,
                       },
                     ],
-                    yield_target: [
-                      data["MBR-FIRST"]?.target_yield,
-                      data["MBR-FIRST"]?.target_yield,
-                    ],
-                    yield_rate: [
-                      data["MBR-FIRST"]?.s_curr_yield,
-                      data["MBR-FIRST"]?.s_curr_yield,
-                    ],
-                    status: [
-                      data["MBR-FIRST"]?.s_status_alarm,
-                      data["MBR-FIRST"]?.s_status_alarm,
-                    ],
+                    yield_target: [data["MBR_F-FIRST"]?.f_target_yield, data["MBR-FIRST"]?.s_target_yield],
+                    yield_rate: [data["MBR_F-FIRST"]?.f_curr_yield, data["MBR-FIRST"]?.s_curr_yield],
+                    status: [data["MBR_F-FIRST"]?.f_status_alarm, data["MBR-FIRST"]?.s_status_alarm],
                   }}
                 />
               </div>
@@ -173,18 +143,18 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["ARP-FIRST"]?.prod_ok,
-                        diff: data["ARP-FIRST"]?.diff_prod,
+                        value: data["ARP-FIRST"]?.act_pd,
+                        diff: data["ARP-FIRST"]?.diff_pd,
                       },
                     ],
                     ctActual: [
                       {
-                        value: data["ARP-FIRST"]?.cycle_t,
+                        value: data["ARP-FIRST"]?.act_ct,
                         diff: data["ARP-FIRST"]?.diff_ct,
                       },
                     ],
-                    yield_rate: [data["ARP-FIRST"]?.yield_rate],
                     yield_target: [data["ARP-FIRST"]?.target_yield],
+                    yield_rate: [data["ARP-FIRST"]?.curr_yield],
                     status: [data["ARP-FIRST"]?.status_alarm],
                   }}
                 />
@@ -225,18 +195,18 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["FIM-FIRST"]?.prod_ok,
-                        diff: data["FIM-FIRST"]?.diff_prod,
+                        value: data["FIM-FIRST"]?.act_pd,
+                        diff: data["FIM-FIRST"]?.diff_pd,
                       },
                     ],
                     ctActual: [
                       {
-                        value: data["FIM-FIRST"]?.cycle_t,
+                        value: data["FIM-FIRST"]?.act_ct,
                         diff: data["FIM-FIRST"]?.diff_ct,
                       },
                     ],
                     yield_target: [data["FIM-FIRST"]?.target_yield],
-                    yield_rate: [data["FIM-FIRST"]?.yield_rate],
+                    yield_rate: [data["FIM-FIRST"]?.curr_yield],
                     status: [data["FIM-FIRST"]?.status_alarm],
                   }}
                 />
@@ -273,18 +243,18 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["AOD-FIRST"]?.prod_ok,
-                        diff: data["AOD-FIRST"]?.diff_prod,
+                        value: data["AOD-FIRST"]?.act_pd,
+                        diff: data["AOD-FIRST"]?.diff_pd,
                       },
                     ],
                     ctActual: [
                       {
-                        value: data["AOD-FIRST"]?.cycle_t,
+                        value: data["AOD-FIRST"]?.act_ct,
                         diff: data["AOD-FIRST"]?.diff_ct,
                       },
                     ],
                     yield_target: [data["AOD-FIRST"]?.target_yield],
-                    yield_rate: [data["AOD-FIRST"]?.yield_rate],
+                    yield_rate: [data["AOD-FIRST"]?.curr_yield],
                     status: [data["AOD-FIRST"]?.status_alarm],
                   }}
                 />
@@ -297,18 +267,18 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["AVS-FIRST"]?.prod_ok,
-                        diff: data["AVS-FIRST"]?.diff_prod,
+                        value: data["AVS-FIRST"]?.act_pd,
+                        diff: data["AVS-FIRST"]?.diff_pd,
                       },
                     ],
                     ctActual: [
                       {
-                        value: data["AVS-FIRST"]?.cycle_t,
+                        value: data["AVS-FIRST"]?.act_ct,
                         diff: data["AVS-FIRST"]?.diff_ct,
                       },
                     ],
                     yield_target: [data["AVS-FIRST"]?.target_yield],
-                    yield_rate: [data["AVS-FIRST"]?.yield_rate],
+                    yield_rate: [data["AVS-FIRST"]?.curr_yield],
                     status: [data["AVS-FIRST"]?.status_alarm],
                   }}
                 />
@@ -322,18 +292,18 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["ALU-FIRST"]?.prod_ok,
-                        diff: data["ALU-FIRST"]?.diff_prod,
+                        value: data["ALU-FIRST"]?.act_pd,
+                        diff: data["ALU-FIRST"]?.diff_pd,
                       },
                     ],
                     ctActual: [
                       {
-                        value: data["ALU-FIRST"]?.cycle_t,
+                        value: data["ALU-FIRST"]?.act_ct,
                         diff: data["ALU-FIRST"]?.diff_ct,
                       },
                     ],
                     yield_target: [data["ALU-FIRST"]?.target_yield],
-                    yield_rate: [data["ALU-FIRST"]?.yield_rate],
+                    yield_rate: [data["ALU-FIRST"]?.curr_yield],
                     status: [data["ALU-FIRST"]?.status_alarm],
                   }}
                 />
@@ -365,18 +335,9 @@ export default function NatAssyCombineRealtime() {
                         diff: data["MBR-SECOND"]?.s_diff_ct,
                       },
                     ],
-                    yield_target: [
-                      data["MBR-SECOND"]?.target_yield,
-                      data["MBR-SECOND"]?.target_yield,
-                    ],
-                    yield_rate: [
-                      data["MBR-SECOND"]?.s_curr_yield,
-                      data["MBR-SECOND"]?.s_curr_yield,
-                    ],
-                    status: [
-                      data["MBR-SECOND"]?.s_status_alarm,
-                      data["MBR-SECOND"]?.s_status_alarm,
-                    ],
+                    yield_target: [data["MBR_F-SECOND"]?.f_target_yield, data["MBR-SECOND"]?.s_target_yield],
+                    yield_rate: [data["MBR_F-SECOND"]?.f_curr_yield, data["MBR-SECOND"]?.s_curr_yield],
+                    status: [data["MBR_F-SECOND"]?.f_status_alarm, data["MBR-SECOND"]?.s_status_alarm],
                   }}
                 />
               </div>
@@ -388,18 +349,18 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["ARP-SECOND"]?.prod_ok,
-                        diff: data["ARP-SECOND"]?.diff_prod,
+                        value: data["ARP-SECOND"]?.act_pd,
+                        diff: data["ARP-SECOND"]?.diff_pd,
                       },
                     ],
                     ctActual: [
                       {
-                        value: data["ARP-SECOND"]?.cycle_t,
+                        value: data["ARP-SECOND"]?.act_ct,
                         diff: data["ARP-SECOND"]?.diff_ct,
                       },
                     ],
                     yield_target: [data["ARP-SECOND"]?.target_yield],
-                    yield_rate: [data["ARP-SECOND"]?.yield_rate],
+                    yield_rate: [data["ARP-SECOND"]?.curr_yield],
                     status: [data["ARP-SECOND"]?.status_alarm],
                   }}
                 />
@@ -440,18 +401,18 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["FIM-SECOND"]?.prod_ok,
-                        diff: data["FIM-SECOND"]?.diff_prod,
+                        value: data["FIM-SECOND"]?.act_pd,
+                        diff: data["FIM-SECOND"]?.diff_pd,
                       },
                     ],
                     ctActual: [
                       {
-                        value: data["FIM-SECOND"]?.cycle_t,
+                        value: data["FIM-SECOND"]?.act_ct,
                         diff: data["FIM-SECOND"]?.diff_ct,
                       },
                     ],
                     yield_target: [data["FIM-SECOND"]?.target_yield],
-                    yield_rate: [data["FIM-SECOND"]?.yield_rate],
+                    yield_rate: [data["FIM-SECOND"]?.curr_yield],
                     status: [data["FIM-SECOND"]?.status_alarm],
                   }}
                 />
@@ -488,18 +449,18 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["AOD-SECOND"]?.prod_ok,
-                        diff: data["AOD-SECOND"]?.diff_prod,
+                        value: data["AOD-SECOND"]?.act_pd,
+                        diff: data["AOD-SECOND"]?.diff_pd,
                       },
                     ],
                     ctActual: [
                       {
-                        value: data["AOD-SECOND"]?.cycle_t,
+                        value: data["AOD-SECOND"]?.act_ct,
                         diff: data["AOD-SECOND"]?.diff_ct,
                       },
                     ],
                     yield_target: [data["AOD-SECOND"]?.target_yield],
-                    yield_rate: [data["AOD-SECOND"]?.yield_rate],
+                    yield_rate: [data["AOD-SECOND"]?.curr_yield],
                     status: [data["AOD-SECOND"]?.status_alarm],
                   }}
                 />
@@ -512,18 +473,18 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["AVS-SECOND"]?.prod_ok,
-                        diff: data["AVS-SECOND"]?.diff_prod,
+                        value: data["AVS-SECOND"]?.act_pd,
+                        diff: data["AVS-SECOND"]?.diff_pd,
                       },
                     ],
                     ctActual: [
                       {
-                        value: data["AVS-SECOND"]?.cycle_t,
+                        value: data["AVS-SECOND"]?.act_ct,
                         diff: data["AVS-SECOND"]?.diff_ct,
                       },
                     ],
                     yield_target: [data["AVS-SECOND"]?.target_yield],
-                    yield_rate: [data["AVS-SECOND"]?.yield_rate],
+                    yield_rate: [data["AVS-SECOND"]?.curr_yield],
                     status: [data["AVS-SECOND"]?.status_alarm],
                   }}
                 />
@@ -537,18 +498,18 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["ALU-SECOND"]?.prod_ok,
-                        diff: data["ALU-SECOND"]?.diff_prod,
+                        value: data["ALU-SECOND"]?.act_pd,
+                        diff: data["ALU-SECOND"]?.diff_pd,
                       },
                     ],
                     ctActual: [
                       {
-                        value: data["ALU-SECOND"]?.cycle_t,
+                        value: data["ALU-SECOND"]?.act_ct,
                         diff: data["ALU-SECOND"]?.diff_ct,
                       },
                     ],
                     yield_target: [data["ALU-SECOND"]?.target_yield],
-                    yield_rate: [data["ALU-SECOND"]?.yield_rate],
+                    yield_rate: [data["ALU-SECOND"]?.curr_yield],
                     status: [data["ALU-SECOND"]?.status_alarm],
                   }}
                 />
@@ -557,11 +518,9 @@ export default function NatAssyCombineRealtime() {
               <div className="col-start-15 row-start-8 col-span-3 row-span-3 flex flex-col items-center mr-5 h-full">
                 <div
                   className={`w-3 h-full ${
-                    data["ANT-FIRST"]?.status_alarm_front === "RUNNING" &&
-                    data["ANT-FIRST"]?.status_alarm_rear === "RUNNING"
+                    data["ANT-FIRST"]?.status_alarm_front === "RUNNING" && data["ANT-FIRST"]?.status_alarm_rear === "RUNNING"
                       ? "animated-flow"
-                      : data["ANT-FIRST"]?.status_alarm_front === undefined &&
-                        data["ANT-FIRST"]?.status_alarm_rear === undefined
+                      : data["ANT-FIRST"]?.status_alarm_front === undefined && data["ANT-FIRST"]?.status_alarm_rear === undefined
                       ? "bg-gray-300"
                       : "bg-red-500"
                   }`}

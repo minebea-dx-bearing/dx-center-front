@@ -50,6 +50,8 @@ import NatAssyGssmDaily from "./pages/nat/assy/NatAssyGssmDaily";
 import NatAssyFimDaily from "./pages/nat/assy/NatAssyFimDaily";
 import NatTnProdDash from "./pages/nat/tn/NatTnProdDash";
 import PelmecHome from "./pages/pelmec/PelmecHome";
+import JobRequest from "./pages/JobRequest";
+import UserLogin from "./pages/UserLogin";
 import PelmecMmsAssy from "./pages/pelmec/assy/PelmecMmsAssy";
 import PelmecMmsTurning from "./pages/pelmec/tn/PelmecMmsTurning";
 import PelmecMms1stRough from "./pages/pelmec/gd/PelmecMms1stRough";
@@ -81,7 +83,7 @@ import PelmecHomeNew from "./pages/pelmecNew/PelmecHomeNew";
 // NHB
 import NhbHomeNew from "./pages/nhbNew/NhbHomeNew";
 import NhbTnRt from "./pages/nhbNew/tn/NhbTnRt";
-import NhbIRBoreRt from "./pages/nhbNew/gd2/NhbIRBoreRt";
+
 // MCB
 import McbHomeNew from "./pages/mcbNew/McbHomeNew";
 import McbAssyAnalysisMachine from "./pages/mcb/assy/McbAssyAnalysisMachine";
@@ -92,15 +94,28 @@ import NhbGdHome from "./pages/nhb/gd2/NhbGdHome";
 import NhbGd2IRBore from "./pages/nhb/gd2/NhbGd2IRBore";
 import NatAssyReport from "./pages/natNew/assy/additional/NatAssyReport";
 import OverviewHome from "./pages/OverviewHome";
+import NatTnAnalysisMachine from "./pages/natNew/tn/NatTnAnalysisMachine";
+import NatIRBoreAnalysisMachine from "./pages/natNew/gd2/ir/NatIRBoreAnalysisMachine";
+import NatIRRwAnalysisMachine from "./pages/natNew/gd2/ir/NatIRRwAnalysisMachine";
+import NatIRSfAnalysisMachine from "./pages/natNew/gd2/ir/NatIRSfAnalysisMachine";
+import NatIRSfRt from "./pages/natNew/gd2/ir/NatIRSfRt";
+import NatORSfRt from "./pages/natNew/gd2/or/NatORSfRt";
+import NatORSfAnalysisMachine from "./pages/natNew/gd2/or/NatORSfAnalysisMachine";
+import NatORRwAnalysisMachine from "./pages/natNew/gd2/or/NatORRwAnalysisMachine";
+import NatMbrAnalysisMachine from "./pages/natNew/assy/NatMbrAnalysisMachine";
+import NatArpRt from "./pages/natNew/assy/NatArpRt";
+import NatArpAnalysisMachine from "./pages/natNew/assy/NatArpAnalysisMachine";
+import NatFimRt from "./pages/natNew/assy/NatFimRt";
+import NatFimAnalysisMachine from "./pages/natNew/assy/NatFimAnalysisMachine";
+import NatAvsRt from "./pages/natNew/assy/NatAvsRt";
+import NatAvsAnalysisMachine from "./pages/natNew/assy/NatAvsAnalysisMachine";
+import NatAluRt from "./pages/natNew/assy/NatAluRt";
+import NatAluAnalysisMachine from "./pages/natNew/assy/NatAluAnalysisMachine";
+import NhbIRBoreRt from "./pages/nhbNew/gd2/ir/NhbIRBoreRt";
 
 
 
 function App() {
-  // useEffect(() => {
-  //   const scale = window.devicePixelRatio;
-  //   document.body.style.zoom = (1 / scale).toString();
-  //   // console.log(window.innerHeight)
-  // }, []);
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
@@ -133,7 +148,7 @@ function App() {
               <Route path="assy/combine-realtime" element={<NatAssyCombineRealtime />} />
               <Route path="assy/combine-realtime-oee" element={<NatAssyCombineRealtimeOee />} />
               <Route path="assy/mbr-realtime" element={<NatAssyMbrRealtime />} />
-              <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine defaultMC={"mbr01"} defaultDate={"2025-11-01"}/>} />
+              <Route path="assy/analysis-mc" element={<NatAssyAnalysisMachine/>} />
               <Route path="assy/mbr-daily" element={<NatAssyMbrDaily />} />
               <Route path="assy/arp-realtime" element={<NatAssyArpRealtime />} />
               <Route path="assy/arp-daily" element={<NatAssyArpDaily />} />
@@ -162,6 +177,9 @@ function App() {
             <Route path="/nhb" element={<NhbHome />} />
             <Route path="/nhb/tn" element={<NhbTnHome />} />
             <Route path="/nhb/tn/tn-realtime" element={<NhbTnTnRealtime />} />
+            <Route path="/nhb/tn/analysis-mc" element={<NhbTnAnalysisMachine />} />
+            <Route path="/nhb/gd" element={<NhbGdHome />} />
+            {/* <Route path="/nhb/gd/2ndinbore-realtime" element={<NhbGd2IRBore />} /> */}
 
             <Route path="/nht" element={<NhtHome />} />
             <Route path="/nht/gd" element={<NhtGdHome />} />
@@ -181,27 +199,40 @@ function App() {
               {/* TN */}
               <Route path="tn-realtime_new" element={<NatTnRt/>}/>
               <Route path="tn-history_new" element={<NatTnHistory/>}/>
+              {/* TN additional */}
+              <Route path="tn-realtime_new/analysis-mc" element={<NatTnAnalysisMachine/>} />
               {/* 1st Gd */}
               <Route path="sl-realtime_new" element={<NatSLRt/>}/>
               {/* 2nd Gd IR */}
               <Route path="ir-bore-realtime_new" element={<NatIRBoreRt/>}/>
               <Route path="ir-rw-realtime_new" element={<NatIRRwRt/>}/>
-              <Route path="ir-sf-realtime_new" element={<Nat2ndInSuperRealtime />} />
+              <Route path="ir-sf-realtime_new" element={<NatIRSfRt />} />
+              {/* 2nd Gd IR additional */}
+              <Route path="ir-bore-realtime_new/analysis-mc" element={<NatIRBoreAnalysisMachine/>} />
+              <Route path="ir-rw-realtime_new/analysis-mc" element={<NatIRRwAnalysisMachine/>} />
+              <Route path="ir-sf-realtime_new/analysis-mc" element={<NatIRSfAnalysisMachine/>} />
               {/* 2nd Gd OR */}
               <Route path="or-rw-realtime_new" element={<NatORRwRt/>}/>
-              <Route path="or-sf-realtime_new" element={<Nat2ndOutSuperRealtime />} />
+              <Route path="or-sf-realtime_new" element={<NatORSfRt />} />
+              {/* 2nd Gd OR additional */}
+              <Route path="or-rw-realtime_new/analysis-mc" element={<NatORRwAnalysisMachine/>} />
+              <Route path="or-sf-realtime_new/analysis-mc" element={<NatORSfAnalysisMachine/>} />
               {/* Assy */}
               <Route path="assy-combine-realtime_new" element={<NatAssyCombineRealtime />} />
               <Route path="assy-mbr-realtime_new" element={<NatMbrRt/>}/>
-              <Route path="assy-arp-realtime_new" element={<NatAssyArpRealtime />} />
+              <Route path="assy-arp-realtime_new" element={<NatArpRt />} />
               <Route path="assy-gssm-realtime_new" element={<NatAssyGssmRealtime />} />
-              <Route path="assy-fim-realtime_new" element={<NatAssyFimRealtime />} />
+              <Route path="assy-fim-realtime_new" element={<NatFimRt />} />
               <Route path="assy-ant-realtime_new" element={<NatAssyAntRealtime />} />
-              <Route path="assy-avs-realtime_new" element={<NatAssyAvsRealtime />} />
-              <Route path="assy-alu-realtime_new" element={<NatAssyAluRealtime />} />
+              <Route path="assy-avs-realtime_new" element={<NatAvsRt />} />
+              <Route path="assy-alu-realtime_new" element={<NatAluRt />} />
               {/* Assy additional */}
               <Route path="assy-report" element={<NatAssyReport />} />
-              <Route path="assy-mbr-realtime_new/analysis-mc" element={<NatAssyAnalysisMachine/>} />
+              <Route path="assy-mbr-realtime_new/analysis-mc" element={<NatMbrAnalysisMachine/>} />
+              <Route path="assy-arp-realtime_new/analysis-mc" element={<NatArpAnalysisMachine/>} />
+              <Route path="assy-fim-realtime_new/analysis-mc" element={<NatFimAnalysisMachine/>} />
+              <Route path="assy-avs-realtime_new/analysis-mc" element={<NatAvsAnalysisMachine/>} />
+              <Route path="assy-alu-realtime_new/analysis-mc" element={<NatAluAnalysisMachine/>} />
               <Route path="mbr-unmatch" element={<NatAssyUnMatchData />} />
               <Route path="mbr-daily" element={<NatAssyMbrDaily />} />
               <Route path="arp-daily" element={<NatAssyArpDaily />} />
@@ -236,7 +267,12 @@ function App() {
               <Route index element={<McbHomeNew/>}/>
             </Route>
 
+
             <Route path="/mcb/assy/analysis-mc" element={<McbAssyAnalysisMachine />} />
+
+            {/* jobrequest */}
+            <Route path="/job_request" element={<JobRequest />} />
+            <Route path="/user_login" element={<UserLogin />} />
 
             {/* page not found */}
             <Route path="*" exact={true} element={<NotFound/>} />

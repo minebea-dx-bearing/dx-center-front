@@ -14,7 +14,7 @@ export default function NhbTnHome() {
         <div className="text-center">Section</div>
         <hr className="my-4" />
         <div className="flex flex-wrap justify-center gap-8">
-          <CardTitle title={"TURNING"} path={"/nhb/tn/tn-realtime"} />
+          <CardTitle title={"TURNING"} path={"/nhb_new/tn-realtime_new"} />
         </div>
       </div>
     </div>

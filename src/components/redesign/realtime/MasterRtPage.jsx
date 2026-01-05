@@ -25,22 +25,21 @@ export default function MasterRtPage({ plant_, process_, data, dataSum }) {
     return <div key={data.mc_no}>{selectCard}</div>;
   });
 
-  const setHistoryPath = location.pathname.replace("realtime","history")
+  const setHistoryPath = location.pathname.replace("realtime", "history");
 
   const changeState = (value) => {
-    // console.log(value)
     setSegmented(value);
-    if(value === "history"){
+    if (value === "history") {
       navigate(setHistoryPath, {
-        state:{
-          rtPath:location.pathname
-        }
-      })
+        state: {
+          rtPath: location.pathname,
+        },
+      });
     }
-  }
+  };
 
   setInterval(() => {
-    setCountDown(60-(moment().format("ss")))
+    setCountDown(60 - moment().format("ss"));
   }, 1000);
 
   return (
@@ -50,13 +49,17 @@ export default function MasterRtPage({ plant_, process_, data, dataSum }) {
         <Segmented
           size="large"
           shape="round"
-          options={[{label:"Realtime", value:"realtime"}, 
-                    {label:"History", value:"history"}]}
+          options={[
+            { label: "Realtime", value: "realtime" },
+            { label: "History", value: "history" },
+          ]}
           onChange={changeState}
         />
       </div>
       <div className="flex justify-end items-center -mt-17 mb-5 mr-5 text-lg">
-        <h1 >Update: {moment().format("DD-MMM HH:mm")} <span className="text-red-500">(Refresh in {countDown}s)</span></h1>
+        <h1>
+          Update: {moment().format("DD-MMM HH:mm")} <span className="text-red-500">(Refresh in {countDown}s)</span>
+        </h1>
       </div>
       {segmented === "Realtime" ? (
         <>
@@ -70,7 +73,9 @@ export default function MasterRtPage({ plant_, process_, data, dataSum }) {
           />
           <div className="flex flex-wrap gap-y-5 mt-5">{cardItem}</div>
         </>
-      ) : ("")}
+      ) : (
+        ""
+      )}
     </div>
   );
 }
