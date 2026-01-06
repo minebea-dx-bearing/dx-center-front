@@ -24,7 +24,7 @@ export default function NatAssyCombineRealtime() {
     }
     try {
       const response1 = await axios.get(`${TWN_URL}/nat/assy/combine-realtime`, {
-        headers: {
+          headers: {
           "Cache-Control": "no-cache",
           Pragma: "no-cache",
           Expires: "0",
@@ -219,13 +219,13 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["ANT-FIRST"]?.rear_ok,
+                        value: data["ANT-FIRST"]?.ok_rear,
                         diff: data["ANT-FIRST"]?.diff_prod_rear,
                       },
                     ],
                     ctActual: [
                       {
-                        value: data["ANT-FIRST"]?.rear_cycle_t,
+                        value: data["ANT-FIRST"]?.cycle_time_rear,
                         diff: data["ANT-FIRST"]?.diff_ct_rear,
                       },
                     ],
@@ -425,13 +425,13 @@ export default function NatAssyCombineRealtime() {
                   data={{
                     prodActual: [
                       {
-                        value: data["ANT-FIRST"]?.front_ok,
+                        value: data["ANT-FIRST"]?.ok_front,
                         diff: data["ANT-FIRST"]?.diff_prod_front,
                       },
                     ],
                     ctActual: [
                       {
-                        value: data["ANT-FIRST"]?.front_cycle_t,
+                        value: data["ANT-FIRST"]?.cycle_time_front,
                         diff: data["ANT-FIRST"]?.diff_ct_front,
                       },
                     ],
